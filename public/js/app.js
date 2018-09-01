@@ -9,7 +9,7 @@ var eos2fo, fo2eos;
 getExchangeInfo();
 
 function getExchangeInfo() {
-  var url = "https://json2jsonp.com/?url=https://fibos.io/getExchangeInfo&callback=?";
+  var url = "https://json2jsonp.com/?url=" + encodeURIComponent('https://fibos.io/getExchangeInfo?rand='+Math.random()) + "&callback=?";
   $.getJSON(url, function(data){
     eos2fo = data.price
     fo2eos = 1 / data.price
