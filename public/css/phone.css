@@ -1,0 +1,33 @@
+section{}
+section .panel-heading{}
+section .panel-heading a {}
+section .panel-heading .fa{}
+section .panel-heading .fa-bookmark-o{}
+section content{}
+section header{
+    width: 100%;
+    position: inherit;
+    height: 100px;
+}
+section header .icon-download{
+    position: relative;
+}
+section header .icon-download a{}
+section header .icon-download a:hover{}
+section header + .website-list{
+    margin: 0 10px;
+    border-left: none;
+    border-top: 1px dotted #e8e8e8;
+}
+section .website-list{
+    height: initial;
+    margin: 0 10px;
+}
+section .website-list li{
+    width: 50%;
+}
+section .website-list li .website{
+}
+section .website-list li .website .name{}
+section .website-list li .website:hover{}
+section .website-list li .description{}
