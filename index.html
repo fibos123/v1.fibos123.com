@@ -3,14 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="FIBOS 123">
-    <meta name="author" content="FIBOS 123">
-    <title>FIBOS 123</title>
-    <style type="text/css">
-      html, body{height: 100%}
-      body {margin: 0;background: black url(https://images.unsplash.com/photo-1526860474862-d2c1d76aed1f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a6be3dfab8db60665eed6a99dbf481bd&auto=format&fit=crop&w=2978&q=80) center no-repeat;background-size: cover;text-align: center;color: white;}
-      table{background: rgba(0, 0, 0, 0.8);}
-    </style>
+    <meta name="description" content="FIBOS 导航">
+    <meta name="author" content="FIBOS 导航">
+    <title>FIBOS 导航</title>
+    <link href="public/components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="public/components/aos/dist/aos.css" rel="stylesheet">
+    <link href="public/css/app.css" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44004176-1"></script>
     <script>
@@ -22,15 +21,81 @@
     </script>
   </head>
   <body>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
-      <tbody><tr>
-        <td align="center">
-          <h1>FIBOS 123</h1>
-          <br>
-          <p>Account: fibos123comm</p>
-          <p>Vote for us, Thank you. </p>
-        </td>
-      </tr>
-    </tbody></table>
+
+    <header>
+      <div class="navbar navbar-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="https://www.fibos123.com/" class="navbar-brand d-flex align-items-center">
+            <img src="public/images/logo.png" height="50" alt="">
+          </a>
+        </div>
+      </div>
+    </header>
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="bg"></div>
+        <div class="container">
+          <h1 class="jumbotron-heading">FIBOS 导航</h1>
+          <p class="lead"> 一个收录 FIBOS 网址的小导航 </p>
+        </div>
+      </section>
+      <div class="album py-5 bg-light">
+        <div id="content" class="container">
+
+        </div>
+      </div>
+    </main>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="/">返回首页</a>
+        </p>
+        <p>
+          &copy;
+          <script>
+              document.write(new Date().getFullYear())
+          </script>
+          <a href="https://www.fibos123.com/">FIBOS 导航</a>
+        </p>
+      </div>
+    </footer>
   </body>
+
+    <script id="tpl-site" type="text/html">
+    {{ each site }}
+      <section>
+        <div class="panel-heading"><a href="#{{ $value.name }}" id="{{ $value.name }}" data-aos="fade-up">
+          <i class="{{ $value.icon }}"></i> {{ $value.name }}</a>
+        </div>
+        {{ each $value.sub }}
+          <content data-aos="fade-up">
+            {{ if $value.name }}
+               <header> 
+                <h2 class="icon-download"><a href="#{{ $value.name }}" id="{{ $value.name }}" >{{ $value.name }}</a></h2> 
+               </header> 
+             {{/if}}
+             <ul class="website-list"> 
+              {{ each $value.child }}
+                <li> 
+                  <a href="{{ $value.url }}" class="website" target="_blank">
+                  <p class="name">{{ $value.name }}</p>
+                  <p class="description">{{ $value.desc }}</p>
+                  </a> 
+                 </li>
+               {{/each}}
+             </ul> 
+         </content>
+       {{/each}}
+      </section>
+    {{/each}}
+    </script>
+
+  <script src="public/components/jquery/dist/jquery.min.js"></script>
+  <script src="public/components/aos/dist/aos.js"></script>
+  <script>
+      document.write("<script type='text/javascript' src='data.js?rand=" + Math.random() + "'><\/script>");
+  </script>
+  <script src="public/components/template-web.js"></script>
+  <script src="public/js/app.js"></script>
+
 </html>
