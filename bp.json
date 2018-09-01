@@ -26,6 +26,28 @@
       "p2p_endpoint": "",
       "api_endpoint": "",
       "ssl_endpoint": ""
+    },
+    {
+      "location": {
+        "name": "HongKong",
+        "country": "CN",
+        "latitude": 22.336271,
+        "longitude": 114.1736643
+      },
+      "node_type": "full",
+      "api_endpoint": "http://rpc-mainnet.fibos123.com",
+      "ssl_endpoint": "https://rpc-mainnet.fibos123.com"
+    },
+    {
+      "location": {
+        "name": "HongKong",
+        "country": "CN",
+        "latitude": 22.336271,
+        "longitude": 114.1736643
+      },
+      "node_type": "seed",
+      "p2p_endpoint": "p2p-mainnet.fibos123.com:9977",
+      "bnet_endpoint": ""
     }
   ]
 }
