@@ -24,6 +24,12 @@ var data = {
       name: "生态",
       sub: [
         {
+          name: "浏览器",
+          child: [
+            {name: "FIBOS ROCKS", desc: "FIBOS 区块浏览器", url: "http://explorer.fibos.rocks/"},
+          ]
+        },
+        {
           name: "钱包",
           child: [
             {name: "MORE Wallet", desc: "首款支持兑换 FO 的钱包", url: "https://more.top/"},
