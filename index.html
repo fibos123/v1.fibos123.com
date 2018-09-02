@@ -70,7 +70,7 @@
           <i class="{{ $value.icon }}"></i> {{ $value.name }}</a>
         </div>
         {{ each $value.sub }}
-          <content data-aos="fade-up">
+          <content data-aos="fade-up" {{ if $value.child.length <= 5 }}class="line1"{{/if}}>
             {{ if $value.name }}
                <header> 
                 <h2 class="icon-download"><a href="#{{ $value.name }}" id="{{ $value.name }}" >{{ $value.name }}</a></h2> 
