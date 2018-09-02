@@ -11,7 +11,7 @@
     <link href="public/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
     <link href="public/components/aos/dist/aos.css" rel="stylesheet">
     <link href="public/css/app.css" rel="stylesheet">
-    <link href="public/css/phone.css" rel="stylesheet" media="screen and (max-width:480px)">
+    <link href="public/css/phone.css" rel="stylesheet" media="screen and (max-width:1200px)">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-44004176-1"></script>
     <script>
@@ -66,14 +66,14 @@
     <script id="tpl-site" type="text/html">
     {{ each site }}
       <section>
-        <div class="panel-heading"><a href="#{{ $value.name }}" id="{{ $value.name }}" data-aos="fade-up">
+        <div class="panel-heading"><a id="{{ $value.name }}" data-aos="fade-up">
           <i class="{{ $value.icon }}"></i> {{ $value.name }}</a>
         </div>
         {{ each $value.sub }}
           <content data-aos="fade-up" {{ if $value.child.length <= 5 }}class="line1"{{/if}}>
             {{ if $value.name }}
                <header> 
-                <h2 class="icon-download"><a href="#{{ $value.name }}" id="{{ $value.name }}" >{{ $value.name }}</a></h2> 
+                <h2 class="icon-download"><a id="{{ $value.name }}" >{{ $value.name }}</a></h2> 
                </header> 
              {{/if}}
              <ul class="website-list"> 
