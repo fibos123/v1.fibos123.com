@@ -35,6 +35,13 @@ var data = {
             {name: "MORE Wallet", desc: "首款支持兑换 FO 的钱包", url: "https://more.top/"},
             {name: "51Token", desc: "支持 FO 闪兑的钱包", url: "http://www.51token.im/"},
           ]
+        },
+        {
+          name: "工具",
+          child: [
+            {name: "Fibos Startup", desc: "FIBOS 常用代码", url: "https://github.com/dabdevelop/fibos-startup/"},
+            {name: "FibosBP", desc: "FIBOS 在线工具包", url: "http://fibosbp.com/"},
+          ]
         }
       ]
     }
