@@ -12,7 +12,7 @@ var data = {
             {name: "FIBOS.IO", desc: "FIBOS 官方网站", url: "https://fibos.io/"},
             {name: "开发文档", desc: "FIBOS 开发文档", url: "https://fibos.io/docs/guide/basic/about.md.html"},
             {name: "Telegram", desc: "FIBOS 官方电报群", url: "https://t.me/FIBOSIO"},
-            {name: "社区", desc: "FIBOS 社区", url: "http://bbs.dev.fo/"},
+            {name: "社区", desc: "FIBOS 官方社区", url: "http://bbs.dev.fo/"},
             {name: "GITHUB", desc: "FIBOS 源代码", url: "https://github.com/FIBOSIO"},
             {name: "Fibos Startup", desc: "FIBOS 常用代码", url: "https://github.com/dabdevelop/fibos-startup/"},
           ]
@@ -30,6 +30,13 @@ var data = {
           ]
         },
         {
+          name: "工具",
+          child: [
+            {name: "Fibos Startup", desc: "FIBOS 常用代码", url: "https://github.com/dabdevelop/fibos-startup/"},
+            {name: "FibosBP", desc: "FIBOS 在线工具包", url: "http://fibosbp.com/"},
+          ]
+        },
+        {
           name: "钱包",
           child: [
             {name: "MORE Wallet", desc: "首款支持兑换 FO 的钱包", url: "https://more.top/"},
@@ -38,11 +45,13 @@ var data = {
           ]
         },
         {
-          name: "工具",
+          name: "官方网站",
           child: [
-            {name: "Fibos Startup", desc: "FIBOS 常用代码", url: "https://github.com/dabdevelop/fibos-startup/"},
-            {name: "FibosBP", desc: "FIBOS 在线工具包", url: "http://fibosbp.com/"},
-          ]
+            {name: "FIBOS.IO", desc: "FIBOS 官方网站", url: "https://fibos.io/"},
+            {name: "开发文档", desc: "FIBOS 开发文档", url: "https://fibos.io/docs/guide/basic/about.md.html"},
+            {name: "Telegram", desc: "FIBOS 官方电报群", url: "https://t.me/FIBOSIO"},
+            {name: "社区", desc: "FIBOS 官方社区", url: "http://bbs.dev.fo/"},
+            {name: "GITHUB", desc: "FIBOS 源代码", url: "https://github.com/FIBOSIO"},          ]
         }
       ]
     }
