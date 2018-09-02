@@ -34,6 +34,7 @@ var data = {
           child: [
             {name: "MORE Wallet", desc: "首款支持兑换 FO 的钱包", url: "https://more.top/"},
             {name: "51Token", desc: "支持 FO 闪兑的钱包", url: "http://www.51token.im/"},
+            {name: "FO 钱包", desc: "基于 FIBOS 生态系统的智能钱包", url: "http://wallet.fo/"},
           ]
         },
         {
