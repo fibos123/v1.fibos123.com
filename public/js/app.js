@@ -50,7 +50,7 @@ $('#vote_with_ironman').on('click', function (event) {
         const foNetwork = {
             name: 'FIBOS Mainnet',
             protocol: 'https',
-            port: 80,
+            port: 443,
             host: 'rpc-mainnet.fibos123.com',
             blockchain: 'fibos',
             chainId: '6aa7bd33b6b45192465afa3553dedb531acaaff8928cf64b70bd4c5e49b7ec6a'
