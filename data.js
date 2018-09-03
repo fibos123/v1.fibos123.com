@@ -71,7 +71,8 @@ var data = {
             {name: "开发文档", desc: "FIBOS 开发文档", url: "https://fibos.io/docs/guide/basic/about.md.html"},
             {name: "Telegram", desc: "FIBOS 官方电报群", url: "https://t.me/FIBOSIO"},
             {name: "社区", desc: "FIBOS 官方社区", url: "http://bbs.dev.fo/"},
-            {name: "GITHUB", desc: "FIBOS 源代码", url: "https://github.com/FIBOSIO"},          ]
+            {name: "GITHUB", desc: "FIBOS 源代码", url: "https://github.com/FIBOSIO"},
+          ]
         }
       ]
     }

@@ -30,7 +30,7 @@ section .website-list li .website:hover{background:rgba(186, 210, 232, 0.3);box-
 section .website-list li .description{font-size:12px;color:#a2a8a2;margin:0}
 section header, section .website-list{height:200px}
 section .line1 header, section .line1 .website-list{height:100px}
-
+.navbar-brand{padding: 0.7rem 0;}
 .navbar{padding-top: 0;padding-bottom: 0;}
 .navbar-nav{} 
 .navbar-nav .nav-item{} 
