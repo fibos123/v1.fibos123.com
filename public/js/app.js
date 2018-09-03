@@ -33,7 +33,7 @@ function getExchangeInfo() {
 }
 
 // 使用 Ironman 投票
-const bp2vote = "fibos123com1"
+const bp2vote = "fibos123comm"
 $('#vote_with_ironman').on('click', function (event) {
     event.preventDefault();
     if ($('#vote_with_ironman').attr("onclick")) {
