@@ -74,6 +74,12 @@ var data = {
             {name: "社区", desc: "FIBOS 官方社区", url: "http://bbs.dev.fo/"},
             {name: "GITHUB", desc: "FIBOS 源代码", url: "https://github.com/FIBOSIO"},
           ]
+        },
+        {
+          name: "交易所",
+          child: [
+            {name: "CREX", desc: "已上线 FO 交易", url: "http://www.crexfit.com/"},
+          ]
         }
       ]
     }
