@@ -80,6 +80,12 @@ var data = {
           child: [
             {name: "CREX", desc: "已上线 FO 交易", url: "http://www.crexfit.com/"},
           ]
+        },
+        {
+          name: "社区",
+          child: [
+            {name: "imondo", desc: "由 fibos4imondo 超级节点 建立的一个活跃的小众社区", url: "http://imondo.io/"},
+          ]
         }
       ]
     }
