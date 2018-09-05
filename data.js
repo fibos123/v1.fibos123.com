@@ -45,7 +45,7 @@ var data = {
         {
           name: "浏览器",
           child: [
-            {name: "FIBOS ROCKS", icon: "fas fa-database", desc: "FIBOS 区块浏览器", url: "http://explorer.fibos.rocks/"},
+            {name: "FIBOS ROCKS", icon: "fas fa-tachometer-alt", desc: "FIBOS 区块浏览器", url: "http://explorer.fibos.rocks/"},
           ]
         },
         {
