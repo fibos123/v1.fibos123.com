@@ -45,11 +45,12 @@ var data = {
         {
           name: "浏览器",
           child: [
-            {name: "FIBOS ROCKS", desc: "FIBOS 区块浏览器", url: "http://explorer.fibos.rocks/"},
+            {name: "FIBOS ROCKS", icon: "fas fa-database", desc: "FIBOS 区块浏览器", url: "http://explorer.fibos.rocks/"},
           ]
         },
         {
           name: "钱包",
+          icon: "",
           child: [
             {name: "MORE Wallet", desc: "支持傻瓜式一键投兑 FO 功能", url: "https://more.top/"},
             {name: "51Token", desc: "支持 FO 闪兑的钱包", url: "http://www.51token.im/"},
@@ -60,7 +61,8 @@ var data = {
         {
           name: "工具",
           child: [
-            {name: "Ironman", desc: "使用 Ironman 插件可以轻松双向兑换", url: "http://foironman.com/"},
+            {name: "Ironman", icon: "fas fa-wrench", desc: "使用 Ironman 插件可以轻松双向兑换", url: "http://foironman.com/", more: {icon: "", name: "教程", url: "http://imondo.io/article/1535848881409"}},
+            {name: "FOToolkit", icon: "fas fa-toolbox", desc: "FIBOS 工具套件。安全，可靠，透明和快速", url: "https://fotoolkit.com/home"},
             {name: "FibosBP", desc: "FIBOS 在线工具包", url: "http://fibosbp.com/"},
             {name: "Fibos Startup", desc: "FIBOS 常用代码", url: "https://github.com/dabdevelop/fibos-startup/"},
           ]
@@ -79,6 +81,7 @@ var data = {
           name: "交易所",
           child: [
             {name: "CREX", desc: "已上线 FO 交易", url: "http://www.crexfit.com/"},
+            {name: "Augur", desc: "做多 / 做空 FIBOS", url: "https://www.augur.net/", more: {icon: "", name: "教程", url: "http://imondo.io/article/1536026943861"}},
           ]
         },
         {

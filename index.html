@@ -92,16 +92,23 @@
           <content data-aos="fade-up" {{ if $value.child.length <= 5 }}class="line1"{{/if}}>
             {{ if $value.name }}
                <header> 
-                <h2 class="icon-download"><a id="{{ $value.name }}" >{{ $value.name }}</a></h2> 
+                <h2 class="icon-download"><a id="{{ $value.name }}" >{{ if $value.icon }}<i class="{{ $value.icon }}"></i> {{ /if }}{{ $value.name }}</a></h2> 
                </header> 
              {{/if}}
              <ul class="website-list"> 
               {{ each $value.child }}
                 <li> 
                   <a href="{{ $value.url }}" class="website" target="_blank">
-                  <p class="name">{{ $value.name }}</p>
-                  <p class="description">{{ $value.desc }}</p>
+                    <p class="name">{{ if $value.icon }}<i class="{{ $value.icon }}"></i> {{ /if }}{{ $value.name }}</p>
+                    <p class="description">{{ $value.desc }}</p>
                   </a> 
+                  {{ if $value.more }}
+                    <p class="more">
+                      <a href="{{ $value.more.url }}" target="_blank">
+                        {{ if $value.more.icon }}<i class="{{ $value.more.icon }}"></i> {{ /if }}{{ $value.more.name }}
+                      </a>
+                    </p>
+                  {{ /if }}
                  </li>
                {{/each}}
              </ul> 

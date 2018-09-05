@@ -23,19 +23,21 @@ section header .icon-download a{color:#555;text-decoration:none}
 section header .icon-download a:hover{}
 section header + .website-list{margin:0 30px 0 140px;border-left:1px dotted #e8e8e8}
 section .website-list{margin:0 30px 0 30px;padding:0;overflow:hidden}
-section .website-list li{float:left;width:20%;height:98px;margin-left: -1px;border-left: 1px dotted #e8e8e8;overflow:hidden;cursor:pointer;list-style:none;}
+section .website-list li{float:left;width:20%;height:98px;margin-left:-1px;border-left:1px dotted #e8e8e8;overflow:hidden;cursor:pointer;list-style:none;position:relative}
+section .website-list li .more{position:absolute;right:10px;top: 10px;}
+section .website-list li .more a{background:#007bff;color:white;font-size:12px;padding:2px 7px;border-radius:6px;text-decoration:none;display: block;}
 section .website-list li .website{text-decoration:none;color:#2d74b2;display:block;height:68px;padding:7px 10px;margin:10px;box-sizing:content-box;border-radius:6px;transition:background 0.15s, box-shadow 0.15s}
 section .website-list li .website .name{margin-bottom:5px;font-size:16px;font-weight:400}
 section .website-list li .website:hover{background:rgba(186, 210, 232, 0.3);box-shadow:0 1px 2px rgba(31,35,37,.08)}
 section .website-list li .description{font-size:12px;color:#a2a8a2;margin:0}
 section header, section .website-list{height:200px}
 section .line1 header, section .line1 .website-list{height:100px}
-.navbar-brand{padding: 0.7rem 0;}
-.navbar{padding-top: 0;padding-bottom: 0;}
-.navbar-nav{} 
-.navbar-nav .nav-item{} 
-.navbar-nav .nav-item a{height: 76px;line-height: 76px;padding-top: 0;padding: 0 1.2rem!important;} 
+.navbar-brand{padding:0.7rem 0}
+.navbar{padding-top:0;padding-bottom:0}
+.navbar-nav{}
+.navbar-nav .nav-item{}
+.navbar-nav .nav-item a{height:76px;line-height:76px;padding-top:0;padding:0 1.2rem!important}
 .navbar-nav .nav-item.active{}
-.navbar-nav .nav-item.active a{background: #4184bf;color: white!important;pa display: p a d;} 
-.navbar-nav .nav-item .nav-link{} 
-.navbar-nav .nav-item .nav-link:hover{} 
+.navbar-nav .nav-item.active a{background:#4184bf;color:white!important;pa display:p a d}
+.navbar-nav .nav-item .nav-link{}
+.navbar-nav .nav-item .nav-link:hover{}
