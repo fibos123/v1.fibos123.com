@@ -82,6 +82,7 @@ var data = {
           child: [
             {name: "CREX", desc: "已上线 FO 交易", url: "http://www.crexfit.com/"},
             {name: "Augur", desc: "做多 / 做空 FIBOS", url: "https://www.augur.net/", more: {icon: "", name: "教程", url: "http://imondo.io/article/1536026943861"}},
+            {name: "币岁", desc: "了得资本投资的数字资产交易平台", url: "https://www.bisale.com/"},
           ]
         },
         {
