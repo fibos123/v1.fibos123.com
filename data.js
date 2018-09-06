@@ -80,9 +80,10 @@ var data = {
         {
           name: "交易所",
           child: [
-            {name: "CREX", desc: "已上线 FO 交易", url: "http://www.crexfit.com/"},
+            {name: "CREX", desc: "数字资产价值兑换交易平台", url: "http://www.crexfit.com/"},
             {name: "Augur", desc: "做多 / 做空 FIBOS", url: "https://www.augur.net/", more: {icon: "", name: "教程", url: "http://imondo.io/article/1536026943861"}},
             {name: "币岁", desc: "了得资本投资的数字资产交易平台", url: "https://www.bisale.com/"},
+            {name: "BIEX", desc: "全球区块链资产交易平台，位于塞舌尔共和国", url: "https://www.biex.io/"},
           ]
         },
         {
