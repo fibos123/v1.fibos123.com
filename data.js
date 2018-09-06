@@ -45,7 +45,7 @@ var data = {
         {
           name: "浏览器",
           child: [
-            {name: "FIBOS ROCKS", icon: "", desc: "一款出色的 FIBOS 区块链浏览器", url: "http://explorer.fibos.rocks/", more: {icon: "", name: "投票", url: "http://explorer.fibos.rocks/voting#fibos123comm:fibosrockskr"}},
+            {name: "FIBOS ROCKS", icon: "", desc: "一款出色的 FIBOS 区块链浏览器", url: "http://explorer.fibos.rocks/", more: {icon: "", name: "投票", color: "color-fibos-rocks", url: "http://explorer.fibos.rocks/voting#fibos123comm:fibosrockskr"}},
           ]
         },
         {

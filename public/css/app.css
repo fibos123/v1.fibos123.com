@@ -41,3 +41,5 @@ section .line1 header, section .line1 .website-list{height:100px}
 .navbar-nav .nav-item.active a{background:#4184bf;color:white!important;pa display:p a d}
 .navbar-nav .nav-item .nav-link{}
 .navbar-nav .nav-item .nav-link:hover{}
+section .website-list li .more a.color-fibos-rocks{color: #78d2f0;background: rgba(0, 0, 0, 0.85);
+}

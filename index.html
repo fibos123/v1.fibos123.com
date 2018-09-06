@@ -104,7 +104,7 @@
                   </a> 
                   {{ if $value.more }}
                     <p class="more">
-                      <a href="{{ $value.more.url }}" target="_blank">
+                      <a href="{{ $value.more.url }}" target="_blank" class="{{ $value.more.color }}">
                         {{ if $value.more.icon }}<i class="{{ $value.more.icon }}"></i> {{ /if }}{{ $value.more.name }}
                       </a>
                     </p>
