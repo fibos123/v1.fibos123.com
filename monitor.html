@@ -31,33 +31,26 @@
             <img src="public/images/logo.png" height="50" alt="">
           </a>
       
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-<!--         <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="./"><i class="fas fa-map-signs"></i> 网站</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="monitor.html"><i class="fas fa-code-branch"></i> 节点监控</a>
-            </li>
-          </ul>
-        </div> -->
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./"><i class="fas fa-map-signs"></i> 网站</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="monitor.html"><i class="fas fa-code-branch"></i> 节点监控</a>
+          </li>
+        </ul>
+      </div>
 
         </div>
       </div>
     </header>
 
     <main role="main">
-      <section class="jumbotron text-center">
-        <div class="bg"></div>
-        <div class="container">
-          <h1 class="jumbotron-heading">FIBOS 导航</h1>
-          <p class="lead"> 一个汇集 FIBOS 优质网址及资源的导航网站 </p>
-        </div>
-      </section>
       <div class="album py-5 bg-light">
         <div id="content" class="container">
 
@@ -82,41 +75,6 @@
     </footer>
   </body>
 
-    <script id="tpl-site" type="text/html">
-    {{ each site }}
-      <section>
-        <div class="panel-heading"><a id="{{ $value.name }}" data-aos="fade-up">
-          <i class="{{ $value.icon }}"></i> {{ $value.name }}</a>
-        </div>
-        {{ each $value.sub }}
-          <content data-aos="fade-up" {{ if $value.child.length <= 5 }}class="line1"{{/if}}>
-            {{ if $value.name }}
-               <header> 
-                <h2 class="icon-download"><a id="{{ $value.name }}" >{{ if $value.icon }}<i class="{{ $value.icon }}"></i> {{ /if }}{{ $value.name }}</a></h2> 
-               </header> 
-             {{/if}}
-             <ul class="website-list"> 
-              {{ each $value.child }}
-                <li> 
-                  <a href="{{ $value.url }}" class="website" target="_blank">
-                    <p class="name">{{ if $value.icon }}<i class="{{ $value.icon }}"></i> {{ /if }}{{ $value.name }}</p>
-                    <p class="description">{{ $value.desc }}</p>
-                  </a> 
-                  {{ if $value.more }}
-                    <p class="more">
-                      <a href="{{ $value.more.url }}" target="_blank" class="{{ $value.more.color }}">
-                        {{ if $value.more.icon }}<i class="{{ $value.more.icon }}"></i> {{ /if }}{{ $value.more.name }}
-                      </a>
-                    </p>
-                  {{ /if }}
-                 </li>
-               {{/each}}
-             </ul> 
-         </content>
-       {{/each}}
-      </section>
-    {{/each}}
-    </script>
 
   <script src="public/components/jquery/dist/jquery.min.js"></script>
   <script src="public/components/aos/dist/aos.js"></script>
@@ -129,4 +87,26 @@
 
   <script src="https://qcloudtest-1256426052.cos.ap-guangzhou.myqcloud.com/fibos.20180902.js"></script>
   <script src="public/components/bignumber.js/bignumber.min.js"></script>
+
+  <script src="public/components/json2table.js"></script>
+
+
+  <script type="text/javascript">
+	$.getJSON("https://api.fibos123.com/bp_status", function(data){
+		var html = $.json2table(data, "出块节点在线状态")
+		$(html).addClass("table table-bordered table-hover table-sm")
+	  	$('#content').append( html );
+	  	console.log( html );
+	}).then(function (){
+		$.getJSON("https://api.fibos123.com/bp_status_change_logs", function(data){
+			var html = $.json2table(data, "出块节点变更记录")
+			$(html).addClass("table table-bordered table-hover table-sm")
+		  	$('#content').append( html );
+		  	console.log( html );
+		}).then(function (){
+			$('#content').append( "<a href='https://api.fibos123.com/' target='_blank'>API</a>" );
+		})
+	})
+  </script>
+
 </html>

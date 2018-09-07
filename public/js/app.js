@@ -1,4 +1,6 @@
-document.getElementById('content').innerHTML = template('tpl-site', data);
+if ($("#tpl-site").length) {
+    document.getElementById('content').innerHTML = template('tpl-site', data);
+}
 AOS.init({
   startEvent: "aosEvent",
   disable: 'mobile',
