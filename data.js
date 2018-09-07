@@ -25,7 +25,7 @@ var data = {
           name: "",
           child: [
             {name: "FIBOS ROCKS", icon: "fas fa-tachometer-alt", desc: "一款出色的 FIBOS 区块链浏览器", url: "http://explorer.fibos.rocks/"},
-            {name: "Ironman", icon: "fas fa-wrench", desc: "使用 Ironman 插件可以轻松双向兑换", url: "http://foironman.com/"},
+            {name: "Ironman", icon: "fas fa-wrench", desc: "基于浏览器的 FIBOS 安全插件", url: "http://foironman.com/"},
             {name: "FOToolkit", icon: "fas fa-toolbox", desc: "FIBOS 工具套件。安全，可靠，透明和快速", url: "https://fotoolkit.com/home"},
             {name: "FIBOS.IO", desc: "FIBOS 官方网站", url: "https://fibos.io/"},
             {name: "MORE Wallet", desc: "支持傻瓜式一键投兑 FO 功能", url: "https://more.top/"},
@@ -45,7 +45,24 @@ var data = {
         {
           name: "浏览器",
           child: [
-            {name: "FIBOS ROCKS", icon: "", desc: "一款出色的 FIBOS 区块链浏览器", url: "http://explorer.fibos.rocks/", more: {icon: "", name: "投票", color: "color-fibos-rocks", url: "http://explorer.fibos.rocks/voting#fibos123comm:fibosrockskr"}},
+            {name: "FIBOS ROCKS", icon: "", desc: "一款出色的 FIBOS 区块链浏览器", url: "http://explorer.fibos.rocks/", more: {name: "投票", color: "color-fibos-rocks", url: "http://explorer.fibos.rocks/voting#fibos123comm:fibosrockskr"}},
+          ]
+        },
+        {
+          name: "监控",
+          icon: "",
+          child: [
+            {name: "FIBOS 安全节点", icon: "fas fa-bong", desc: "慢雾区推出的聚焦 FIBOS 生态安全网站", url: "https://fibos.slowmist.io/"},
+            {name: "番茄 FO 实时动态", desc: "关注 FO 实时动态，掌握通证持有者分布情况", url: "https://h5.tomatowallet.cn/fibos/fo-market.html"},
+          ]
+        },
+        {
+          name: "工具",
+          child: [
+            {name: "Ironman", icon: "fas fa-wrench", desc: "基于浏览器的 FIBOS 安全插件", url: "http://foironman.com/", more: {icon: "", name: "教程", url: "http://imondo.io/article/1535848881409"}},
+            {name: "FOToolkit", icon: "fas fa-toolbox", desc: "FIBOS 工具套件。安全，可靠，透明和快速", url: "https://fotoolkit.com/home"},
+            {name: "FibosBP", desc: "FIBOS 在线工具包", url: "http://fibosbp.com/"},
+            {name: "Fibos Startup", desc: "FIBOS 常用代码", url: "https://github.com/dabdevelop/fibos-startup/"},
           ]
         },
         {
@@ -56,15 +73,6 @@ var data = {
             {name: "51Token", desc: "支持 FO 闪兑的钱包", url: "http://www.51token.im/", more: {icon: "", name: "教程", url: "http://imondo.io/article/1535949163876"}},
             {name: "FO 钱包", desc: "基于 FIBOS 生态系统的智能钱包", url: "http://wallet.fo/", more: {icon: "", name: "教程", url: "https://fibos.io/5b8b51baaba908441dbbfc81.html"}},
             {name: "OneChain", desc: "数字货币全能 APP", url: "http://www.onechain.one/"},
-          ]
-        },
-        {
-          name: "工具",
-          child: [
-            {name: "Ironman", icon: "fas fa-wrench", desc: "使用 Ironman 插件可以轻松双向兑换", url: "http://foironman.com/", more: {icon: "", name: "教程", url: "http://imondo.io/article/1535848881409"}},
-            {name: "FOToolkit", icon: "fas fa-toolbox", desc: "FIBOS 工具套件。安全，可靠，透明和快速", url: "https://fotoolkit.com/home"},
-            {name: "FibosBP", desc: "FIBOS 在线工具包", url: "http://fibosbp.com/"},
-            {name: "Fibos Startup", desc: "FIBOS 常用代码", url: "https://github.com/dabdevelop/fibos-startup/"},
           ]
         },
         {
