@@ -5,15 +5,15 @@ version 0.16.0.
 
 ## Install
 `
-npm install -g grunt-cli bower yo generator-karma generator-angular
-npm install
+npm install -g grunt-cli bower yo generator-karma generator-angular && 
+npm install && 
 bower install
 `
 
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `grunt build` for building and `grunt serve` for preview.
 
 ## Testing
 
