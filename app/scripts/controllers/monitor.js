@@ -43,7 +43,7 @@ angular.module('appApp')
 	  		$scope.$apply();
 			st2 = setTimeout(function (){
 				bp_status_change_logs()
-			}, 2000)
+			}, 1000)
 	  	});
 	}
 
