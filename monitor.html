@@ -93,14 +93,20 @@
 
   <script type="text/javascript">
 	$.getJSON("https://api.fibos123.com/bp_status", function(data){
-		var html = $.json2table(data, "出块节点在线状态")
+		var html = $.json2table(data.rows, "出块节点在线状态")
 		$(html).addClass("table table-bordered table-hover table-sm")
+    $(html).find("[rowspan]").remove()
+      $('#content').append( "<h2>出块节点在线状态</h2>" );
+      $('#content').append( "更新时间：格林威治标准时间 " + data.bp_status_refresh_time);
 	  	$('#content').append( html );
 	  	console.log( html );
 	}).then(function (){
 		$.getJSON("https://api.fibos123.com/bp_status_change_logs", function(data){
-			var html = $.json2table(data, "出块节点变更记录")
+			var html = $.json2table(data.rows, "出块节点变更记录")
 			$(html).addClass("table table-bordered table-hover table-sm")
+      $(html).find("[rowspan]:first").remove()
+        $('#content').append( "<h2>出块节点变更记录</h2>" );
+        $('#content').append( "更新时间：格林威治标准时间 " + data.now_time );
 		  	$('#content').append( html );
 		  	console.log( html );
 		}).then(function (){
