@@ -378,6 +378,7 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.json',
+            '.gitignore',
             'CNAME',
             'public/*',
             'public/*/*',
