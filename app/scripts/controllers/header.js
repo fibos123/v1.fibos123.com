@@ -22,7 +22,7 @@ angular.module('appApp')
       },
       {
         name: '节点监控',
-        icon: 'fas fa-code-branch',
+        icon: 'fab fa-connectdevelop',
         url:  'monitor'
       }
     ];
