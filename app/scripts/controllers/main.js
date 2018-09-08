@@ -12,7 +12,7 @@ angular.module('appApp')
 
   	document.title = 'FIBOS 导航';
 
-  	$.getJSON('data.json', function(data) {
+  	$.getJSON('data.json?rand=' + Math.random(), function(data) {
   		$scope.data = data;
   		$scope.$apply();
 
