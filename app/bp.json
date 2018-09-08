@@ -1,0 +1,53 @@
+{
+  "producer_account_name": "fibos123comm",
+  "org": {
+    "candidate_name": "FIBOS123",
+    "website": "https://www.fibos123.com",
+    "email": "mingfun.wong.chn@gmail.com",
+    "branding": {
+        "logo_256": "https://www.fibos123.com/public/images/logo_256.png",
+    },
+    "location": {
+      "name": "Tokyo",
+      "country": "JP",
+      "latitude": 35.7015201,
+      "longitude": 139.6741876
+    },
+  },
+  "nodes": [
+    {
+      "location": {
+        "name": "HongKong",
+        "country": "CN",
+        "latitude": 22.336271,
+        "longitude": 114.1736643
+      },
+      "node_type": "producer",
+      "p2p_endpoint": "",
+      "api_endpoint": "",
+      "ssl_endpoint": ""
+    },
+    {
+      "location": {
+        "name": "HongKong",
+        "country": "CN",
+        "latitude": 22.336271,
+        "longitude": 114.1736643
+      },
+      "node_type": "full",
+      "api_endpoint": "http://rpc-mainnet.fibos123.com",
+      "ssl_endpoint": "https://rpc-mainnet.fibos123.com"
+    },
+    {
+      "location": {
+        "name": "HongKong",
+        "country": "CN",
+        "latitude": 22.336271,
+        "longitude": 114.1736643
+      },
+      "node_type": "seed",
+      "p2p_endpoint": "p2p-mainnet.fibos123.com:9977",
+      "bnet_endpoint": ""
+    }
+  ]
+}

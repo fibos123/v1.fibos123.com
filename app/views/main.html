@@ -1,0 +1,39 @@
+<main role="main"> 
+ <section class="jumbotron text-center"> 
+  <div class="bg"></div> 
+  <div class="container"> 
+   <h1 class="jumbotron-heading">FIBOS 导航</h1> 
+   <p class="lead"> 一个汇集 FIBOS 优质网址及资源的导航网站 </p> 
+  </div> 
+ </section> 
+ <div class="album py-5 bg-light"> 
+  <div id="content" class="container"> 
+
+      <section ng-repeat="value in data">
+        <div class="panel-heading"><a id="{{ value.name }}" data-aos="fade-up">
+          <i class="{{ value.icon }}"></i> {{ value.name }}</a>
+        </div>
+          <content ng-repeat="value in value.sub" data-aos="fade-up" ng-class="{ line1: value.child.length <= 5 }" >
+             <header ng-if="value.name"> 
+                  <h2 class="icon-download"><a id="{{ value.name }}" ><i ng-if="value.icon" class="{{ value.icon }}"></i> {{ value.name }}</a></h2> 
+             </header> 
+             <ul class="website-list"> 
+                <li ng-repeat="value in value.child"> 
+                  <a href="{{ value.url }}" class="website" target="_blank">
+                    <p class="name"><i ng-if="value.icon" class="{{ value.icon }}"></i> {{ value.name }}</p>
+                    <p class="description">{{ value.desc }}</p>
+                  </a> 
+                    <p class="more" ng-if="value.more">
+                      <a href="{{ value.more.url }}" target="_blank" class="{{ value.more.color }}">
+                        <i ng-if="value.more.icon" class="{{ value.more.icon }}"></i> {{ value.more.name }}
+                      </a>
+                    </p>
+                 </li>
+             </ul> 
+         </content>
+      </section>
+
+
+   </div>
+  </div> 
+</main> 
