@@ -18,7 +18,7 @@ angular.module('appApp')
   	var st1, st2, st3;
 
 	$scope.protocol = window.location.protocol;
-	
+
   	get_bp_status();
   	bp_status_change_logs();
   	producerjson();
@@ -135,7 +135,7 @@ angular.module('appApp')
 		  						} else {
 									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "blocked";
 		  						}
-		  					})
+		  					}, function(){})
 						}
 
   					}
