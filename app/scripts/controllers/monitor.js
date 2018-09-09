@@ -139,7 +139,7 @@ angular.module('appApp')
 		  					var addr = json.nodes[j].p2p_endpoint.split(":");
 		  					var host = addr[0];
 		  					var port = addr[1];
-		  					producerjson_rows[i]['p2p_status'] = 'unknown';
+		  					producerjson_rows[i]['p2p_status'] = 'connecting';
 		  					check_p2p(i, host, port, function(i, host, port, info) {
 		  						var status = info.msg.indexOf("open");
 		  						if (status) {

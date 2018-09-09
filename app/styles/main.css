@@ -51,3 +51,5 @@ section .website-list li .more a.color-fibos-rocks{color: #78d2f0;background: rg
 .over21,.unknown,.unset{color: gray;}
 .over21:before,.unknown:before,.unset:before{font-family: "Font Awesome 5 Free";content:'\f059';display: inline-block;width: 20px}
 .monospaced-font{/*font-family: Consolas,Courier;*/}
+.connecting{color: gray;}
+.connecting:before{font-family: "Font Awesome 5 Free";content:'\f2f1';display: inline-block;width: 20px;font-weight: 900;}
