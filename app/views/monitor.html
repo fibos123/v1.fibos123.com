@@ -4,9 +4,9 @@
     	
 		<h3>出块节点在线状态</h3>
 		<div ng-if="bp_status">
-		最新区块：{{ bp_status.head_block_num | number }}<br/>
-		状态更新时间：{{ bp_status.bp_status_refresh_time | date : "yyyy-MM-dd HH:mm:ss.sss Z" }}
-	</div>
+			最新区块：{{ bp_status.head_block_num | number }}<br/>
+			状态更新时间：{{ bp_status.bp_status_refresh_time | date : "yyyy-MM-dd HH:mm:ss.sss Z" }}
+		</div>
 		<table ng-if="bp_status_rows" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
 			<tr><th width="50" class="text-center">排名</th><th>节点账户</th><th>状态</th></tr>
 			<tr ng-repeat="(key, value) in bp_status_rows">
@@ -16,7 +16,43 @@
 			</tr>
 		</table>
 		<div ng-if="!bp_status">获取中...</div>
+		
+		<br>
+		<h3>接入点在线状态</h3>
+		<div>
+			HTTP 状态和 HTTPS 状态：支持跨来源资源共享（CORS）接入点 <br>
+			P2P 状态：检查是否开放端口
+		</div>
+		<table ng-if="producerjson" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
+			<tr>
+				<th width="50" class="text-center">编号</th>
+				<th>节点账户</th>
+				<th width="25%">HTTP 状态</th>
+				<th width="25%">HTTPS 状态</th>
+				<th width="25%">P2P 状态</th>
+			</tr>
+			<tr ng-repeat="(key, value) in producerjson">
+				<td align="center">{{ $index + 1 }}</td>
+				<td>{{ value.owner }}</td>
 
+				<td class="{{ value.http_status }}">
+					<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
+					<span ng-if="value.http_status == 'unset'">unset</span>
+					<span ng-if="value.http_status == 'offline'">offline</span>
+				</td>
+
+				<td class="{{ value.https_status }}">
+					<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
+					<span ng-if="value.https_status == 'unset'">unset</span>
+					<span ng-if="value.https_status == 'offline'">offline</span>
+				</td>
+
+				<td class="{{ value.p2p_status }}">{{ value.p2p_status }}</td>
+			</tr>
+		</table>
+		<div ng-if="!bp_status">获取中...</div>
+
+		<br>
 		<h3>出块节点在线状态变更记录</h3>
 		<div ng-if="bp_status_change_logs">
 			记录开始时间：{{ bp_status_change_logs.log_birthtime | date : "yyyy-MM-dd HH:mm:ss.sss Z" }} <br>

@@ -12,12 +12,14 @@ angular.module('appApp')
 
   	document.title = ' 节点监控 | FIBOS 导航';
 
-  	get_bp_status()
-  	bp_status_change_logs()
-
   	var bp_status_rows = {};
   	var bp_status_change_logs_rows = [];
-  	var st1, st2;
+  	var producerjson_rows = {};
+  	var st1, st2, st3;
+
+  	get_bp_status();
+  	bp_status_change_logs();
+  	producerjson();
 
 	function get_bp_status() {
 	  	$.getJSON('https://api.fibos123.com/bp_status', function(data) {
@@ -47,11 +49,153 @@ angular.module('appApp')
 	  	});
 	}
 
+	function producerjson() {
+	  	$.post('https://rpc-mainnet.fibos123.com/v1/chain/get_table_rows',
+	  		JSON.stringify({
+	  			"json": "true",
+		  		"code": "producerjson",
+		  		"scope": "producerjson",
+		  		"table": "producerjson",
+		  		"limit": 1000
+		  	})
+	  	, function(data) {
+	  		var list = {};
+	  		for (var i = 0; i < data.rows.length; i++) {
+	  			var json = JSON.parse(data.rows[i].json);
+	  			list[i] = {
+	  				owner: data.rows[i].owner,
+	  				http_status: "unset",
+	  				http_number: "",
+	  				https_status: "unset",
+	  				https_number: "",
+	  				p2p_status: "unset"
+	  			};
+
+	  			if (!producerjson_rows[i]) {
+		  			producerjson_rows[i] = {
+		  				owner: data.rows[i].owner,
+		  				http_status: "unset",
+		  				http_number: "",
+		  				https_status: "unset",
+		  				https_number: "",
+		  				p2p_status: "unset"
+		  			};
+	  			}
+
+	  			for (var j = 0; j < json.nodes.length; j++) {
+	  				// http
+	  				if (json.nodes[j].api_endpoint) {
+	  					if (producerjson_rows[i]['http_status']) {
+							list[i]['http_status'] = producerjson_rows[i]['http_status'];
+							list[i]['http_number'] = producerjson_rows[i]['http_number'];
+						}
+	  					get_info(i, json.nodes[j].api_endpoint + '/v1/chain/get_info', function(i, url, info) {
+	  						if (info.head_block_num) {
+								list[i]['http_status'] = producerjson_rows[i]['http_status'] = "online";
+								list[i]['http_number'] = producerjson_rows[i]['http_number'] = info.head_block_num;
+	  						} else {
+								list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
+	  						}
+	  					}, function(i){
+							list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
+	  					})
+  					}
+	  				// https
+	  				if (json.nodes[j].ssl_endpoint) {
+	  					if (producerjson_rows[i]['https_status']) {
+							list[i]['https_status'] = producerjson_rows[i]['https_status'];
+							list[i]['https_number'] = producerjson_rows[i]['https_number'];
+						}
+	  					get_info(i, json.nodes[j].ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
+	  						if (info.head_block_num) {
+								list[i]['https_status'] = producerjson_rows[i]['https_status'] = "online";
+								list[i]['https_number'] = producerjson_rows[i]['https_number'] = info.head_block_num;
+	  						} else {
+								list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
+	  						}
+	  					}, function(i){
+							list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
+	  					})
+  					}
+	  				// p2p
+	  				if (json.nodes[j].p2p_endpoint) {
+	  					if (producerjson_rows[i]['p2p_status'] && producerjson_rows[i]['p2p_status'] != 'unset') {
+							list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'];
+						} else {
+		  					var addr = json.nodes[j].p2p_endpoint.split(":");
+		  					var host = addr[0];
+		  					var port = addr[1];
+		  					producerjson_rows[i]['p2p_status'] = 'unknown';
+		  					check_p2p(i, host, port, function(i, host, port, info) {
+		  						var status = info.msg.indexof("open");
+		  						if (status) {
+									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "open";
+		  						} else {
+									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "blocked";
+		  						}
+		  					})
+						}
+
+  					}
+	  			}
+	  		}
+
+	  		$scope.producerjson = list;
+	  		$scope.$apply();
+			st3 = setTimeout(function (){
+				producerjson();
+			}, 500)
+	  	});
+
+	  	function get_info(i, url, callback, errcallback) {
+	  		$.ajax({
+			    type: "GET",
+			    // cache: false,
+			    url: url,
+			    data: {},
+			    dataType: "json",
+			    success: function (data, textStatus){
+			    	callback(i, url, data);
+			    },
+			    error: function (){
+			    	errcallback(i, url);
+			    }
+			})
+	  	}
+
+	  	function check_p2p(i, host, port, callback, errcallback) {
+		    var url = 'https://json2jsonp.com/?url=' + 
+		    encodeURIComponent('https://networkappers.com/api/port.php?ip='+host+'&port='+port) + 
+		    '&callback=?';
+	  		$.ajax({
+			    type: "GET",
+			    // cache: false,
+			    url: url,
+			    data: {},
+			    dataType: "json",
+			    success: function (data, textStatus){
+			    	callback(i, host, port, data);
+			    },
+			    error: function (){
+			    	errcallback(i, host, port);
+			    }
+			})
+	  	}
+	}
+
 	$scope.$on("$destroy", function() {
 		clearTimeout(st1);
 		clearTimeout(st2);
+		clearTimeout(st3);
 	})
 
+	// 检查空对象
+	function checkNullObj (obj) {
+		for (var i in obj) {
+		    return true
+		}
+		return false
+	}
 
 
   });
