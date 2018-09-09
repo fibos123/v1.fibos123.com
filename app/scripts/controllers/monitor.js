@@ -129,7 +129,7 @@ angular.module('appApp')
 		  					var port = addr[1];
 		  					producerjson_rows[i]['p2p_status'] = 'unknown';
 		  					check_p2p(i, host, port, function(i, host, port, info) {
-		  						var status = info.msg.indexof("open");
+		  						var status = info.msg.indexOf("open");
 		  						if (status) {
 									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "open";
 		  						} else {
@@ -166,7 +166,7 @@ angular.module('appApp')
 	  	}
 
 	  	function check_p2p(i, host, port, callback, errcallback) {
-		    var url = 'https://json2jsonp.com/?url=' + 
+		    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
 		    encodeURIComponent('https://networkappers.com/api/port.php?ip='+host+'&port='+port) + 
 		    '&callback=?';
 	  		$.ajax({
