@@ -17,6 +17,8 @@ angular.module('appApp')
   	var producerjson_rows = {};
   	var st1, st2, st3;
 
+	$scope.protocol = window.location.protocol;
+	
   	get_bp_status();
   	bp_status_change_logs();
   	producerjson();
