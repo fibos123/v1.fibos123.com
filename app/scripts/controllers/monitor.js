@@ -26,9 +26,9 @@ angular.module('appApp')
 	function get_bp_status() {
 	  	$.getJSON('https://api.fibos123.com/bp_status', function(data) {
 	  		$scope.bp_status = data;
-	  		if (!bp_status_rows || JSON.stringify(bp_status_rows) != JSON.stringify(data.rows)) {
-	  			$scope.bp_status_rows = data.rows;
-	  			bp_status_rows = data.rows;
+	  		if (!bp_status_rows || JSON.stringify(bp_status_rows) != JSON.stringify(data.rows2)) {
+	  			$scope.bp_status_rows = data.rows2;
+	  			bp_status_rows = data.rows2;
 	  		}
 	  		$scope.$apply();
 			st1 = setTimeout(function (){
