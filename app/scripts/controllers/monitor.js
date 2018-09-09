@@ -106,6 +106,7 @@ angular.module('appApp')
 							list[i]['http_status'] = producerjson_rows[i]['http_status'] = "error";
 							list[i]['http_msg'] = producerjson_rows[i]['http_msg'] = "not http";
 	  					}
+						list[i]['http_endpoint'] = producerjson_rows[i]['http_endpoint'] = json.nodes[j].api_endpoint;
   					}
 	  				// https
 	  				if (json.nodes[j].ssl_endpoint) {
@@ -128,6 +129,7 @@ angular.module('appApp')
 							list[i]['https_status'] = producerjson_rows[i]['https_status'] = "error";
 							list[i]['https_msg'] = producerjson_rows[i]['https_msg'] = "not https";
 	  					}
+						list[i]['https_endpoint'] = producerjson_rows[i]['https_endpoint'] = json.nodes[j].ssl_endpoint;
   					}
 	  				// p2p
 	  				if (json.nodes[j].p2p_endpoint) {
@@ -147,13 +149,14 @@ angular.module('appApp')
 		  						}
 		  					}, function(){})
 						}
-
+						list[i]['p2p_endpoint'] = producerjson_rows[i]['p2p_endpoint'] = json.nodes[j].p2p_endpoint;
   					}
 	  			}
 	  		}
 
 	  		$scope.producerjson = list;
 	  		$scope.$apply();
+	  		$('[data-toggle="tooltip"]').tooltip();
 			st3 = setTimeout(function (){
 				producerjson();
 			}, 500)

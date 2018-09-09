@@ -49,20 +49,28 @@
 				<td>{{ value.owner }}</td>
 
 				<td class="{{ value.http_status }}">
-					<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
-					<span ng-if="value.http_status == 'unset'">unset</span>
-					<span ng-if="value.http_status == 'offline'">offline</span>
-					<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
+					<span data-toggle="tooltip" title="{{ value.http_endpoint }}">
+						<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
+						<span ng-if="value.http_status == 'unset'">unset</span>
+						<span ng-if="value.http_status == 'offline'">offline</span>
+						<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
+					</span>
 				</td>
 
 				<td class="{{ value.https_status }}">
-					<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
-					<span ng-if="value.https_status == 'unset'">unset</span>
-					<span ng-if="value.https_status == 'offline'">offline</span>
-					<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
+					<span data-toggle="tooltip" title="{{ value.https_endpoint }}">
+						<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
+						<span ng-if="value.https_status == 'unset'">unset</span>
+						<span ng-if="value.https_status == 'offline'">offline</span>
+						<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
+					</span>
 				</td>
 
-				<td class="{{ value.p2p_status }}">{{ value.p2p_status }}</td>
+				<td class="{{ value.p2p_status }}">
+					<span data-toggle="tooltip" title="{{ value.p2p_endpoint }}">
+						{{ value.p2p_status }}
+					</span>
+			</td>
 			</tr>
 		</table>
 		<div ng-if="!bp_status">获取中...</div>
