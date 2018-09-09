@@ -52,12 +52,14 @@
 					<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
 					<span ng-if="value.http_status == 'unset'">unset</span>
 					<span ng-if="value.http_status == 'offline'">offline</span>
+					<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
 				</td>
 
 				<td class="{{ value.https_status }}">
 					<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
 					<span ng-if="value.https_status == 'unset'">unset</span>
 					<span ng-if="value.https_status == 'offline'">offline</span>
+					<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
 				</td>
 
 				<td class="{{ value.p2p_status }}">{{ value.p2p_status }}</td>

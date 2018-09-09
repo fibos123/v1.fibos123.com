@@ -91,16 +91,21 @@ angular.module('appApp')
 							list[i]['http_status'] = producerjson_rows[i]['http_status'];
 							list[i]['http_number'] = producerjson_rows[i]['http_number'];
 						}
-	  					get_info(i, json.nodes[j].api_endpoint + '/v1/chain/get_info', function(i, url, info) {
-	  						if (info.head_block_num) {
-								list[i]['http_status'] = producerjson_rows[i]['http_status'] = "online";
-								list[i]['http_number'] = producerjson_rows[i]['http_number'] = info.head_block_num;
-	  						} else {
+						if (json.nodes[j].api_endpoint.indexOf("http://") === 0) {
+		  					get_info(i, json.nodes[j].api_endpoint + '/v1/chain/get_info', function(i, url, info) {
+		  						if (info.head_block_num) {
+									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "online";
+									list[i]['http_number'] = producerjson_rows[i]['http_number'] = info.head_block_num;
+		  						} else {
+									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
+		  						}
+		  					}, function(i){
 								list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
-	  						}
-	  					}, function(i){
-							list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
-	  					})
+		  					})
+	  					} else {
+							list[i]['http_status'] = producerjson_rows[i]['http_status'] = "error";
+							list[i]['http_msg'] = producerjson_rows[i]['http_msg'] = "not http";
+	  					}
   					}
 	  				// https
 	  				if (json.nodes[j].ssl_endpoint) {
@@ -108,16 +113,21 @@ angular.module('appApp')
 							list[i]['https_status'] = producerjson_rows[i]['https_status'];
 							list[i]['https_number'] = producerjson_rows[i]['https_number'];
 						}
-	  					get_info(i, json.nodes[j].ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
-	  						if (info.head_block_num) {
-								list[i]['https_status'] = producerjson_rows[i]['https_status'] = "online";
-								list[i]['https_number'] = producerjson_rows[i]['https_number'] = info.head_block_num;
-	  						} else {
+						if (json.nodes[j].ssl_endpoint.indexOf("https://") === 0) {
+		  					get_info(i, json.nodes[j].ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
+		  						if (info.head_block_num) {
+									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "online";
+									list[i]['https_number'] = producerjson_rows[i]['https_number'] = info.head_block_num;
+		  						} else {
+									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
+		  						}
+		  					}, function(i){
 								list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
-	  						}
-	  					}, function(i){
-							list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
-	  					})
+		  					})
+	  					} else {
+							list[i]['https_status'] = producerjson_rows[i]['https_status'] = "error";
+							list[i]['https_msg'] = producerjson_rows[i]['https_msg'] = "not https";
+	  					}
   					}
 	  				// p2p
 	  				if (json.nodes[j].p2p_endpoint) {
