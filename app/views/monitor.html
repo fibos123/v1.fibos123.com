@@ -51,19 +51,25 @@
 				<td class="{{ value.http_status }}">
 					<span data-toggle="tooltip" title="{{ value.http_endpoint }}">
 						<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
+						<span ng-if="value.http_status == 'warning'">{{ value.http_number | number }} </span>
 						<span ng-if="value.http_status == 'unset'">unset</span>
 						<span ng-if="value.http_status == 'offline'">offline</span>
+						<span ng-if="value.http_status == 'timeout'">timeout</span>
 						<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
 					</span>
+					<span ng-if="value.http_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
 				</td>
 
 				<td class="{{ value.https_status }}">
 					<span data-toggle="tooltip" title="{{ value.https_endpoint }}">
 						<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
+						<span ng-if="value.https_status == 'warning'">{{ value.https_number | number }}</span>
 						<span ng-if="value.https_status == 'unset'">unset</span>
 						<span ng-if="value.https_status == 'offline'">offline</span>
+						<span ng-if="value.https_status == 'timeout'">timeout</span>
 						<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
 					</span>
+					<span ng-if="value.https_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
 				</td>
 
 				<td class="{{ value.p2p_status }}">

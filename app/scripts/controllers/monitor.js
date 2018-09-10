@@ -78,65 +78,105 @@ angular.module('appApp')
 		  				owner: data.rows[i].owner,
 		  				http_status: "unset",
 		  				http_number: "",
+		  				http_msg: "",
 		  				https_status: "unset",
 		  				https_number: "",
+		  				https_msg: "",
 		  				p2p_status: "unset"
 		  			};
 	  			}
 
 	  			for (var j = 0; j < json.nodes.length; j++) {
 	  				// http
-	  				if (json.nodes[j].api_endpoint) {
+	  				var api_endpoint = json.nodes[j].api_endpoint || json.nodes[j].rpc_endpoint;
+	  				if (api_endpoint) {
 	  					if (producerjson_rows[i]['http_status']) {
 							list[i]['http_status'] = producerjson_rows[i]['http_status'];
 							list[i]['http_number'] = producerjson_rows[i]['http_number'];
+							list[i]['http_msg'] = producerjson_rows[i]['http_msg'];
 						}
-						if (json.nodes[j].api_endpoint.indexOf("http://") === 0) {
-		  					get_info(i, json.nodes[j].api_endpoint + '/v1/chain/get_info', function(i, url, info) {
+						if (api_endpoint.indexOf("http://") === 0) {
+		  					get_info(i, api_endpoint + '/v1/chain/get_info', function(i, url, info) {
 		  						if (info.head_block_num) {
 									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "online";
 									list[i]['http_number'] = producerjson_rows[i]['http_number'] = info.head_block_num;
 		  						} else {
 									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
 		  						}
-		  					}, function(i){
-								list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
+		  					}, function(i, url, textStatus) {
+		  						if (textStatus == "timeout") {
+									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "timeout";
+		  						} else {
+								    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
+								    encodeURIComponent(url) + 
+								    '&callback=?';
+									get_info(i, url, function(i, url, info) {
+				  						if (info.head_block_num) {
+											list[i]['http_status'] = producerjson_rows[i]['http_status'] = "warning";
+											list[i]['http_number'] = producerjson_rows[i]['http_number'] = info.head_block_num;
+				  						} else {
+											list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
+				  						}
+				  					}, function (i, url, textStatus){
+										list[i]['http_status'] = producerjson_rows[i]['http_status'] = "error";
+										list[i]['http_msg'] = producerjson_rows[i]['http_msg'] = "error";
+				  					})
+		  						}
 		  					})
 	  					} else {
 							list[i]['http_status'] = producerjson_rows[i]['http_status'] = "error";
 							list[i]['http_msg'] = producerjson_rows[i]['http_msg'] = "not http";
 	  					}
-						list[i]['http_endpoint'] = producerjson_rows[i]['http_endpoint'] = json.nodes[j].api_endpoint;
+						list[i]['http_endpoint'] = producerjson_rows[i]['http_endpoint'] = api_endpoint;
   					}
 	  				// https
-	  				if (json.nodes[j].ssl_endpoint) {
+	  				var ssl_endpoint = json.nodes[j].ssl_endpoint;
+	  				if (ssl_endpoint) {
 	  					if (producerjson_rows[i]['https_status']) {
 							list[i]['https_status'] = producerjson_rows[i]['https_status'];
 							list[i]['https_number'] = producerjson_rows[i]['https_number'];
 						}
-						if (json.nodes[j].ssl_endpoint.indexOf("https://") === 0) {
-		  					get_info(i, json.nodes[j].ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
+						if (ssl_endpoint.indexOf("https://") === 0) {
+		  					get_info(i, ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
 		  						if (info.head_block_num) {
 									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "online";
 									list[i]['https_number'] = producerjson_rows[i]['https_number'] = info.head_block_num;
 		  						} else {
 									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
 		  						}
-		  					}, function(i){
-								list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
+		  					}, function(i, url, textStatus) {
+		  						if (textStatus == "timeout") {
+									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "timeout";
+		  						} else {
+								    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
+								    encodeURIComponent(url) + 
+								    '&callback=?';
+									get_info(i, url, function(i, url, info) {
+				  						if (info.head_block_num) {
+											list[i]['https_status'] = producerjson_rows[i]['https_status'] = "warning";
+											list[i]['https_number'] = producerjson_rows[i]['https_number'] = info.head_block_num;
+				  						} else {
+											list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
+				  						}
+				  					}, function (i, url, textStatus){
+										list[i]['https_status'] = producerjson_rows[i]['https_status'] = "error";
+										list[i]['https_msg'] = producerjson_rows[i]['https_msg'] = "error";
+				  					})
+		  						}
 		  					})
 	  					} else {
 							list[i]['https_status'] = producerjson_rows[i]['https_status'] = "error";
 							list[i]['https_msg'] = producerjson_rows[i]['https_msg'] = "not https";
 	  					}
-						list[i]['https_endpoint'] = producerjson_rows[i]['https_endpoint'] = json.nodes[j].ssl_endpoint;
+						list[i]['https_endpoint'] = producerjson_rows[i]['https_endpoint'] = ssl_endpoint;
   					}
 	  				// p2p
-	  				if (json.nodes[j].p2p_endpoint) {
+	  				var p2p_endpoint = json.nodes[j].p2p_endpoint;
+	  				if (p2p_endpoint) {
 	  					if (producerjson_rows[i]['p2p_status'] && producerjson_rows[i]['p2p_status'] != 'unset') {
 							list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'];
 						} else {
-		  					var addr = json.nodes[j].p2p_endpoint.split(":");
+		  					var addr = p2p_endpoint.split(":");
 		  					var host = addr[0];
 		  					var port = addr[1];
 		  					producerjson_rows[i]['p2p_status'] = 'connecting';
@@ -147,9 +187,11 @@ angular.module('appApp')
 		  						} else {
 									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "blocked";
 		  						}
-		  					}, function(){})
+		  					}, function(i){
+								list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "timeout";
+		  					})
 						}
-						list[i]['p2p_endpoint'] = producerjson_rows[i]['p2p_endpoint'] = json.nodes[j].p2p_endpoint;
+						list[i]['p2p_endpoint'] = producerjson_rows[i]['p2p_endpoint'] = p2p_endpoint;
   					}
 	  			}
 	  		}
@@ -159,21 +201,22 @@ angular.module('appApp')
 	  		$('[data-toggle="tooltip"]').tooltip();
 			st3 = setTimeout(function (){
 				producerjson();
-			}, 500)
+			}, 1000)
 	  	});
 
 	  	function get_info(i, url, callback, errcallback) {
 	  		$.ajax({
 			    type: "GET",
 			    // cache: false,
+			    timeout: 1000,
 			    url: url,
 			    data: {},
 			    dataType: "json",
 			    success: function (data, textStatus){
 			    	callback(i, url, data);
 			    },
-			    error: function (){
-			    	errcallback(i, url);
+			    error: function (XMLHttpRequest, textStatus, errorThrown){
+			    	errcallback(i, url, textStatus);
 			    }
 			})
 	  	}
@@ -185,14 +228,15 @@ angular.module('appApp')
 	  		$.ajax({
 			    type: "GET",
 			    // cache: false,
+			    timeout: 2000,
 			    url: url,
 			    data: {},
 			    dataType: "json",
 			    success: function (data, textStatus){
 			    	callback(i, host, port, data);
 			    },
-			    error: function (){
-			    	errcallback(i, host, port);
+			    error: function (XMLHttpRequest, textStatus, errorThrown){
+			    	errcallback(i, host, port, textStatus);
 			    }
 			})
 	  	}

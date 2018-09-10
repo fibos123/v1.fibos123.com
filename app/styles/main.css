@@ -46,10 +46,14 @@ section .website-list li .more a.color-fibos-rocks{color: #78d2f0;background: rg
 .table-hover tr:hover {background-color: rgba(0,0,0,.075);}
 .online, .open{color: green;}
 .online:before, .open:before{font-family: "Font Awesome 5 Free";content:'\f058';display: inline-block;width: 20px}
-.offline, .blocked, .error{color: red;}
-.offline:before, .blocked:before, .error:before{font-family: "Font Awesome 5 Free";content:'\f057';display: inline-block;width: 20px}
+.offline, .blocked, .error, .timeout{color: red;}
+.offline:before, .blocked:before, .error:before,.timeout:before{font-family: "Font Awesome 5 Free";content:'\f057';display: inline-block;width: 20px}
 .over21,.unknown,.unset{color: gray;}
 .over21:before,.unknown:before,.unset:before{font-family: "Font Awesome 5 Free";content:'\f059';display: inline-block;width: 20px}
 .monospaced-font{/*font-family: Consolas,Courier;*/}
 .connecting{color: gray;}
 .connecting:before{font-family: "Font Awesome 5 Free";content:'\f2f1';display: inline-block;width: 20px;font-weight: 900;}
+
+.warning{color: orange;}
+.warning:before{font-family: "Font Awesome 5 Free";content:'\f06a';display: inline-block;width: 20px;font-weight: 900;}
+
