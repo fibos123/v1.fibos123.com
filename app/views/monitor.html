@@ -11,8 +11,9 @@
 			<tr>
 				<th width="50" class="text-center">编号</th>
 				<th>节点账户</th>
-				<th width="35%">状态</th>
-				<th width="35%">打包区块</th>
+				<th width="20%">状态</th>
+				<th width="20%">打包区块</th>
+				<th width="35%">最终打包时间</th>
 			</tr>
 			<tr ng-repeat="(key, value) in bp_status_rows" ng-class="{ 'font-weight-bold': bp_status.head_block_producer == value.bpname }">
 				<td align="center">{{ $index + 1 }}</td>
@@ -22,6 +23,9 @@
 				</td>
 				<td>
 					{{ value.number | number }}
+				</td>
+				<td>
+					{{ value.date | date : "yyyy-MM-dd HH:mm:ss.sss Z" }}
 				</td>
 			</tr>
 		</table>
