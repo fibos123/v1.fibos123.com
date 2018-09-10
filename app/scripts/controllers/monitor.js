@@ -135,6 +135,7 @@ angular.module('appApp')
 	  					if (producerjson_rows[i]['https_status']) {
 							list[i]['https_status'] = producerjson_rows[i]['https_status'];
 							list[i]['https_number'] = producerjson_rows[i]['https_number'];
+							list[i]['https_msg'] = producerjson_rows[i]['https_msg'];
 						}
 						if (ssl_endpoint.indexOf("https://") === 0) {
 		  					get_info(i, ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
