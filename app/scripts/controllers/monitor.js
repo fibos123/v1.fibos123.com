@@ -182,11 +182,13 @@ angular.module('appApp')
 		  					var port = addr[1];
 		  					producerjson_rows[i]['p2p_status'] = 'connecting';
 		  					check_p2p(i, host, port, function(i, host, port, info) {
-		  						var status = info.msg.indexOf("open");
-		  						if (status) {
+		  						var status = info && info.msg;
+		  						if (status && info.msg.indexOf("open")) {
 									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "open";
-		  						} else {
+		  						} else if (status && info.msg.indexOf("blocked")) {
 									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "blocked";
+		  						} else {
+									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "timeout";
 		  						}
 		  					}, function(i){
 								list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "timeout";
