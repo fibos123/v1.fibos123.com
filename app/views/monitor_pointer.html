@@ -1,0 +1,69 @@
+<main role="main">
+  <div class="album py-4 bg-light">
+    <div id="content" class="container">
+    	
+    	<ul class="nav nav-pills flex-column flex-sm-row">
+		  <li class="nav-item">
+		    <a class="nav-link" ng-href="#!/monitor">出块节点在线状态</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" ng-href="#!/monitor/logs">出块节点在线状态变更记录</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link active" ng-href="#!/monitor/pointer">接入点在线状态</a>
+		  </li>
+		</ul><br>
+
+		<h3>接入点在线状态</h3>
+		<div>
+			HTTP 状态和 HTTPS 状态：支持跨来源资源共享（CORS）的接入点 <br>
+			P2P 状态：检查是否开放端口
+		</div>
+		<table ng-if="producerjson" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
+			<tr>
+				<th width="50" class="text-center">编号</th>
+				<th>节点账户</th>
+				<th width="25%">HTTP 状态 </th>
+				<th width="25%">HTTPS 状态</th>
+				<th width="25%">P2P 状态</th>
+			</tr>
+			<tr ng-repeat="(key, value) in producerjson">
+				<td align="center">{{ $index + 1 }}</td>
+				<td>{{ value.owner }}</td>
+
+				<td class="{{ value.http_status }}">
+					<span data-toggle="tooltip" title="{{ value.http_endpoint }}">
+						<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
+						<span ng-if="value.http_status == 'warning'">{{ value.http_number | number }} </span>
+						<span ng-if="value.http_status == 'unset'">unset</span>
+						<span ng-if="value.http_status == 'offline'">offline</span>
+						<span ng-if="value.http_status == 'timeout'">timeout</span>
+						<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
+					</span>
+					<span ng-if="value.http_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
+				</td>
+
+				<td class="{{ value.https_status }}">
+					<span data-toggle="tooltip" title="{{ value.https_endpoint }}">
+						<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
+						<span ng-if="value.https_status == 'warning'">{{ value.https_number | number }}</span>
+						<span ng-if="value.https_status == 'unset'">unset</span>
+						<span ng-if="value.https_status == 'offline'">offline</span>
+						<span ng-if="value.https_status == 'timeout'">timeout</span>
+						<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
+					</span>
+					<span ng-if="value.https_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
+				</td>
+
+				<td class="{{ value.p2p_status }}">
+					<span data-toggle="tooltip" title="{{ value.p2p_endpoint }}">
+						{{ value.p2p_status }}
+					</span>
+			</td>
+			</tr>
+		</table>
+		<div ng-if="!producerjson">获取中...</div>
+
+	</div>
+  </div>
+</main>

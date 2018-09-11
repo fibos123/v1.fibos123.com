@@ -11,7 +11,7 @@ angular.module('appApp')
   .controller('HeaderCtrl', function ($scope, $location) {
 
     $scope.isActive = function (viewLocation) { 
-        return viewLocation === $location.path().slice(1);
+        return viewLocation === $location.path().slice(1).split("/")[0];
     };
 
     $scope.menuItems = [

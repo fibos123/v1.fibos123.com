@@ -29,6 +29,16 @@ angular
         controller: 'MonitorCtrl',
         controllerAs: 'monitor'
       })
+      .when('/monitor/pointer', {
+        templateUrl: 'views/monitor_pointer.html',
+        controller: 'MonitorPointerCtrl',
+        controllerAs: 'monitorpointer'
+      })
+      .when('/monitor/logs', {
+        templateUrl: 'views/monitor_logs.html',
+        controller: 'MonitorLogsCtrl',
+        controllerAs: 'monitorlogs'
+      })
       .otherwise({
         redirectTo: '/'
       });

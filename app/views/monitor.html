@@ -1,11 +1,24 @@
 <main role="main">
-  <div class="album py-5 bg-light">
+  <div class="album py-4 bg-light">
     <div id="content" class="container">
-    	
+
+    	<ul class="nav nav-pills flex-column flex-sm-row">
+		  <li class="nav-item">
+		    <a class="nav-link active" ng-href="#!/monitor">出块节点在线状态</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" ng-href="#!/monitor/logs">出块节点在线状态变更记录</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" ng-href="#!/monitor/pointer">接入点在线状态</a>
+		  </li>
+		</ul><br>
+
+
 		<h3>出块节点在线状态</h3>
 		<div ng-if="bp_status">
 			最新区块：{{ bp_status.head_block_num | number }}<br/>
-			状态更新时间：{{ bp_status.bp_status_refresh_time | date : "yyyy-MM-dd HH:mm:ss.sss Z" }}
+			状态更新时间：{{ bp_status.bp_status_refresh_time | date : "yyyy-MM-dd HH:mm:ss Z" }}
 		</div>
 		<table ng-if="bp_status_rows" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
 			<tr>
@@ -25,85 +38,12 @@
 					{{ value.number | number }}
 				</td>
 				<td>
-					{{ value.date | date : "yyyy-MM-dd HH:mm:ss.sss Z" }}
+					{{ value.date | date : "yyyy-MM-dd HH:mm:ss Z" }}
 				</td>
 			</tr>
 		</table>
 		<div ng-if="!bp_status">获取中...</div>
 		
-		<br>
-		<h3>接入点在线状态</h3>
-		<div>
-			HTTP 状态和 HTTPS 状态：支持跨来源资源共享（CORS）的接入点 <br>
-			P2P 状态：检查是否开放端口
-		</div>
-		<table ng-if="producerjson" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
-			<tr>
-				<th width="50" class="text-center">编号</th>
-				<th>节点账户</th>
-				<th width="25%">
-					HTTP 状态 
-					<a ng-if="protocol == 'https:'" href="http://www.fibos123.com/#!/monitor" target="_blank">点击显示 HTTP 监控</a>
-				</th>
-				<th width="25%">HTTPS 状态</th>
-				<th width="25%">P2P 状态</th>
-			</tr>
-			<tr ng-repeat="(key, value) in producerjson">
-				<td align="center">{{ $index + 1 }}</td>
-				<td>{{ value.owner }}</td>
-
-				<td class="{{ value.http_status }}">
-					<span data-toggle="tooltip" title="{{ value.http_endpoint }}">
-						<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
-						<span ng-if="value.http_status == 'warning'">{{ value.http_number | number }} </span>
-						<span ng-if="value.http_status == 'unset'">unset</span>
-						<span ng-if="value.http_status == 'offline'">offline</span>
-						<span ng-if="value.http_status == 'timeout'">timeout</span>
-						<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
-					</span>
-					<span ng-if="value.http_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
-				</td>
-
-				<td class="{{ value.https_status }}">
-					<span data-toggle="tooltip" title="{{ value.https_endpoint }}">
-						<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
-						<span ng-if="value.https_status == 'warning'">{{ value.https_number | number }}</span>
-						<span ng-if="value.https_status == 'unset'">unset</span>
-						<span ng-if="value.https_status == 'offline'">offline</span>
-						<span ng-if="value.https_status == 'timeout'">timeout</span>
-						<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
-					</span>
-					<span ng-if="value.https_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
-				</td>
-
-				<td class="{{ value.p2p_status }}">
-					<span data-toggle="tooltip" title="{{ value.p2p_endpoint }}">
-						{{ value.p2p_status }}
-					</span>
-			</td>
-			</tr>
-		</table>
-		<div ng-if="!bp_status">获取中...</div>
-
-		<br>
-		<h3>出块节点在线状态变更记录</h3>
-		<div ng-if="bp_status_change_logs">
-			记录开始时间：{{ bp_status_change_logs.log_birthtime | date : "yyyy-MM-dd HH:mm:ss.sss Z" }} <br>
-			记录更新时间：{{ bp_status_change_logs.now_time | date : "yyyy-MM-dd HH:mm:ss.sss Z" }}
-		</div>
-		<table ng-if="bp_status_change_logs_rows" class="table table-bordered table-hover table-sm table-striped monospaced-font" >
-			<tr><th width="50" class="text-center">编号</th><th>时间</th><th>节点账户</th><th>旧状态</th><th>新状态</th></tr>
-			<tr ng-repeat="(key, value) in bp_status_change_logs_rows">
-				<td align="center">{{ $index + 1 }}</td>
-				<td>{{ value.date | date : "yyyy-MM-dd HH:mm:ss Z" }}</td>
-				<td>{{ value.bp }}</td>
-				<td class="{{ value.from }}">{{ value.from }}</td>
-				<td class="{{ value.to }}">{{ value.to }}</td>
-			</tr>
-		</table>
-		<div ng-if="!bp_status_change_logs">获取中...</div>
-
-		<a href="https://api.fibos123.com/" target="_blank">查看 API</a>
 	</div>
   </div>
 </main>
