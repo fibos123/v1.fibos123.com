@@ -221,7 +221,7 @@ angular.module('appApp')
 	var si1 = setInterval(function (){
 		$scope.$apply();
 	  	$('[data-toggle="tooltip"]').tooltip();
-	}, 1000);
+	}, 100);
 
 	$scope.$on("$destroy", function() {
 		clearTimeout(st1);
