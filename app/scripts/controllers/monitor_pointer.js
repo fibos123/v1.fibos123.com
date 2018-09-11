@@ -20,8 +20,11 @@ angular.module('appApp')
 	}
 
   	producerjson();
+  	$scope.refresh = producerjson;
 
 	function producerjson() {
+		producerjson_rows = {};
+		
 	  	$.post('https://rpc-mainnet.fibos123.com/v1/chain/get_table_rows',
 	  		JSON.stringify({
 	  			"json": "true",
@@ -172,9 +175,9 @@ angular.module('appApp')
 	  		$scope.producerjson = list;
 	  		$scope.$apply();
 	  		$('[data-toggle="tooltip"]').tooltip();
-			st1 = setTimeout(function (){
-				producerjson();
-			}, 1000)
+			// st1 = setTimeout(function (){
+			// 	producerjson();
+			// }, 1000)
 	  	});
 
 	  	function get_info(i, url, callback, errcallback) {
@@ -215,8 +218,14 @@ angular.module('appApp')
 	  	}
 	}
 
+	var si1 = setInterval(function (){
+		$scope.$apply();
+	  	$('[data-toggle="tooltip"]').tooltip();
+	}, 1000);
+
 	$scope.$on("$destroy", function() {
 		clearTimeout(st1);
+		clearInterval(si1);
 	})
 
   });

@@ -21,26 +21,30 @@
 			状态更新时间：{{ bp_status.bp_status_refresh_time | date : "yyyy-MM-dd HH:mm:ss Z" }}
 		</div>
 		<table ng-if="bp_status_rows" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
-			<tr>
-				<th width="50" class="text-center">编号</th>
-				<th>节点账户</th>
-				<th width="20%">状态</th>
-				<th width="20%">打包区块</th>
-				<th width="35%">最终打包时间</th>
-			</tr>
-			<tr ng-repeat="(key, value) in bp_status_rows" ng-class="{ 'font-weight-bold': bp_status.head_block_producer == value.bpname }">
-				<td align="center">{{ $index + 1 }}</td>
-				<td>{{ value.bpname }}</td>
-				<td class="{{ value.status }}">
-					{{ value.status }}
-				</td>
-				<td>
-					{{ value.number | number }}
-				</td>
-				<td>
-					{{ value.date | date : "yyyy-MM-dd HH:mm:ss Z" }}
-				</td>
-			</tr>
+			<thead>
+				<tr>
+					<th width="50" class="text-center">编号</th>
+					<th>节点账户</th>
+					<th width="20%">状态</th>
+					<th width="20%">打包区块</th>
+					<th width="35%">最终打包时间</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, value) in bp_status_rows" ng-class="{ 'font-weight-bold': bp_status.head_block_producer == value.bpname }">
+					<td align="center">{{ $index + 1 }}</td>
+					<td>{{ value.bpname }}</td>
+					<td class="{{ value.status }}">
+						{{ value.status }}
+					</td>
+					<td>
+						{{ value.number | number }}
+					</td>
+					<td>
+						{{ value.date | date : "yyyy-MM-dd HH:mm:ss Z" }}
+					</td>
+				</tr>
+			</tbody>
 		</table>
 		<div ng-if="!bp_status">获取中...</div>
 		

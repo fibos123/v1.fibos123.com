@@ -47,7 +47,6 @@ section .line1 header, section .line1 .website-list{height:100px}
 .navbar-nav .nav-item .nav-link{}
 .navbar-nav .nav-item .nav-link:hover{}
 section .website-list li .more a.color-fibos-rocks{color: #78d2f0;background: rgba(0, 0, 0, 0.85);}
-.table-hover tr:hover {background-color: rgba(0,0,0,.075);}
 .online, .open{color: green;}
 .online:before, .open:before{font-family: "Font Awesome 5 Free";content:'\f058';display: inline-block;width: 20px}
 .offline, .blocked, .error, .timeout{color: red;}

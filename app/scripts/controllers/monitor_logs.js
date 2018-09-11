@@ -17,7 +17,10 @@ angular.module('appApp')
 
   	bp_status_change_logs();
 
+  	$scope.refresh = bp_status_change_logs;
+
 	function bp_status_change_logs() {
+		bp_status_change_logs_rows = {};
 	  	$.getJSON('https://api.fibos123.com/bp_status_change_logs', function(data) {
 	  		$scope.bp_status_change_logs = data;
 	  		if (!bp_status_change_logs_rows || bp_status_change_logs_rows.length != data.rows.length) {
@@ -25,9 +28,9 @@ angular.module('appApp')
 	  			bp_status_change_logs_rows = data.rows;
 	  		}
 	  		$scope.$apply();
-			st1 = setTimeout(function (){
-				bp_status_change_logs()
-			}, 1000)
+			// st1 = setTimeout(function (){
+			// 	bp_status_change_logs()
+			// }, 1000)
 	  	});
 	}
 
