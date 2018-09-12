@@ -19,9 +19,9 @@
 		<div class="d-flex justify-content-between">
 		    <div><h3>接入点状态监测 </h3></div>
 		    <div class="mt-auto">
-				<a href="javascirpt:;" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> 
+				<a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> 
 			</div>
-		  </div>
+	  </div>
 
 		<table ng-if="producerjson" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
 			<thead>
@@ -51,7 +51,9 @@
 							<span ng-if="value.http_status == 'timeout'">timeout</span>
 							<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
 						</span>
-						<span ng-if="value.http_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
+						<span ng-if="value.http_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">
+							<i class="far fa-question-circle"></i>
+						</span>
 					</td>
 
 					<td class="{{ value.https_status }}">
@@ -63,7 +65,9 @@
 							<span ng-if="value.https_status == 'timeout'">timeout</span>
 							<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
 						</span>
-						<span ng-if="value.https_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">*</span>
+						<span ng-if="value.https_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">
+							<i class="far fa-question-circle"></i>
+						</span>
 					</td>
 
 					<td class="{{ value.p2p_status }}">

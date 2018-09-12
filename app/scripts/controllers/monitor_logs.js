@@ -14,10 +14,16 @@ angular.module('appApp')
 
   	var bp_status_change_logs_rows = [];
   	var st1;
+  	var is_all = false;
 
   	bp_status_change_logs();
 
   	$scope.refresh = bp_status_change_logs;
+  	$scope.is_all = is_all;
+
+  	$scope.show_all = function (){
+  		$scope.is_all = true;
+  	}
 
 	function bp_status_change_logs() {
 		bp_status_change_logs_rows = {};
