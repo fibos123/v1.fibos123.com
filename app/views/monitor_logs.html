@@ -41,7 +41,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<a class="a-link" ng-click="show_all()" ng-if="!is_all">
+		<a class="a-link" ng-click="show_all()" ng-if="!is_all && bp_status_change_logs">
 			查看剩余的 {{ bp_status_change_logs_rows.length - 20 }} 条记录
 		</a>
 		<div ng-if="!bp_status_change_logs">获取中...</div>
