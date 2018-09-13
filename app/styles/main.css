@@ -47,6 +47,7 @@ footer a{color:#2d74b2}
 .part-websites section .line1 header, .part-websites section .line1 .website-list{height:100px}
 .part-websites section .website-list li .more a.color-fibos-rocks{color: #78d2f0;background: rgba(0, 0, 0, 0.85);}
 .part-monitor {}
+.part-monitor .green{color: green}
 .part-monitor .icon{}
 .part-monitor .icon:before{font-family: "Font Awesome 5 Free";display: inline-block;width: 20px;}
 .part-monitor .icon-ok{color: green}

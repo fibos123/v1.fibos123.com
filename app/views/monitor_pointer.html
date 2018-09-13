@@ -47,8 +47,8 @@
 					<td>{{ value.bpname }}</td>
 
 					<td>
-						<span ng-if="value.http.history" data-toggle="tooltip" title="已开启 history 插件">
-							<i class="far fa-check-circle"></i>
+						<span ng-if="value.http.history" class="green" data-toggle="tooltip" title="已开启 history 插件">
+							<i class="fas fa-history"></i>
 						</span>
 						<span class="icon" ng-class="{'icon-ok': value.http.status == 'ok', 'icon-ng': value.http.status == 'ng', 'icon-connecting': value.http.status == 'connecting', 'icon-unknown': value.http.status == 'unset', 'icon-warning': value.http.warning}" data-toggle="tooltip" title="{{ value.http.endpoint }}">
 							<span>{{ value.http.msg }}</span>
@@ -63,8 +63,8 @@
 					</td>
 
 					<td>
-						<span ng-if="value.https.history" data-toggle="tooltip" title="已开启 history 插件">
-							<i class="far fa-check-circle"></i>
+						<span ng-if="value.https.history" class="green" data-toggle="tooltip" title="已开启 history 插件">
+							<i class="fas fa-history"></i>
 						</span>
 						<span class="icon" ng-class="{'icon-ok': value.https.status == 'ok', 'icon-ng': value.https.status == 'ng', 'icon-connecting': value.https.status == 'connecting', 'icon-unknown': value.https.status == 'unset', 'icon-warning': value.https.warning}" data-toggle="tooltip" title="{{ value.https.endpoint }}">
 							<span>{{ value.https.msg }}</span>
