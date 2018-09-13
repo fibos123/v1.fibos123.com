@@ -43,18 +43,18 @@ angular.module('appApp')
 	  				http: {
 	  					status: "unset",
 	  					msg: "unset",
-	  					warning: "",
 	  					endpoint: "",
 	  					number: 0,
 	  					history: false,
+	  					cors: true
 	  				},
 	  				https: {
 	  					status: "unset",
 	  					msg: "unset",
-	  					warning: "",
 	  					endpoint: "",
 	  					number: 0,
 	  					history: false,
+	  					cors: true
 	  				},
 	  				p2p: {
 	  					status: "unset",
@@ -67,13 +67,13 @@ angular.module('appApp')
 	  				// http
 	  				check_http_or_https(bpname, json.nodes[j], "http", function (bpname, info) {
 	  					if (info) {
-	  						list[bpname]["http"] = info;
+	  						list[bpname]["http"] = Object.assign(list[bpname]["http"], info)
 	  					}
 	  				});
 	  				// https
 	  				check_http_or_https(bpname, json.nodes[j], "https", function (bpname, info) {
 	  					if (info) {
-	  						list[bpname]["https"] = info;
+	  						list[bpname]["https"] = Object.assign(list[bpname]["https"], info)
 	  					}
 	  				});
 	  				// p2p
@@ -89,7 +89,7 @@ angular.module('appApp')
 	  		$scope.$apply();
 	  		$('[data-toggle="tooltip"]').tooltip();
 			// st1 = setTimeout(function (){
-			// 	producerjson();
+			// 	main();
 			// }, 1000)
 	  	});
 
@@ -118,20 +118,19 @@ angular.module('appApp')
 			get_info(bpname, endpoint + '/v1/chain/get_info', "GET", {},function(bpname, url, info) {
 				if (info && info.head_block_num) {
 					get_info(bpname, endpoint + '/v1/history/get_transaction', "POST", '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}',function(bpname, url, info) {
-						console.log(info)
 						if (info && info.id) {
 							var info = list[bpname][type];
 							info["history"] = true;
 							return callback(bpname, info);
 						}
 					})
-					return callback(bpname, {status: "ok",endpoint: endpoint,number: info.head_block_num});
+					return callback(bpname, {status: "ok", msg: "",number: info.head_block_num});
 				} else {
-					return callback(bpname, {status: "ng",msg: "offline",endpoint: endpoint});
+					return callback(bpname, {status: "ng",msg: "offline"});
 				}
 			}, function(bpname, url, textStatus) {
 				if (textStatus == "timeout") {
-					return callback(bpname, {status: "ng",msg:"timeout",endpoint: endpoint});
+					return callback(bpname, {status: "ng",msg:"timeout"});
 				} else {
 				    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
 				    encodeURIComponent(url) + 
@@ -142,19 +141,18 @@ angular.module('appApp')
 						    encodeURIComponent(endpoint + '/v1/history/get_transaction') + 
 						    '&callback=?';
 							get_info(bpname, url, "POST", '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}',function(bpname, url, info) {
-								console.log(info)
 								if (info && info.id) {
 									var info = list[bpname][type];
 									info["history"] = true;
 									return callback(bpname, info);
 								}
 							})
-							return callback(bpname, {status: "ok",warning: "未开启 CORS",endpoint: endpoint,number: info.head_block_num});
+							return callback(bpname, {status: "ok", msg: "",cors: false,number: info.head_block_num});
 						} else {
-							return callback(bpname, {status: "ng",msg: "offline",endpoint: endpoint});
+							return callback(bpname, {status: "ng",msg: "offline"});
 						}
 					}, function (bpname, url, textStatus){
-						return callback(bpname, {status: "ng",msg: "error",endpoint: endpoint});
+						return callback(bpname, {status: "ng",msg: "error"});
 					})
 				}
 			});
@@ -172,10 +170,12 @@ angular.module('appApp')
 			callback(bpname, {status: "connecting",msg:"connecting",endpoint: endpoint});
 			get_p2p(bpname, host, port, function(bpname, host, port, info) {
 				var status = info && info.msg;
-				if (status && info.msg.indexOf("open")) {
+				if (status && info.msg.indexOf("open") >= 0) {
 					callback(bpname, {status: "ok",msg:"open",endpoint: endpoint});
-				} else if (status && info.msg.indexOf("blocked")) {
+				} else if (status && info.msg.indexOf("blocked") >= 0) {
 					callback(bpname, {status: "ng",msg: "blocked",endpoint: endpoint});
+				} else if (status && info.msg.indexOf("invalid") >= 0) {
+					callback(bpname, {status: "ng",msg: "invalid",endpoint: endpoint});
 				} else {
 					callback(bpname, {status: "ng",msg: "timeout",endpoint: endpoint});
 				}
