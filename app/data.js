@@ -1,4 +1,4 @@
-[
+var websites = [
   {
     "icon": "fas fa-map-signs",
     "name": "新手指南",

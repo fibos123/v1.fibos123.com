@@ -69,6 +69,7 @@ angular.module('appApp')
 							list[i]['http_msg'] = producerjson_rows[i]['http_msg'];
 						}
 						if (api_endpoint.indexOf("http://") === 0) {
+		  					list[i]['http_status'] = producerjson_rows[i]['http_status'] = 'connecting';
 		  					get_info(i, api_endpoint + '/v1/chain/get_info', function(i, url, info) {
 		  						if (info && info.head_block_num) {
 									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "online";
@@ -111,6 +112,7 @@ angular.module('appApp')
 							list[i]['https_msg'] = producerjson_rows[i]['https_msg'];
 						}
 						if (ssl_endpoint.indexOf("https://") === 0) {
+		  					list[i]['https_status'] = producerjson_rows[i]['https_status'] = 'connecting';
 		  					get_info(i, ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
 		  						if (info && info.head_block_num) {
 									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "online";
@@ -153,7 +155,7 @@ angular.module('appApp')
 		  					var addr = p2p_endpoint.split(":");
 		  					var host = addr[0];
 		  					var port = addr[1];
-		  					producerjson_rows[i]['p2p_status'] = 'connecting';
+		  					list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = 'connecting';
 		  					check_p2p(i, host, port, function(i, host, port, info) {
 		  						var status = info && info.msg;
 		  						if (status && info.msg.indexOf("open")) {
@@ -203,7 +205,7 @@ angular.module('appApp')
 		    '&callback=?';
 	  		$.ajax({
 			    type: "GET",
-			    // cache: false,
+			    cache: false,
 			    timeout: 5000,
 			    url: url,
 			    data: {},

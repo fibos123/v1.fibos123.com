@@ -31,7 +31,12 @@
 					<th width="25%">HTTP 状态 </th>
 					<th width="25%">HTTPS 状态</th>
 					<th width="25%">P2P 状态 
-						<span data-toggle="tooltip" title="检查是否开放端口">
+						<span data-toggle="tooltip" data-html="true" title="
+						1. 检查是否开放端口。<br />
+						2. 超时时间为 1 秒。<br />
+						3. 端口开放不代表可连接，请各 BP 设置 max-clients 。<br />
+						4. 端口检查由 https://networkappers.com/tools/open-port-checker 提供。
+						">
 							<i class="far fa-question-circle"></i>
 						</span>
 					</th>
@@ -49,6 +54,7 @@
 							<span ng-if="value.http_status == 'unset'">unset</span>
 							<span ng-if="value.http_status == 'offline'">offline</span>
 							<span ng-if="value.http_status == 'timeout'">timeout</span>
+							<span ng-if="value.http_status == 'connecting'">connecting</span>
 							<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
 						</span>
 						<span ng-if="value.http_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">
@@ -63,6 +69,7 @@
 							<span ng-if="value.https_status == 'unset'">unset</span>
 							<span ng-if="value.https_status == 'offline'">offline</span>
 							<span ng-if="value.https_status == 'timeout'">timeout</span>
+							<span ng-if="value.https_status == 'connecting'">connecting</span>
 							<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
 						</span>
 						<span ng-if="value.https_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">

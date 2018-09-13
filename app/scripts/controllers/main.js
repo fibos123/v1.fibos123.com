@@ -12,19 +12,15 @@ angular.module('appApp')
 
   	document.title = 'FIBOS 导航';
 
-  	$.getJSON('data.json?rand=' + Math.random(), function(data) {
-  		$scope.data = data;
-  		$scope.$apply();
+	$scope.data = websites;
 
-		AOS.init({
-		  startEvent: 'aosEvent',
-		  disable: 'mobile',
-		  once: true,
-		  offset: 60
-		});
-		document.dispatchEvent(new Event('aosEvent'));
-
-  	});
+	AOS.init({
+	  startEvent: 'aosEvent',
+	  disable: 'mobile',
+	  once: true,
+	  offset: 60
+	});
+	document.dispatchEvent(new Event('aosEvent'));
 
 	var eos2fo, fo2eos;
 	var i = 0;
