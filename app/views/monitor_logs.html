@@ -1,6 +1,6 @@
 <main role="main">
-  <div class="album py-4 bg-light">
-    <div id="content" class="container">
+  <div class="py-4 bg-light">
+    <div class="container part-monitor">
     	
     	<ul class="nav nav-pills flex-column flex-sm-row">
 		  <li class="nav-item">
@@ -36,8 +36,8 @@
 					<td align="center">{{ bp_status_change_logs_rows.length - $index }}</td>
 					<td>{{ value.date | date : "yyyy-MM-dd HH:mm:ss Z" }}</td>
 					<td>{{ value.bp }}</td>
-					<td class="{{ value.from }}">{{ value.from }}</td>
-					<td class="{{ value.to }}">{{ value.to }}</td>
+					<td class="icon" ng-class="{'icon-ok': value.from == 'online', 'icon-ng': value.from == 'offline', 'icon-unknown': value.from == 'over21'}">{{ value.from }}</td>
+					<td class="icon" ng-class="{'icon-ok': value.to == 'online', 'icon-ng': value.to == 'offline', 'icon-unknown': value.to == 'over21'}">{{ value.to }}</td>
 				</tr>
 			</tbody>
 		</table>

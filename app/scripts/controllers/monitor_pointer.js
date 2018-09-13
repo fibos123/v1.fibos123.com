@@ -12,19 +12,18 @@ angular.module('appApp')
 
   	document.title = ' 节点监控 | FIBOS 导航';
 
-  	var producerjson_rows = {};
   	var st1;
+	var list = {};
 
 	if (window.location.protocol === "https:") {
 		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
 		return;
 	}
 
-  	producerjson();
-  	$scope.refresh = producerjson;
+  	main();
+  	$scope.refresh = main;
 
-	function producerjson() {
-		producerjson_rows = {};
+	function main() {
 		
 	  	$.post('https://rpc-mainnet.fibos123.com/v1/chain/get_table_rows',
 	  		JSON.stringify({
@@ -35,147 +34,58 @@ angular.module('appApp')
 		  		"limit": 1000
 		  	})
 	  	, function(data) {
-	  		var list = {};
+	  		list = {};
 	  		for (var i = 0; i < data.rows.length; i++) {
 	  			var json = JSON.parse(data.rows[i].json);
-	  			list[i] = {
-	  				owner: data.rows[i].owner,
-	  				http_status: "unset",
-	  				http_number: "",
-	  				https_status: "unset",
-	  				https_number: "",
-	  				p2p_status: "unset"
+	  			var bpname = data.rows[i].owner;
+	  			list[bpname] = {
+	  				bpname: bpname,
+	  				http: {
+	  					status: "unset",
+	  					msg: "unset",
+	  					warning: "",
+	  					endpoint: "",
+	  					number: 0,
+	  					history: false,
+	  				},
+	  				https: {
+	  					status: "unset",
+	  					msg: "unset",
+	  					warning: "",
+	  					endpoint: "",
+	  					number: 0,
+	  					history: false,
+	  				},
+	  				p2p: {
+	  					status: "unset",
+	  					msg: "unset",
+	  					endpoint: "",
+	  				}
 	  			};
-
-	  			if (!producerjson_rows[i]) {
-		  			producerjson_rows[i] = {
-		  				owner: data.rows[i].owner,
-		  				http_status: "unset",
-		  				http_number: "",
-		  				http_msg: "",
-		  				https_status: "unset",
-		  				https_number: "",
-		  				https_msg: "",
-		  				p2p_status: "unset"
-		  			};
-	  			}
 
 	  			for (var j = 0; j < json.nodes.length; j++) {
 	  				// http
-	  				var api_endpoint = json.nodes[j].api_endpoint || json.nodes[j].rpc_endpoint;
-	  				if (api_endpoint) {
-	  					if (producerjson_rows[i]['http_status']) {
-							list[i]['http_status'] = producerjson_rows[i]['http_status'];
-							list[i]['http_number'] = producerjson_rows[i]['http_number'];
-							list[i]['http_msg'] = producerjson_rows[i]['http_msg'];
-						}
-						if (api_endpoint.indexOf("http://") === 0) {
-		  					list[i]['http_status'] = producerjson_rows[i]['http_status'] = 'connecting';
-		  					get_info(i, api_endpoint + '/v1/chain/get_info', function(i, url, info) {
-		  						if (info && info.head_block_num) {
-									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "online";
-									list[i]['http_number'] = producerjson_rows[i]['http_number'] = info.head_block_num;
-		  						} else {
-									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
-		  						}
-		  					}, function(i, url, textStatus) {
-		  						if (textStatus == "timeout") {
-									list[i]['http_status'] = producerjson_rows[i]['http_status'] = "timeout";
-		  						} else {
-								    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
-								    encodeURIComponent(url) + 
-								    '&callback=?';
-									get_info(i, url, function(i, url, info) {
-				  						if (info && info.head_block_num) {
-											list[i]['http_status'] = producerjson_rows[i]['http_status'] = "warning";
-											list[i]['http_number'] = producerjson_rows[i]['http_number'] = info.head_block_num;
-				  						} else {
-											list[i]['http_status'] = producerjson_rows[i]['http_status'] = "offline";
-				  						}
-				  					}, function (i, url, textStatus){
-										list[i]['http_status'] = producerjson_rows[i]['http_status'] = "error";
-										list[i]['http_msg'] = producerjson_rows[i]['http_msg'] = "error";
-				  					})
-		  						}
-		  					})
-	  					} else {
-							list[i]['http_status'] = producerjson_rows[i]['http_status'] = "error";
-							list[i]['http_msg'] = producerjson_rows[i]['http_msg'] = "not http";
+	  				check_http_or_https(bpname, json.nodes[j], "http", function (bpname, info) {
+	  					if (info) {
+	  						list[bpname]["http"] = info;
 	  					}
-						list[i]['http_endpoint'] = producerjson_rows[i]['http_endpoint'] = api_endpoint;
-  					}
+	  				});
 	  				// https
-	  				var ssl_endpoint = json.nodes[j].ssl_endpoint;
-	  				if (ssl_endpoint) {
-	  					if (producerjson_rows[i]['https_status']) {
-							list[i]['https_status'] = producerjson_rows[i]['https_status'];
-							list[i]['https_number'] = producerjson_rows[i]['https_number'];
-							list[i]['https_msg'] = producerjson_rows[i]['https_msg'];
-						}
-						if (ssl_endpoint.indexOf("https://") === 0) {
-		  					list[i]['https_status'] = producerjson_rows[i]['https_status'] = 'connecting';
-		  					get_info(i, ssl_endpoint + '/v1/chain/get_info', function(i, url, info) {
-		  						if (info && info.head_block_num) {
-									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "online";
-									list[i]['https_number'] = producerjson_rows[i]['https_number'] = info.head_block_num;
-		  						} else {
-									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
-		  						}
-		  					}, function(i, url, textStatus) {
-		  						if (textStatus == "timeout") {
-									list[i]['https_status'] = producerjson_rows[i]['https_status'] = "timeout";
-		  						} else {
-								    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
-								    encodeURIComponent(url) + 
-								    '&callback=?';
-									get_info(i, url, function(i, url, info) {
-				  						if (info && info.head_block_num) {
-											list[i]['https_status'] = producerjson_rows[i]['https_status'] = "warning";
-											list[i]['https_number'] = producerjson_rows[i]['https_number'] = info.head_block_num;
-				  						} else {
-											list[i]['https_status'] = producerjson_rows[i]['https_status'] = "offline";
-				  						}
-				  					}, function (i, url, textStatus){
-										list[i]['https_status'] = producerjson_rows[i]['https_status'] = "error";
-										list[i]['https_msg'] = producerjson_rows[i]['https_msg'] = "error";
-				  					})
-		  						}
-		  					})
-	  					} else {
-							list[i]['https_status'] = producerjson_rows[i]['https_status'] = "error";
-							list[i]['https_msg'] = producerjson_rows[i]['https_msg'] = "not https";
+	  				check_http_or_https(bpname, json.nodes[j], "https", function (bpname, info) {
+	  					if (info) {
+	  						list[bpname]["https"] = info;
 	  					}
-						list[i]['https_endpoint'] = producerjson_rows[i]['https_endpoint'] = ssl_endpoint;
-  					}
+	  				});
 	  				// p2p
-	  				var p2p_endpoint = json.nodes[j].p2p_endpoint;
-	  				if (p2p_endpoint) {
-	  					if (producerjson_rows[i]['p2p_status'] && producerjson_rows[i]['p2p_status'] != 'unset') {
-							list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'];
-						} else {
-		  					var addr = p2p_endpoint.split(":");
-		  					var host = addr[0];
-		  					var port = addr[1];
-		  					list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = 'connecting';
-		  					check_p2p(i, host, port, function(i, host, port, info) {
-		  						var status = info && info.msg;
-		  						if (status && info.msg.indexOf("open")) {
-									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "open";
-		  						} else if (status && info.msg.indexOf("blocked")) {
-									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "blocked";
-		  						} else {
-									list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "timeout";
-		  						}
-		  					}, function(i){
-								list[i]['p2p_status'] = producerjson_rows[i]['p2p_status'] = "timeout";
-		  					})
-						}
-						list[i]['p2p_endpoint'] = producerjson_rows[i]['p2p_endpoint'] = p2p_endpoint;
-  					}
+	  				check_p2p(bpname, json.nodes[j], function (bpname, info) {
+	  					if (info) {
+	  						list[bpname]["p2p"] = info;
+	  					}
+	  				});
 	  			}
 	  		}
 
-	  		$scope.producerjson = list;
+	  		$scope.list = list;
 	  		$scope.$apply();
 	  		$('[data-toggle="tooltip"]').tooltip();
 			// st1 = setTimeout(function (){
@@ -183,24 +93,115 @@ angular.module('appApp')
 			// }, 1000)
 	  	});
 
-	  	function get_info(i, url, callback, errcallback) {
+		function check_http_or_https(bpname, bpinfo, type, callback) {
+			var endpoint = "";
+			if (type == "http") {
+				endpoint = bpinfo.api_endpoint || bpinfo.rpc_endpoint;
+			}
+			if (type == "https") {
+				endpoint = bpinfo.ssl_endpoint;
+			}
+			if (!endpoint) {
+				return callback(bpname, false);
+			}
+			if (type === "http") {
+				if (endpoint.indexOf("http://") !== 0) {
+					return callback(bpname, {status: "ng",msg: "not http",endpoint: endpoint});
+				}
+			}
+			if (type === "https") {
+				if (endpoint.indexOf("https://") !== 0) {
+					return callback(bpname, {status: "ng",msg: "not https",endpoint: endpoint});
+				}
+			}
+			callback(bpname, {status: "connecting",msg:"connecting",endpoint: endpoint,});
+			get_info(bpname, endpoint + '/v1/chain/get_info', "GET", {},function(bpname, url, info) {
+				if (info && info.head_block_num) {
+					get_info(bpname, endpoint + '/v1/history/get_transaction', "POST", '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}',function(bpname, url, info) {
+						console.log(info)
+						if (info && info.id) {
+							var info = list[bpname][type];
+							info["history"] = true;
+							return callback(bpname, info);
+						}
+					})
+					return callback(bpname, {status: "ok",endpoint: endpoint,number: info.head_block_num});
+				} else {
+					return callback(bpname, {status: "ng",msg: "offline",endpoint: endpoint});
+				}
+			}, function(bpname, url, textStatus) {
+				if (textStatus == "timeout") {
+					return callback(bpname, {status: "ng",msg:"timeout",endpoint: endpoint});
+				} else {
+				    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
+				    encodeURIComponent(url) + 
+				    '&callback=?';
+					get_info(bpname, url, "GET", {}, function(bpname, url, info) {
+						if (info && info.head_block_num) {
+						    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
+						    encodeURIComponent(endpoint + '/v1/history/get_transaction') + 
+						    '&callback=?';
+							get_info(bpname, url, "POST", '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}',function(bpname, url, info) {
+								console.log(info)
+								if (info && info.id) {
+									var info = list[bpname][type];
+									info["history"] = true;
+									return callback(bpname, info);
+								}
+							})
+							return callback(bpname, {status: "ok",warning: "未开启 CORS",endpoint: endpoint,number: info.head_block_num});
+						} else {
+							return callback(bpname, {status: "ng",msg: "offline",endpoint: endpoint});
+						}
+					}, function (bpname, url, textStatus){
+						return callback(bpname, {status: "ng",msg: "error",endpoint: endpoint});
+					})
+				}
+			});
+		}
+
+		function check_p2p(bpname, bpinfo, callback) {
+			var endpoint = bpinfo.p2p_endpoint;
+			if (!endpoint) {
+				return callback(bpname, false);
+			}
+			var addr = endpoint.split(":");
+			var host = addr[0];
+			var port = addr[1];
+
+			callback(bpname, {status: "connecting",msg:"connecting",endpoint: endpoint});
+			get_p2p(bpname, host, port, function(bpname, host, port, info) {
+				var status = info && info.msg;
+				if (status && info.msg.indexOf("open")) {
+					callback(bpname, {status: "ok",msg:"open",endpoint: endpoint});
+				} else if (status && info.msg.indexOf("blocked")) {
+					callback(bpname, {status: "ng",msg: "blocked",endpoint: endpoint});
+				} else {
+					callback(bpname, {status: "ng",msg: "timeout",endpoint: endpoint});
+				}
+			}, function(i){
+				callback(bpname, {status: "ng",msg: "timeout",endpoint: endpoint});
+			})
+		}
+
+	  	function get_info(bp, url, type, data, callback, errcallback) {
 	  		$.ajax({
-			    type: "GET",
+			    type: type,
 			    // cache: false,
 			    timeout: 5000,
 			    url: url,
-			    data: {},
+			    data: data,
 			    dataType: "json",
 			    success: function (data, textStatus){
-			    	callback(i, url, data);
+			    	callback(bp, url, data);
 			    },
 			    error: function (XMLHttpRequest, textStatus, errorThrown){
-			    	errcallback(i, url, textStatus);
+			    	errcallback(bp, url, textStatus);
 			    }
 			})
 	  	}
 
-	  	function check_p2p(i, host, port, callback, errcallback) {
+	  	function get_p2p(bp, host, port, callback, errcallback) {
 		    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
 		    encodeURIComponent('https://networkappers.com/api/port.php?ip='+host+'&port='+port) + 
 		    '&callback=?';
@@ -212,7 +213,7 @@ angular.module('appApp')
 			    data: {},
 			    dataType: "json",
 			    success: function (data, textStatus){
-			    	callback(i, host, port, data);
+			    	callback(bp, host, port, data);
 			    },
 			    error: function (XMLHttpRequest, textStatus, errorThrown){
 			    	errcallback(i, host, port, textStatus);

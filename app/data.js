@@ -26,7 +26,7 @@ var websites = [
           {"name": "Ironman", "icon": "fas fa-wrench", "desc": "基于浏览器的 FIBOS 安全插件", "url": "http://foironman.com/"},
           {"name": "FOToolkit", "icon": "fas fa-toolbox", "desc": "FIBOS 工具套件。安全，可靠，透明和快速", "url": "https://fotoolkit.com/home"},
           {"name": "FIBOS 安全节点", "icon": "fas fa-bong", "desc": "慢雾区推出的聚焦 FIBOS 生态安全网站", "url": "https://fibos.slowmist.io/"},
-          {"name": "FIBOS.IO", "desc": "FIBOS 官方网站", "url": "https://fibos.io/"},
+          {"name": "FIBOS.IO", "icon": "fas fa-home","desc": "FIBOS 官方网站", "url": "https://fibos.io/"},
           {"name": "MORE Wallet", "desc": "支持傻瓜式一键投兑 FO 功能", "url": "https://more.top/"},
           {"name": "51Token", "desc": "支持 FO 闪兑的钱包", "url": "http://www.51token.im/"},
           {"name": "FO 钱包", "desc": "基于 FIBOS 生态系统的智能钱包", "url": "http://wallet.fo/"},
@@ -77,7 +77,7 @@ var websites = [
       {
         "name": "官方网站",
         "child": [
-          {"name": "FIBOS.IO", "desc": "FIBOS 官方网站", "url": "https://fibos.io/"},
+          {"name": "FIBOS.IO", "icon": "fas fa-home", "desc": "FIBOS 官方网站", "url": "https://fibos.io/"},
           {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/guide/basic/about.md.html"},
           {"name": "Telegram", "desc": "FIBOS 官方电报群", "url": "https://t.me/FIBOSIO"},
           {"name": "社区", "desc": "FIBOS 官方社区", "url": "http://bbs.dev.fo/"},

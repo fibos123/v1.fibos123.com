@@ -1,6 +1,6 @@
 <main role="main">
-  <div class="album py-4 bg-light">
-    <div id="content" class="container">
+  <div class="py-4 bg-light">
+    <div class="container part-monitor">
     	
     	<ul class="nav nav-pills flex-column flex-sm-row">
 		  <li class="nav-item">
@@ -15,15 +15,14 @@
 		</ul><br>
 
 		
-		
 		<div class="d-flex justify-content-between">
 		    <div><h3>接入点状态监测 </h3></div>
-		    <div class="mt-auto" ng-if="producerjson">
+		    <div class="mt-auto" ng-if="list">
 				<a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> 
 			</div>
 	  </div>
 
-		<table ng-if="producerjson" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
+		<table ng-if="list" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
 			<thead>
 				<tr>
 					<th width="50" class="text-center">编号</th>
@@ -43,49 +42,56 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(key, value) in producerjson">
+				<tr ng-repeat="(key, value) in list">
 					<td align="center">{{ $index + 1 }}</td>
-					<td>{{ value.owner }}</td>
+					<td>{{ value.bpname }}</td>
 
-					<td class="{{ value.http_status }}">
-						<span data-toggle="tooltip" title="{{ value.http_endpoint }}">
-							<span ng-if="value.http_status == 'online'">{{ value.http_number | number }}</span>
-							<span ng-if="value.http_status == 'warning'">{{ value.http_number | number }} </span>
-							<span ng-if="value.http_status == 'unset'">unset</span>
-							<span ng-if="value.http_status == 'offline'">offline</span>
-							<span ng-if="value.http_status == 'timeout'">timeout</span>
-							<span ng-if="value.http_status == 'connecting'">connecting</span>
-							<span ng-if="value.http_status == 'error'">{{ value.http_msg }}</span>
+					<td>
+						<span ng-if="value.http.history" data-toggle="tooltip" title="已开启 history 插件">
+							<i class="far fa-check-circle"></i>
 						</span>
-						<span ng-if="value.http_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">
-							<i class="far fa-question-circle"></i>
+						<span class="icon" ng-class="{'icon-ok': value.http.status == 'ok', 'icon-ng': value.http.status == 'ng', 'icon-connecting': value.http.status == 'connecting', 'icon-unknown': value.http.status == 'unset', 'icon-warning': value.http.warning}" data-toggle="tooltip" title="{{ value.http.endpoint }}">
+							<span>{{ value.http.msg }}</span>
+							<span ng-if="value.http.status == 'ok'">{{ value.http.number | number }}</span>
 						</span>
+						<span ng-if="value.http.warning" data-toggle="tooltip" title="{{ value.http.warning }}">
+							<i class="fas fa-exclamation-circle"></i>
+						</span>
+						<a class="hide-link float-right" ng-if="value.http.status != 'unset'" target="_blank" href="{{ value.http.endpoint }}/v1/chain/get_info" data-toggle="tooltip" title="打开新窗口查看接入点">
+							<i class="fas fa-link"></i>
+						</a>
 					</td>
 
-					<td class="{{ value.https_status }}">
-						<span data-toggle="tooltip" title="{{ value.https_endpoint }}">
-							<span ng-if="value.https_status == 'online'">{{ value.https_number | number }}</span>
-							<span ng-if="value.https_status == 'warning'">{{ value.https_number | number }}</span>
-							<span ng-if="value.https_status == 'unset'">unset</span>
-							<span ng-if="value.https_status == 'offline'">offline</span>
-							<span ng-if="value.https_status == 'timeout'">timeout</span>
-							<span ng-if="value.https_status == 'connecting'">connecting</span>
-							<span ng-if="value.https_status == 'error'">{{ value.https_msg }}</span>
+					<td>
+						<span ng-if="value.https.history" data-toggle="tooltip" title="已开启 history 插件">
+							<i class="far fa-check-circle"></i>
 						</span>
-						<span ng-if="value.https_status == 'warning'" data-toggle="tooltip" title="未开启 CORS">
-							<i class="far fa-question-circle"></i>
+						<span class="icon" ng-class="{'icon-ok': value.https.status == 'ok', 'icon-ng': value.https.status == 'ng', 'icon-connecting': value.https.status == 'connecting', 'icon-unknown': value.https.status == 'unset', 'icon-warning': value.https.warning}" data-toggle="tooltip" title="{{ value.https.endpoint }}">
+							<span>{{ value.https.msg }}</span>
+							<span ng-if="value.https.status == 'ok'">{{ value.https.number | number }}</span>
 						</span>
+						<span ng-if="value.https.warning" data-toggle="tooltip" title="{{ value.https.warning }}">
+							<i class="fas fa-exclamation-circle"></i>
+						</span>
+						<a class="hide-link float-right" ng-if="value.https.status != 'unset'" target="_blank" href="{{ value.https.endpoint }}/v1/chain/get_info" data-toggle="tooltip" title="打开新窗口查看接入点">
+							<i class="fas fa-link"></i>
+						</a>
 					</td>
 
-					<td class="{{ value.p2p_status }}">
-						<span data-toggle="tooltip" title="{{ value.p2p_endpoint }}">
-							{{ value.p2p_status }}
+					<td >
+						<span data-toggle="tooltip" title="{{ value.p2p.endpoint }}" class="icon" ng-class="{'icon-ok': value.p2p.status == 'ok', 'icon-ng': value.p2p.status == 'ng', 'icon-connecting': value.p2p.status == 'connecting', 'icon-unknown': value.p2p.status == 'unset', 'icon-warning': value.p2p.warning}">
+							{{ value.p2p.msg }}
 						</span>
-				</td>
+						<span>
+							<a class="hide-link float-right" ng-if="value.p2p.status != 'unset'" target="_blank" href="https://networkappers.com/api/port.php?ip={{ value.p2p.endpoint.split(':')[0] }}&port={{ value.p2p.endpoint.split(':')[1] }}" data-toggle="tooltip" title="打开新窗口查看接入点">
+								<i class="fas fa-link"></i>
+							</a>
+						</span>
+					</td>
 				</tr>
 			</tbody>
 		</table>
-		<div ng-if="!producerjson">获取中...</div>
+		<div ng-if="!list">获取中...</div>
 
 	</div>
   </div>
