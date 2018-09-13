@@ -184,7 +184,7 @@ angular.module('appApp')
 	  		$.ajax({
 			    type: "GET",
 			    // cache: false,
-			    timeout: 1000,
+			    timeout: 5000,
 			    url: url,
 			    data: {},
 			    dataType: "json",
@@ -204,7 +204,7 @@ angular.module('appApp')
 	  		$.ajax({
 			    type: "GET",
 			    // cache: false,
-			    timeout: 2000,
+			    timeout: 5000,
 			    url: url,
 			    data: {},
 			    dataType: "json",

@@ -22,7 +22,7 @@
 					记录更新时间：{{ bp_status_change_logs.now_time | date : "yyyy-MM-dd HH:mm:ss Z" }}
 				</div>
 		    </div>
-		    <div class="mt-auto">
+		    <div class="mt-auto" ng-if="bp_status_change_logs">
 				<a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> 
 			</div>
 	  </div>
