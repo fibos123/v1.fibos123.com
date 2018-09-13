@@ -34,10 +34,10 @@
 				<tr ng-repeat="(key, value) in bp_status_rows" ng-class="{ 'font-weight-bold': bp_status.head_block_producer == value.bpname }">
 					<td align="center">{{ $index + 1 }}</td>
 					<td>{{ value.bpname }}</td>
-					<td ng-if="bp_status.head_block_num - value.number <= 240" class="icon icon-ok">
+					<td ng-if="bp_status.head_block_num - value.number <= 242" class="icon icon-ok">
 						online
 					</td>
-					<td ng-if="bp_status.head_block_num - value.number > 240" class="icon icon-ng">
+					<td ng-if="bp_status.head_block_num - value.number > 242" class="icon icon-ng">
 						offline
 					</td>
 					<td>
