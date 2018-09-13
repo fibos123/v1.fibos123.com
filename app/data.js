@@ -7,7 +7,7 @@ var websites = [
         "name": "",
         "child": [
           {"name": "FIBOS 是什么？", "desc": "以及为什么要创造 FIBOS ？", "url": "https://fibos.io/docs/guide/basic/about.md.html"},
-          {"name": "我需要兑换 FO 吗？", "desc": "打开微博看看创始人响马先生的提醒", "url": "https://weibo.com/2041028560/Gx1UPkwY3"},
+          {"name": "我需要兑换 FO 吗？", "desc": "打开微博看看创始人响马先生的提醒", "url": "http://file.gongxiangcj.com/nonooghj.png"},
           {"name": "投 FIBOS 代码太难？", "desc": "MORE wallet 推出傻瓜式一键投兑 FO 功能", "url": "https://www.jianshu.com/p/4b1f2f2825f7"},
           {"name": "能查看区块链状态吗？", "desc": "FIBOS ROCKS 是一款出色的 FIBOS 区块链浏览器", "url": "http://explorer.fibos.rocks/"},
           {"name": "遇到问题？", "desc": "加入电报群和开发者以及超过 2000 名成员沟通", "url": "https://t.me/FIBOSIO"}
