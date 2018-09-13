@@ -142,9 +142,7 @@ angular.module('appApp')
 						    '&callback=?';
 							get_info(bpname, url, "POST", '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}',function(bpname, url, info) {
 								if (info && info.id) {
-									var info = list[bpname][type];
-									info["history"] = true;
-									return callback(bpname, info);
+									return callback(bpname, {history: true});
 								}
 							})
 							return callback(bpname, {status: "ok", msg: "",cors: false,number: info.head_block_num});
