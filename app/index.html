@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li ng-repeat="menuItem in menuItems" class="nav-item" ng-href="#!{{ menuItem.url }}" ng-class="{ active: isActive(menuItem.url) }">
-              <a class="nav-link" ng-href="#!/{{ menuItem.url }}"><i class="{{ menuItem.icon }}"></i> {{ menuItem.name }}</a>
+              <a class="nav-link" ng-href="#!/{{ menuItem.url }}"><i class="{{ menuItem.icon }}"></i> <span ng-bind="menuItem.name"></span></a>
             </li>
           </ul>
         </div>
