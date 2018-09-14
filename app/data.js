@@ -28,7 +28,7 @@ var websites = [
           {"name": "FIBOS 安全节点", "icon": "fas fa-bong", "desc": "慢雾区推出的聚焦 FIBOS 生态安全网站", "url": "https://fibos.slowmist.io/"},
           {"name": "FIBOS.IO", "icon": "fas fa-home","desc": "FIBOS 官方网站", "url": "https://fibos.io/"},
           {"name": "MORE Wallet", "desc": "支持傻瓜式一键投兑 FO 功能", "url": "https://more.top/"},
-          {"name": "51Token", "desc": "支持 FO 闪兑的钱包", "url": "http://www.51token.im/"},
+          {"name": "51Token", "desc": "支持 FO 闪兑的钱包", "url": "https://www.51token.im/"},
           {"name": "FO 钱包", "desc": "基于 FIBOS 生态系统的智能钱包", "url": "http://wallet.fo/"},
           {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/guide/basic/about.md.html"},
           {"name": "imondo", "desc": "由 fibos4imondo 超级节点 建立的一个活跃的小众社区", "url": "http://imondo.io/"}
@@ -68,7 +68,7 @@ var websites = [
         "icon": "",
         "child": [
           {"name": "MORE Wallet", "desc": "支持傻瓜式一键投兑 FO 功能", "url": "https://more.top/", "more": {"icon": "", "name": "教程", "url": "https://www.jianshu.com/p/4b1f2f2825f7"}},
-          {"name": "51Token", "desc": "支持 FO 闪兑的钱包", "url": "http://www.51token.im/", "more": {"icon": "", "name": "教程", "url": "http://imondo.io/article/1535949163876"}},
+          {"name": "51Token", "desc": "支持 FO 闪兑的钱包", "url": "https://www.51token.im/", "more": {"icon": "", "name": "教程", "url": "http://imondo.io/article/1535949163876"}},
           {"name": "FO 钱包", "desc": "基于 FIBOS 生态系统的智能钱包", "url": "http://wallet.fo/", "more": {"icon": "", "name": "教程", "url": "https://fibos.io/5b8b51baaba908441dbbfc81.html"}},
           {"name": "OneChain", "desc": "数字货币全能 APP", "url": "http://www.onechain.one/"},
           {"name": "FoToken", "desc": "安全、便捷、高效的数字资产管理工具", "url": "http://www.fotoken.io/"}

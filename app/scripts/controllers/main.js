@@ -16,7 +16,7 @@ angular.module('appApp')
 
 	AOS.init({
 	  startEvent: 'aosEvent',
-	  disable: 'mobile',
+	  // disable: 'mobile',
 	  once: true,
 	  offset: 60
 	});
