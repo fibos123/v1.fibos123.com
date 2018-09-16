@@ -40,6 +40,7 @@ angular.module('appApp')
 	  			var bpname = data.rows[i].owner;
 	  			list[bpname] = {
 	  				bpname: bpname,
+	  				producerjson: json,
 	  				http: {
 	  					status: "unset",
 	  					msg: "unset",
@@ -66,21 +67,15 @@ angular.module('appApp')
 	  			for (var j = 0; j < json.nodes.length; j++) {
 	  				// http
 	  				check_http_or_https(bpname, json.nodes[j], "http", function (bpname, info) {
-	  					if (info) {
-	  						list[bpname]["http"] = Object.assign(list[bpname]["http"], info)
-	  					}
+  						list[bpname]["http"] = Object.assign(list[bpname]["http"], info)
 	  				});
 	  				// https
 	  				check_http_or_https(bpname, json.nodes[j], "https", function (bpname, info) {
-	  					if (info) {
-	  						list[bpname]["https"] = Object.assign(list[bpname]["https"], info)
-	  					}
+  						list[bpname]["https"] = Object.assign(list[bpname]["https"], info)
 	  				});
 	  				// p2p
 	  				check_p2p(bpname, json.nodes[j], function (bpname, info) {
-	  					if (info) {
-	  						list[bpname]["p2p"] = info;
-	  					}
+  						list[bpname]["p2p"] = Object.assign(list[bpname]["p2p"], info)
 	  				});
 	  			}
 	  		}
@@ -102,7 +97,7 @@ angular.module('appApp')
 				endpoint = bpinfo.ssl_endpoint;
 			}
 			if (!endpoint) {
-				return callback(bpname, false);
+				return;
 			}
 			if (type === "http") {
 				if (endpoint.indexOf("http://") !== 0) {
@@ -159,26 +154,46 @@ angular.module('appApp')
 		function check_p2p(bpname, bpinfo, callback) {
 			var endpoint = bpinfo.p2p_endpoint;
 			if (!endpoint) {
-				return callback(bpname, false);
+				return;
 			}
+			endpoint = endpoint.replace("http://", "");
 			var addr = endpoint.split(":");
 			var host = addr[0];
 			var port = addr[1];
 
 			callback(bpname, {status: "connecting",msg:"connecting",endpoint: endpoint});
-			get_p2p(bpname, host, port, function(bpname, host, port, info) {
-				var status = info && info.msg;
-				if (status && info.msg.indexOf("open") >= 0) {
-					callback(bpname, {status: "ok",msg:"open",endpoint: endpoint});
-				} else if (status && info.msg.indexOf("blocked") >= 0) {
-					callback(bpname, {status: "ng",msg: "blocked",endpoint: endpoint});
-				} else if (status && info.msg.indexOf("invalid") >= 0) {
-					callback(bpname, {status: "ng",msg: "invalid",endpoint: endpoint});
-				} else {
-					callback(bpname, {status: "ng",msg: "timeout",endpoint: endpoint});
+			get_p2p(bpname, host, port, function(bpname, host, port, data) {
+				var status = data && data.rows;
+				if (!status) {
+					return callback(bpname, {status: "unknown",msg: "unknown"});
 				}
-			}, function(i){
-				callback(bpname, {status: "ng",msg: "timeout",endpoint: endpoint});
+
+				var rows = data.rows;
+				var msg = "";
+				var ok_num = 0;
+				var length = 1; // rows.length
+
+				for (var i = 0; i < length; i++) {
+					if (rows[i].indexOf("connect ") >= 0 || rows[i].indexOf("connection ") >= 0) {
+						ok_num++;
+					}
+					var _msg = rows[i].split(port)[1].substr(1).replace(/\s+/g,"")
+					if (_msg) {
+						msg = rows[i].split(port)[1].substr(1);
+					}
+				}
+
+				if (ok_num == length) {
+					return callback(bpname, {status: "ok",msg:"connect"});
+				} else {
+					return callback(bpname, {status: "ng",msg:msg});
+				}
+			}, function(bpname, host, port, textStatus){
+				if (textStatus == "timeout") {
+					callback(bpname, {status: "unknown",msg:"timeout"});
+				} else {
+					callback(bpname, {status: "unknown",msg: "unknown"});
+				}
 			})
 		}
 
@@ -190,19 +205,27 @@ angular.module('appApp')
 			    url: url,
 			    data: data,
 			    dataType: "json",
+	     	    tryCount : 0,
+    			retryLimit : 3,
 			    success: function (data, textStatus){
 			    	callback(bp, url, data);
 			    },
 			    error: function (XMLHttpRequest, textStatus, errorThrown){
+    	       	    if (textStatus == 'timeout') {
+					    this.tryCount++;
+					    if (this.tryCount <= this.retryLimit) {
+					        $.ajax(this);
+					        return;
+					    }
+					}
 			    	errcallback(bp, url, textStatus);
 			    }
 			})
 	  	}
 
 	  	function get_p2p(bp, host, port, callback, errcallback) {
-		    var url = 'https://api.fibos123.com/json2jsonp?url=' + 
-		    encodeURIComponent('https://networkappers.com/api/port.php?ip='+host+'&port='+port) + 
-		    '&callback=?';
+		    // var url = 'http://localhost:3000/check_p2p?host='+host+'&port='+port;
+		    var url = 'https://api.fibos123.com/check_p2p?host='+host+'&port='+port;
 	  		$.ajax({
 			    type: "GET",
 			    cache: false,
@@ -210,11 +233,21 @@ angular.module('appApp')
 			    url: url,
 			    data: {},
 			    dataType: "json",
+	     	    tryCount : 0,
+    			retryLimit : 3,
 			    success: function (data, textStatus){
 			    	callback(bp, host, port, data);
 			    },
 			    error: function (XMLHttpRequest, textStatus, errorThrown){
-			    	errcallback(i, host, port, textStatus);
+    	       	    if (textStatus == 'timeout') {
+					    this.tryCount++;
+					    if (this.tryCount <= this.retryLimit) {
+					        $.ajax(this);
+					        return;
+					    }
+					}
+
+			    	errcallback(bp, host, port, textStatus);
 			    }
 			})
 	  	}

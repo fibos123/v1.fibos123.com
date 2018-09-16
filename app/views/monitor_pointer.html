@@ -27,24 +27,34 @@
 				<tr>
 					<th width="50" class="text-center">编号</th>
 					<th>节点账户</th>
-					<th width="25%">HTTP 状态 </th>
+					<th width="25%">HTTP 状态</th>
 					<th width="25%">HTTPS 状态</th>
-					<th width="25%">P2P 状态 
-						<span data-toggle="tooltip" data-html="true" title="
-						1. 检查是否开放端口。<br />
-						2. 超时时间为 1 秒。<br />
-						3. 端口开放不代表可连接，请各 BP 设置 max-clients 。<br />
-						4. 端口检查由 https://networkappers.com/tools/open-port-checker 提供。
-						">
-							<i class="far fa-question-circle"></i>
-						</span>
-					</th>
+					<th width="25%">P2P 状态</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="(key, value) in list">
 					<td align="center">{{ $index + 1 }}</td>
-					<td>{{ value.bpname }}</td>
+					<td>
+						<span ng-if="
+							value.http.status == 'ok' &&
+							value.http.history &&
+							value.https.status == 'ok' &&
+							value.https.history &&
+							value.p2p.status == 'ok'
+						" class="green" data-toggle="tooltip" title="满分接入点"><i class="fas fa-thumbs-up"></i> {{ value.bpname }}</span>
+						<span ng-if="
+							!(value.http.status == 'ok' &&
+							value.http.history &&
+							value.https.status == 'ok' &&
+							value.https.history &&
+							value.p2p.status == 'ok')
+						" >{{ value.bpname }}</span>
+
+						<a class="hide-link float-right" ng-if="value.producerjson.org.website" target="_blank" href="{{ value.producerjson.org.website }}" data-toggle="tooltip" title="打开新窗口查看网站">
+							<i class="fas fa-link"></i>
+						</a>
+					</td>
 
 					<td>
 						<span ng-if="value.http.history" class="green" data-toggle="tooltip" title="已开启 history 插件">
@@ -79,11 +89,18 @@
 					</td>
 
 					<td >
-						<span data-toggle="tooltip" title="{{ value.p2p.endpoint }}" class="icon" ng-class="{'icon-ok': value.p2p.status == 'ok', 'icon-ng': value.p2p.status == 'ng', 'icon-connecting': value.p2p.status == 'connecting', 'icon-unknown': value.p2p.status == 'unset', 'icon-warning': value.p2p.warning}">
+						<span data-toggle="tooltip" title="{{ value.p2p.endpoint }}" class="icon" 
+						ng-class="{
+						'icon-ok': value.p2p.status == 'ok', 
+						'icon-ng': value.p2p.status == 'ng', 
+						'icon-connecting': value.p2p.status == 'connecting', 
+						'icon-unknown': value.p2p.status == 'unset' || value.p2p.status == 'unknown', 
+						'icon-warning': value.p2p.warning}"
+						>
 							{{ value.p2p.msg }}
 						</span>
 						<span>
-							<a class="hide-link float-right" ng-if="value.p2p.status != 'unset'" target="_blank" href="https://networkappers.com/api/port.php?ip={{ value.p2p.endpoint.split(':')[0] }}&port={{ value.p2p.endpoint.split(':')[1] }}" data-toggle="tooltip" title="打开新窗口查看接入点">
+							<a class="hide-link float-right" ng-if="value.p2p.status != 'unset'" target="_blank" href="https://api.fibos123.com/check_p2p?host={{ value.p2p.endpoint.split(':')[0] }}&port={{ value.p2p.endpoint.split(':')[1] }}" data-toggle="tooltip" title="打开新窗口查看接入点">
 								<i class="fas fa-link"></i>
 							</a>
 						</span>
