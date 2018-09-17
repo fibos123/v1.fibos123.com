@@ -6,30 +6,36 @@ img{max-width:100%}
 footer{padding-top:3rem;padding-bottom:3rem}
 footer p{margin-bottom:.25rem}
 footer a{color:#2d74b2}
+footer{background: white}
 .jumbotron{padding-top:calc(var(--jumbotron-padding-y) * 2);padding-bottom:calc(var(--jumbotron-padding-y) * 2);margin-bottom:0;position:relative}
-.jumbotron{background:url(https://images.unsplash.com/photo-1526860474862-d2c1d76aed1f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a6be3dfab8db60665eed6a99dbf481bd&auto=format&fit=crop&w=1920&q=80);background-size:cover;background-position:center;background-repeat:no-repeat;color:white;border-radius:0}
+.jumbotron{background:url(../images/bg.jpg);background-size:cover;background-position:center;background-repeat:no-repeat;color:white;border-radius:0}
 .jumbotron p:last-child{margin-bottom:0}
 .jumbotron-heading{font-weight:300}
-.jumbotron .bg{background:rgba(0, 0, 0, 0.8);position:absolute;width:100%;height:100%;left:0;top:0}
 .jumbotron .container{position:relative}
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{background-color:#4184bf;}
 .navbar-brand{padding:0.7rem 0}
 .navbar{padding-top:0;padding-bottom:0}
 .navbar-nav{}
 .navbar-nav .nav-item{}
-.navbar-nav .nav-item a{height:76px;line-height:76px;padding-top:0;padding:0 1.2rem!important}
+.navbar-nav .nav-item a{height:76px;line-height:76px;padding-top:0;padding:0 1.2rem!important;}
 .navbar-nav .nav-item.active{}
-.navbar-nav .nav-item.active a{background:#4184bf;color:white!important;display:p a d}
+.navbar-nav .nav-item.active a{background:#4184bf;color:white!important;display:block;}
 .navbar-nav .nav-item .nav-link{}
 .navbar-nav .nav-item .nav-link:hover{}
 .a-link{color: #4184bf!important;cursor: pointer;}
+
+body .logo-white{display: none}
+body.full-bg {background: url(../images/bg.jpg) center no-repeat;background-size: cover;}
+body.full-bg .logo{display: none}
+body.full-bg .logo-white{display: initial}
+
 .part-websites {}
 .part-websites section{position:relative;background:white;margin-bottom:30px;padding:1px;border:0 solid #c5d2db;border-radius:8px;background:#fff;box-shadow:0 1px 2px rgba(31,35,37,.08)}
 .part-websites section .panel-heading{padding:12px 24px;font-size:1.2em;border-bottom:1px solid #e7eff4;cursor:default}
 .part-websites section .panel-heading a{color:#212529;text-decoration:none}
 .part-websites section .panel-heading .fa{}
 .part-websites section .panel-heading .fa-bookmark-o{}
-.part-websites section content{position:relative;display:block}
+.part-websites section .content{position:relative;display:block}
 .part-websites section header{position:absolute;top:0;left:0px;width:140px;cursor:default}
 .part-websites section header .icon-download{font-size:1.2em;position:absolute;top:50%;width:100%;text-align:center;margin:-0.7em 0 0 0;font-weight:lighter}
 .part-websites section header .icon-download a{color:#555;text-decoration:none}
@@ -62,3 +68,4 @@ footer a{color:#2d74b2}
 .part-monitor .icon-connecting:before{content:'\f110';font-weight: 900;}
 .part-monitor table td .hide-link{display: none}
 .part-monitor table td:hover .hide-link{display: initial;}
+.part-about{color: white;}

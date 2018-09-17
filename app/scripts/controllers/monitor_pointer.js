@@ -119,7 +119,7 @@ angular.module('appApp')
 							info["history"] = true;
 							return callback(bpname, info);
 						}
-					})
+					}, function(){})
 					return callback(bpname, {status: "ok", msg: "",number: info.head_block_num});
 				} else {
 					return callback(bpname, {status: "ng",msg: "offline"});
@@ -140,7 +140,7 @@ angular.module('appApp')
 								if (info && info.id) {
 									return callback(bpname, {history: true});
 								}
-							})
+							}, function(){})
 							return callback(bpname, {status: "ok", msg: "",cors: false,number: info.head_block_num});
 						} else {
 							return callback(bpname, {status: "ng",msg: "offline"});

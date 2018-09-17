@@ -24,6 +24,11 @@ angular.module('appApp')
         name: '节点监控',
         icon: 'fab fa-connectdevelop',
         url:  'monitor'
+      },
+      {
+        name: 'BP 候选人',
+        icon: 'far fa-address-card',
+        url:  'about'
       }
     ];
 
