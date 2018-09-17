@@ -12,6 +12,8 @@ angular.module('appApp')
 
   	document.title = 'BP 候选人 | FIBOS 导航';
 
+  	$(window).scrollTop(0)
+
   	$("body").addClass("full-bg");
   	$(".navbar").addClass("navbar-dark").removeClass("navbar-light");
 

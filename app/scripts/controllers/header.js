@@ -25,11 +25,11 @@ angular.module('appApp')
         icon: 'fab fa-connectdevelop',
         url:  'monitor'
       },
-      {
-        name: 'BP 候选人',
-        icon: 'far fa-address-card',
-        url:  'about'
-      }
+      // {
+      //   name: 'BP 候选人',
+      //   icon: 'far fa-address-card',
+      //   url:  'about'
+      // }
     ];
 
     // $scope.$apply();
