@@ -94,7 +94,7 @@ angular.module('appApp')
 
 	function set() {
 		is_set = false;
-  		$scope.list = copy(list).sort(compare("score"));
+  		$scope.list = copy(list).sort(compare("bpname")).sort(compare("score"));
 		$scope.$apply();
 		$(".tooltip").remove();
 	  	$('[data-toggle="tooltip"]').tooltip();
@@ -108,10 +108,6 @@ angular.module('appApp')
 
 	$scope.$on("$destroy", function() {
 		clearInterval(si1);
-	})
-
-
-	$scope.$on("$destroy", function() {
 	})
 
 
