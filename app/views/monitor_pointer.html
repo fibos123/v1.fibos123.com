@@ -97,7 +97,7 @@
 						'icon-unknown': value.p2p.status == 'unset' || value.p2p.status == 'unknown', 
 						'icon-warning': value.p2p.warning}"
 						>
-							{{ value.p2p.msg }}
+							{{ value.p2p.msg | lowercase }}
 						</span>
 
 						<span ng-if="!value.p2p.detecting" data-toggle="tooltip" title="这是新接入点，服务器未对其进行监测，请把该接入点地址({{ value.p2p.endpoint }})发送给 &#98;&#112;&#64;&#102;&#105;&#98;&#111;&#115;&#49;&#50;&#51;&#46;&#99;&#111;&#109; ">
