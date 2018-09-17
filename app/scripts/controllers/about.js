@@ -10,7 +10,7 @@
 angular.module('appApp')
   .controller('AboutCtrl', function ($scope) {
 
-  	document.title = 'BP 候选人 | FIBOS 导航';
+  	document.title = 'BP 信息 | FIBOS 导航';
 
   	$(window).scrollTop(0)
 
