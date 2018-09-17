@@ -54,18 +54,20 @@ body.full-bg .logo-white{display: initial}
 .part-websites section .website-list li .more a.color-fibos-rocks{color: #78d2f0;background: rgba(0, 0, 0, 0.85);}
 .part-monitor {}
 .part-monitor .green{color: green}
+.part-monitor .orange{color: orange}
+.part-monitor .red{color: red}
 .part-monitor .icon{}
 .part-monitor .icon:before{font-family: "Font Awesome 5 Free";display: inline-block;width: 20px;}
 .part-monitor .icon-ok{color: green}
 .part-monitor .icon-ok:before{content:'\f058';-webkit-font-smoothing: antialiased;}
 .part-monitor .icon-ng{color: red}
 .part-monitor .icon-ng:before{content:'\f057';}
-.part-monitor .icon-warning{color: orange}
-.part-monitor .icon-warning:before{content:'\f06a';font-weight: 900;}
-.part-monitor .icon-unknown{color: gray}
-.part-monitor .icon-unknown:before{content:'\f059';}
-.part-monitor .icon-connecting{color: gray}
-.part-monitor .icon-connecting:before{content:'\f110';font-weight: 900;}
+.part-monitor .icon-warn{color: orange}
+.part-monitor .icon-warn:before{content:'\f06a';font-weight: 900;}
+.part-monitor .icon-un{color: gray}
+.part-monitor .icon-un:before{content:'\f059';}
+.part-monitor .icon-ing{color: gray}
+.part-monitor .icon-ing:before{content:'\f110';font-weight: 900;}
 .part-monitor table td .hide-link{display: none}
 .part-monitor table td:hover .hide-link{display: initial;}
 .part-about{color: white;}
