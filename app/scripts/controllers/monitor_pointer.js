@@ -61,6 +61,7 @@ angular.module('appApp')
 	  					status: "unset",
 	  					msg: "unset",
 	  					endpoint: "",
+	  					detecting: true
 	  				}
 	  			};
 
@@ -163,9 +164,9 @@ angular.module('appApp')
 
 			callback(bpname, {status: "connecting",msg:"connecting",endpoint: endpoint});
 			get_p2p(bpname, host, port, function(bpname, host, port, data) {
-				var status = data && data.rows;
+				var status = data && data.rows && data.rows.length;
 				if (!status) {
-					return callback(bpname, {status: "unknown",msg: "unknown"});
+					return callback(bpname, {status: "unknown",msg: "unknown",detecting: false});
 				}
 
 				var rows = data.rows;

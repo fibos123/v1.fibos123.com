@@ -99,6 +99,11 @@
 						>
 							{{ value.p2p.msg }}
 						</span>
+
+						<span ng-if="!value.p2p.detecting" data-toggle="tooltip" title="这是新接入点，服务器未对其进行监测，请把该接入点地址({{ value.p2p.endpoint }})发送给 &#98;&#112;&#64;&#102;&#105;&#98;&#111;&#115;&#49;&#50;&#51;&#46;&#99;&#111;&#109; ">
+							<i class="fas fa-exclamation-circle"></i>
+						</span>
+
 						<span>
 							<a class="hide-link float-right" ng-if="value.p2p.status != 'unset'" target="_blank" href="https://api.fibos123.com/check_p2p?host={{ value.p2p.endpoint.split(':')[0] }}&port={{ value.p2p.endpoint.split(':')[1] }}" data-toggle="tooltip" title="打开新窗口查看接入点">
 								<i class="fas fa-link"></i>
