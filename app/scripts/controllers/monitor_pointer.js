@@ -94,7 +94,10 @@ angular.module('appApp')
 
 	function set() {
 		is_set = false;
-  		$scope.list = copy(list).sort(compare("bpname")).sort(compare("score"));
+		var _list = copy(list);
+		_list = _list.sort(compare_sort("bpname"));
+		_list = _list.sort(compare_reverse("score"));
+  		$scope.list = _list;
 		$scope.$apply();
 		$(".tooltip").remove();
 	  	$('[data-toggle="tooltip"]').tooltip();
@@ -292,8 +295,22 @@ angular.module('appApp')
 		})
   	}
 
+	// 对象排序 顺序
+	function compare_sort(pro) { 
+	    return function (obj1, obj2) { 
+	        var val1 = obj1[pro]; 
+	        var val2 = obj2[pro]; 
+	        if (val1 < val2 ) { //正序
+	            return -1; 
+	        } else if (val1 > val2 ) { 
+	            return 1; 
+	        } else { 
+	            return 0; 
+	        } 
+	    } 
+	} 
 	// 对象排序 倒序
-	function compare(pro) { 
+	function compare_reverse(pro) { 
 	    return function (obj1, obj2) { 
 	        var val1 = obj1[pro]; 
 	        var val2 = obj2[pro]; 
