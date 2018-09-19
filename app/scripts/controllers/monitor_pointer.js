@@ -268,7 +268,7 @@ angular.module('appApp')
 
   	function get_p2p(bp, host, port, callback, errcallback) {
 	    // var url = 'http://localhost:3000/check_p2p?host='+host+'&port='+port;
-	    var url = 'http://ec2-13-231-231-11.ap-northeast-1.compute.amazonaws.com/check_p2p?host='+host+'&port='+port;
+	    var url = 'https://rpc-mainnet.fibos123.com/check_p2p?host='+host+'&port='+port;
   		$.ajax({
 		    type: "GET",
 		    cache: false,
