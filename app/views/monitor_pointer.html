@@ -17,8 +17,11 @@
 		
 		<div class="d-flex justify-content-between">
 		    <div><h3>接入点状态监测 </h3></div>
-		    <div class="mt-auto" ng-if="list">
-				<a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> 
+		    <div class="mt-auto">
+				<div class="text-right"><a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> </div>
+    			<div class="input-group input-group-sm pb-1">
+				  <input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
+				</div>
 			</div>
 	  </div>
 
@@ -33,7 +36,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(key, value) in list">
+				<tr ng-repeat="(key, value) in list | filter:q">
 					<td align="center">{{ $index + 1 }}</td>
 					<td>
 						<span ng-class="{

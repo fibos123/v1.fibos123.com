@@ -22,17 +22,15 @@
 					最多显示最近 100 条记录。
 				</div>
 		    </div>
-		    <div class="mt-auto" ng-if="bp_status_change_logs">
-				<a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> 
+
+		    <div class="mt-auto">
+				<div class="text-right"><a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> </div>
+    			<div class="input-group input-group-sm pb-1">
+				  <input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
+				</div>
 			</div>
 	  </div>
 
-	    <div class="py-2 input-group">
-		  <div class="input-group-prepend">
-		    <span class="input-group-text">搜索</span>
-		  </div>
-		    <input type="text" autocomplete="off" placeholder="" class="form-control" ng-model="q">
-	    </div>
 
 		<table ng-if="bp_status_change_logs_rows" class="table table-bordered table-hover table-sm table-striped monospaced-font" >
 			<thead>
