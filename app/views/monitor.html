@@ -15,11 +15,23 @@
 		</ul><br>
 
 
-		<h3>出块节点在线状态</h3>
-		<div ng-if="bp_status">
-			最新区块：{{ bp_status.head_block_num | number }}<br/>
-			状态更新时间：{{ bp_status.bp_status_refresh_time | date : "yyyy-MM-dd HH:mm:ss Z" }}
-		</div>
+		<div class="d-flex justify-content-between">
+		    <div>
+				<h3>出块节点在线状态</h3>
+				<div>
+					最新区块：{{ bp_status.head_block_num | number }}<br/>
+					状态更新时间：{{ bp_status.bp_status_refresh_time | date : "yyyy-MM-dd HH:mm:ss Z" }}
+				</div>
+			</div>
+		    <div class="mt-auto">
+    			<div class="input-group input-group-sm pb-1">
+				  <input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
+				</div>
+			</div>
+	  </div>
+
+
+
 		<table ng-if="bp_status_rows" class="table table-bordered table-hover table-sm table-striped  monospaced-font">
 			<thead>
 				<tr>
@@ -31,7 +43,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(key, value) in bp_status_rows" ng-class="{ 'font-weight-bold': bp_status.head_block_producer == value.bpname }">
+				<tr ng-repeat="(key, value) in bp_status_rows | filter:q" ng-class="{ 'font-weight-bold': bp_status.head_block_producer == value.bpname }">
 					<td align="center">{{ $index + 1 }}</td>
 					<td>{{ value.bpname }}</td>
 					<td ng-if="bp_status.head_block_num - value.number <= 242" class="icon icon-ok">
