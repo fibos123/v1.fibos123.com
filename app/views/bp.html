@@ -36,6 +36,7 @@
 		    <label> <input type="checkbox" ng-init="q11 = false" ng-model="q11"> 最终出块区块 </label>
 		    <label> <input type="checkbox" ng-init="q12 = false" ng-model="q12"> 最终出块时间 </label>
 		    <label> <input type="checkbox" ng-init="q13 = false" ng-model="q13"> 累计出块</label>
+		    <label> <input type="checkbox" ng-init="q15 = false" ng-model="q15"> 网站 </label>
 		    <label> <input type="checkbox" ng-init="q14 = true" ng-model="q14"> 操作 </label>
 		</div>
 
@@ -88,6 +89,7 @@
 		<th width="" ng-if="q11">最终出块区块</th>
 		<th width="" ng-if="q12">最终出块时间</th>
 		<th width="" ng-if="q13">累计出块</th>
+		<th width="50" ng-if="q15">网站</th>
 		<th width="" ng-if="q14">操作</th>
 	</tr>
   </script>
@@ -159,9 +161,16 @@
 			{{ value.block_count | number }}
 		</td>
 
+		<td ng-if="q15">
+			<a ng-if="value.url" target="_blank" href="{{ value.url }}">
+				{{ value.url }}
+			</a>
+		</td>
+
 		<td ng-if="q14">
 			<a class="a-link" ng-href="#!/bp/{{ value.owner }}">详情</a>
 		</td>
+
 
   </script>
 

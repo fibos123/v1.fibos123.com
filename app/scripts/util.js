@@ -107,7 +107,6 @@ var util = {
         var unreceived = 0;
         var bpay = (global.perblock_bucket * producer.unpaid_blocks) / global.total_unpaid_blocks / 10000;
         var bpay2 = (global.perblock_bucket * 5000) / 172800 / 10000;
-        // console.log(global.total_unpaid_blocks)
         var vpay = (global.pervote_bucket * producer.total_votes) / (1 * global.total_producer_vote_weight) / 10000;
         var next_claim_time = 1 * producer.last_claim_time / 1000 + 24 * 60 * 60 * 1000;
         if (vpay < 1000) {

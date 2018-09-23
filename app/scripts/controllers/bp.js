@@ -29,47 +29,15 @@ angular.module('appApp')
   	$scope.weightPercent = util.weightPercent;
   	$scope.getClaimRewards = util.getClaimRewards;
 
-  	get_global(function(data){
-  		global = data.rows[0];
-		$scope.global = global;
-  		get_info();
-  		main();
-  	})
-
-  	function get_info () {
-  		util.ajax({url: url.rpc.get_info}, function(data){
-	  		info = data;
-			$scope.info = info;
-
-			s++;
-
-			if (last_producer != info["head_block_producer"]) {
-				last_producer = info["head_block_producer"];
-				s = 0;
-				setTimeout(function(){
-					s++;
-					$scope.s = s;
-					$scope.$apply();
-				}, 1);
-			}
-
-			$scope.s = s;
-
-			if ("undefined" !== typeof bpname2i[info["head_block_producer"]]) {
-	  			get_bp_info(bpname2i[info["head_block_producer"]], info["head_block_producer"], function(i, bpname, info){
-	  				items[i] = Object.assign(items[i], info);
-					is_set = true;
-	  			}, function(){})
-  			}
-
-			$scope.$apply();
-			st1 = setTimeout(function (){
-				get_info()
-			}, 1000)
-  		}, function(){})
-  	}
+  	main();
+	get_info();
 
   	function main(){
+  		bpname2i = {};
+	  	get_global(function(data){
+	  		global = data.rows[0];
+			$scope.global = global;
+	  	})
 	  	get_producers(function(data) {
 	  		items = data.rows;
 			totalVotessum = util.totalVotessum(data.rows);
@@ -87,6 +55,37 @@ angular.module('appApp')
 			is_set = true;
 	  	}, function(){})
   	}
+
+  	function get_info () {
+  		util.ajax({url: url.rpc.get_info}, function(data){
+	  		info = data;
+			$scope.info = info;
+			s++;
+			if (last_producer != info["head_block_producer"]) {
+				last_producer = info["head_block_producer"];
+				s = 0;
+				setTimeout(function(){
+					s++;
+					$scope.s = s;
+					$scope.$apply();
+				}, 1);
+			}
+			$scope.s = s;
+			if ("undefined" !== typeof bpname2i[info["head_block_producer"]]) {
+	  			get_bp_info(bpname2i[info["head_block_producer"]], info["head_block_producer"], function(i, bpname, info){
+	  				items[i] = Object.assign(items[i], info);
+					is_set = true;
+	  			}, function(){})
+  			}
+
+			$scope.$apply();
+			clearTimeout(st1);
+			st1 = setTimeout(function (){
+				get_info()
+			}, 1000)
+  		}, function(){})
+  	}
+
 
 	function set() {
   		$scope.items = items;
