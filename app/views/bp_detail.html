@@ -16,159 +16,162 @@
 			</div>
 	    </div>
 
-
-
-		<h6>基本信息</h6>
-		<table class="table table-bordered table-hover table-sm table-striped monospaced-font">
-			<tbody>
-
-				<tr>
-					<th>创建时间</th>
-					<td>
-						<span ng-if="info.created">
-							{{ info.created + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
-						</span>
-						<span ng-if="!info.created">
-							-
-						</span>
-					</td>
-				</tr>
-
-				<tr>
-					<th>得票数</th>
-					<td>{{ getStaked(info.total_votes) | number }} FO</td>
-				</tr>
-
-				<tr>
-					<th>得票权重</th>
-					<td>{{ info.total_votes | number }}</td>
-				</tr>
-
-				<tr>
-					<th>得票率</th>
-					<td>{{ weightPercent(info.total_votes, totalVotessum) }} %</td>
-				</tr>
-
-				<tr>
-					<th>每日收益</th>
-					<td>{{ getClaimRewards(info, global, info.rank).total | number }} FO</td>
-				</tr>
-
-				<tr>
-					<th>未领取收益</th>
-					<td>{{ getClaimRewards(info, global, info.rank).unreceived | number }} FO</td>
-				</tr>
-
-				<tr>
-					<th>未支付块</th>
-					<td>{{ info.unpaid_blocks | number }}</td>
-				</tr>
-
-				<tr>
-					<th>上次领取时间</th>
-					<td>{{ info.last_claim_time / 1000 | date : "yyyy-MM-dd HH:mm:ss Z" }}</td>
-				</tr>
-
-				<tr>
-					<th>公钥</th>
-					<td>{{ info.producer_key }}</td>
-				</tr>
-
-
-			</tbody>
-		</table>
-
-		<h6>出块信息</h6>
-		<table class="table table-bordered table-hover table-sm table-striped monospaced-font">
-			<tbody>
-
-
-				<tr>
-					<th>首次出块区块</th>
-					<td>{{ info.first_block | number }}</td>
-				</tr>
-
-				<tr>
-					<th>最终出块区块</th>
-					<td>{{ info.last_block | number }}</td>
-				</tr>
-
-				<tr>
-					<th>首次出块时间</th>
-					<td>
-						<span ng-if="info.first_time">
-							{{ info.first_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
-						</span>
-						<span ng-if="!info.first_time">
-							-
-						</span>
-					</td>
-				</tr>
-
-
-				<tr>
-					<th>最终出块时间</th>
-					<td>
-						<span ng-if="info.last_time">
-							{{ info.last_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
-						</span>
-						<span ng-if="!info.last_time">
-							-
-						</span>
-					</td>
-				</tr>
-
-				<tr>
-					<th>累计出块</th>
-					<td>{{ info.block_count | number }}</td>
-				</tr>
-
-			</tbody>
-		</table>
-
-		<h6>JSON 信息</h6>
-		<table ng-if="info.json" class="table table-bordered table-hover table-sm table-striped monospaced-font">
-			<tbody>
-				
-				<tr ng-repeat="(key, value) in info.json.org">
-					<th>{{ key }}</th>
-					<td>
-						{{ value }}
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
-
-		<h6>接入点信息</h6>
-		<table ng-if="info.json" class="table table-bordered table-hover table-sm table-striped monospaced-font">
-			<tbody>
-				
-				<tr ng-repeat="(key, value) in info.json.nodes">
-					<th>{{ value.node_type }}</th>
-					<td>
-						<div>
-							<b>国家或地区：</b> {{ value.location.name }}, {{ value.location.country }}
-						</div>
-						<div ng-if="
-							value.p2p_endpoint ||
-							value.rpc_endpoint ||
-							value.api_endpoint ||
-							value.ssl_endpoint
-						">
-							<b>接入点地址：</b>
-							<div ng-if="value.p2p_endpoint"> {{ value.p2p_endpoint }}</div>
-							<div ng-if="value.rpc_endpoint"> {{ value.rpc_endpoint }}</div>
-							<div ng-if="value.api_endpoint"> {{ value.api_endpoint }}</div>
-							<div ng-if="value.ssl_endpoint"> {{ value.ssl_endpoint }}</div>
-						</div>
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
 		
-		<div ng-if="!info.json">节点未提交 JSON</div>
+		<div ng-if="info">
+
+			<h6>基本信息</h6>
+			<table class="table table-bordered table-hover table-sm table-striped monospaced-font">
+				<tbody>
+
+					<tr>
+						<th>创建时间</th>
+						<td>
+							<span ng-if="info.created">
+								{{ info.created + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
+							</span>
+							<span ng-if="!info.created">
+								-
+							</span>
+						</td>
+					</tr>
+
+					<tr>
+						<th>得票数</th>
+						<td>{{ getStaked(info.total_votes) | number }} FO</td>
+					</tr>
+
+					<tr>
+						<th>得票权重</th>
+						<td>{{ info.total_votes | number }}</td>
+					</tr>
+
+					<tr>
+						<th>得票率</th>
+						<td>{{ weightPercent(info.total_votes, totalVotessum) }} %</td>
+					</tr>
+
+					<tr>
+						<th>每日收益</th>
+						<td>{{ getClaimRewards(info, global, info.rank).total | number }} FO</td>
+					</tr>
+
+					<tr>
+						<th>未领取收益</th>
+						<td>{{ getClaimRewards(info, global, info.rank).unreceived | number }} FO</td>
+					</tr>
+
+					<tr>
+						<th>未支付块</th>
+						<td>{{ info.unpaid_blocks | number }}</td>
+					</tr>
+
+					<tr>
+						<th>上次领取时间</th>
+						<td>{{ info.last_claim_time / 1000 | date : "yyyy-MM-dd HH:mm:ss Z" }}</td>
+					</tr>
+
+					<tr>
+						<th>公钥</th>
+						<td>{{ info.producer_key }}</td>
+					</tr>
+
+
+				</tbody>
+			</table>
+
+			<h6>出块信息</h6>
+			<table class="table table-bordered table-hover table-sm table-striped monospaced-font">
+				<tbody>
+
+
+					<tr>
+						<th>首次出块区块</th>
+						<td>{{ info.first_block | number }}</td>
+					</tr>
+
+					<tr>
+						<th>最终出块区块</th>
+						<td>{{ info.last_block | number }}</td>
+					</tr>
+
+					<tr>
+						<th>首次出块时间</th>
+						<td>
+							<span ng-if="info.first_time">
+								{{ info.first_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
+							</span>
+							<span ng-if="!info.first_time">
+								-
+							</span>
+						</td>
+					</tr>
+
+
+					<tr>
+						<th>最终出块时间</th>
+						<td>
+							<span ng-if="info.last_time">
+								{{ info.last_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
+							</span>
+							<span ng-if="!info.last_time">
+								-
+							</span>
+						</td>
+					</tr>
+
+					<tr>
+						<th>累计出块</th>
+						<td>{{ info.block_count | number }}</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+			<h6>JSON 信息</h6>
+			<table ng-if="info.json" class="table table-bordered table-hover table-sm table-striped monospaced-font">
+				<tbody>
+					
+					<tr ng-repeat="(key, value) in info.json.org">
+						<th>{{ key }}</th>
+						<td>
+							{{ value }}
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+			<h6>接入点信息</h6>
+			<table ng-if="info.json" class="table table-bordered table-hover table-sm table-striped monospaced-font">
+				<tbody>
+					
+					<tr ng-repeat="(key, value) in info.json.nodes">
+						<th>{{ value.node_type }}</th>
+						<td>
+							<div>
+								<b>国家或地区：</b> {{ value.location.name }}, {{ value.location.country }}
+							</div>
+							<div ng-if="
+								value.p2p_endpoint ||
+								value.rpc_endpoint ||
+								value.api_endpoint ||
+								value.ssl_endpoint
+							">
+								<b>接入点地址：</b>
+								<div ng-if="value.p2p_endpoint"> {{ value.p2p_endpoint }}</div>
+								<div ng-if="value.rpc_endpoint"> {{ value.rpc_endpoint }}</div>
+								<div ng-if="value.api_endpoint"> {{ value.api_endpoint }}</div>
+								<div ng-if="value.ssl_endpoint"> {{ value.ssl_endpoint }}</div>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+			
+			<div ng-if="!info.json">节点未提交 JSON</div>
+
+		</div>
 
 		<div class="pt-2"><a href="#!/bp">返回列表</a></div>
 
