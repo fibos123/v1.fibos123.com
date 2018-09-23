@@ -17,8 +17,8 @@
 		<div class="d-flex justify-content-between">
 		    <div>
 		    	<h3>出块节点在线状态变更记录 </h3>
-				<div ng-if="bp_status_change_logs">
-					记录更新时间：{{ bp_status_change_logs.now_time | date : "yyyy-MM-dd HH:mm:ss Z" }} <br>
+				<div ng-if="data">
+					记录更新时间：{{ data.now_time | date : "yyyy-MM-dd HH:mm:ss Z" }} <br>
 					最多显示最近 100 条记录。
 				</div>
 		    </div>
@@ -32,12 +32,12 @@
 	  </div>
 
 
-		<table ng-if="bp_status_change_logs_rows" class="table table-bordered table-hover table-sm table-striped monospaced-font" >
+		<table ng-if="items" class="table table-bordered table-hover table-sm table-striped monospaced-font" >
 			<thead>
 				<tr><th width="50" class="text-center">编号</th><th>时间</th><th>节点账户</th><th>旧状态</th><th>新状态</th></tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="(key, value) in bp_status_change_logs_rows | filter:q" ng-if="
+				<tr ng-repeat="(key, value) in items | filter:q" ng-if="
 				q || ($index < 20 || is_all)
 				">
 					<td align="center">{{ $index + 1 }}</td>
@@ -56,10 +56,10 @@
 				</tr>
 			</tbody>
 		</table>
-		<a class="a-link" ng-click="show_all()" ng-if="!is_all && bp_status_change_logs && !q">
-			查看剩余的 {{ bp_status_change_logs_rows.length - 20 }} 条记录
+		<a class="a-link" ng-click="show_all()" ng-if="!is_all && items && !q && items.length - 20 > 0">
+			查看剩余的 {{ items.length - 20 }} 条记录
 		</a>
-		<div ng-if="!bp_status_change_logs">获取中...</div>
+		<div ng-if="!items">获取中...</div>
 
 	</div>
   </div>

@@ -11,6 +11,7 @@ angular.module('appApp')
   .controller('MainCtrl', function ($scope) {
 
   	document.title = 'FIBOS 导航';
+  	$(window).scrollTop(0)
 
 	$scope.data = websites;
 

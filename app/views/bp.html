@@ -1,0 +1,171 @@
+<main role="main">
+  <div class="py-4 bg-light">
+    <div class="container part-monitor">
+
+		<div class="d-flex justify-content-between pb-2">
+		    <div>
+		    	<h3>节点列表 </h3>
+		    	<div>生产者： {{info.head_block_producer}}</div>
+		    	<div>最新区块：{{ info.head_block_num | number }} </div>
+		    	<div>出块时间： 
+		    		<span ng-if="info.head_block_time">
+		    			{{ info.head_block_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
+		    		</span>
+		    	</div>
+
+		    </div>
+		    <div class="mt-auto">
+				<div class="text-right"><a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> </div>
+    			<div class="input-group input-group-sm pb-1">
+				  <input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
+				</div>
+			</div>
+	    </div>
+		
+		<div class="pt-2 pb-2">
+		    <h6>显示选项</h6>
+		    <label> <input type="checkbox" ng-init="q1 = true" ng-model="q1"> 编号 </label>
+		    <label> <input type="checkbox" ng-init="q2 = true" ng-model="q2"> 节点账户 </label>
+		    <label> <input type="checkbox" ng-init="q3 = true" ng-model="q3"> 状态 </label>
+		    <label> <input type="checkbox" ng-init="q4 = true" ng-model="q4"> 票数 </label>
+		    <label> <input type="checkbox" ng-init="q5 = true" ng-model="q5"> 得票率 </label>
+		    <label> <input type="checkbox" ng-init="q6 = true" ng-model="q6"> 每日收益 </label>
+		    <label> <input type="checkbox" ng-init="q7 = false" ng-model="q7"> 未领取收益 </label>
+		    <label> <input type="checkbox" ng-init="q9 = false" ng-model="q9"> 首次出块区块 </label>
+		    <label> <input type="checkbox" ng-init="q10 = false" ng-model="q10"> 首次出块时间 </label>
+		    <label> <input type="checkbox" ng-init="q11 = false" ng-model="q11"> 最终出块区块 </label>
+		    <label> <input type="checkbox" ng-init="q12 = false" ng-model="q12"> 最终出块时间 </label>
+		    <label> <input type="checkbox" ng-init="q13 = false" ng-model="q13"> 累计出块</label>
+		    <label> <input type="checkbox" ng-init="q14 = true" ng-model="q14"> 操作 </label>
+		</div>
+
+		<div ng-if="items">
+			<div ng-if="q">
+				<h6>搜索结果</h6>
+				<table ng-if="items" class="table table-bordered table-hover table-sm table-striped monospaced-font">
+					<thead ng-include src="'thead'"></thead>
+					<tbody>
+						<tr ng-repeat="(key, value) in items | filter:q" ng-if="$index < 21" ng-include src="'tbody'">
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div ng-if="!q">
+				<h6>出块节点</h6>
+				<table ng-if="items" class="table table-bordered table-hover table-sm table-striped monospaced-font">
+					<thead ng-include src="'thead'" ng-init="value.rank = 0"></thead>
+					<tbody>
+						<tr ng-repeat="(key, value) in items | filter:q" ng-if="$index < 21" ng-include src="'tbody'" >
+						</tr>
+					</tbody>
+				</table>
+
+				<h6>备选节点</h6>
+				<table ng-if="items" class="table table-bordered table-hover table-sm table-striped monospaced-font">
+					<thead ng-include src="'thead'"></thead>
+					<tbody>
+						<tr ng-repeat="(key, value) in items | filter:q" ng-if="$index >= 21" ng-include src="'tbody'">
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+		<div ng-if="!items">获取中...</div>
+
+  <script type="text/ng-template" id="thead">
+	<tr>
+		<th width="50" class="text-center" ng-if="q1">编号</th>
+		<th width="" ng-if="q2">节点账户</th>
+		<th width="" ng-if="q3">状态</th>
+		<th width="" ng-if="q4">票数</th>
+		<th width="" ng-if="q5">得票率</th>
+		<th width="" ng-if="q6">每日收益</th>
+		<th width="" ng-if="q7">未领取收益</th>
+		<th width="" ng-if="q9">首次出块区块</th>
+		<th width="" ng-if="q10">首次出块时间</th>
+		<th width="" ng-if="q11">最终出块区块</th>
+		<th width="" ng-if="q12">最终出块时间</th>
+		<th width="" ng-if="q13">累计出块</th>
+		<th width="" ng-if="q14">操作</th>
+	</tr>
+  </script>
+  <script type="text/ng-template" id="tbody">
+		<td ng-if="q1" align="center">{{ $index + 1 }}</td>
+		<td ng-if="q2">{{ value.owner }}</td>
+
+		<td ng-if="q3">
+			<span ng-if="info.head_block_producer == value.owner">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" aria-valuemax="100" style="width: {{ s/6*100 }}%">出块中</div>
+				</div>
+			</span>
+			
+			<span ng-if="info.head_block_producer != value.owner && value.bp_info">
+				<span ng-if="value.rank < 21">
+					<span ng-if="info.head_block_num - value.last_block <= 244" class="icon icon-ok">在线</span>
+					<span ng-if="info.head_block_num - value.last_block > 244" class="icon icon-ng">离线</span>
+				</span>
+			</span>
+
+			<span ng-if="!value.bp_info && value.rank < 21" class="gray">
+				获取中
+			</span>
+
+			<span ng-if="value.rank >= 21" class="gray">
+				待机中
+			</span>
+
+		</td>
+
+		<td ng-if="q4">{{ getStaked(value.total_votes) | number }} FO</td>
+		<td ng-if="q5">{{ weightPercent(value.total_votes, totalVotessum) }} %</td>
+		<td ng-if="q6">
+			{{ getClaimRewards(value, global, value.rank).total | number }} FO
+		</td>
+
+		<td ng-if="q7">
+			{{ getClaimRewards(value, global, value.rank).unreceived | number }} FO
+		</td>
+
+  		<td ng-if="q9">
+			{{ value.first_block | number }}
+		</td>
+
+  		<td ng-if="q10">
+			<span ng-if="value.first_time">
+				{{ value.first_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
+			</span>
+			<span ng-if="!value.first_time">
+				-
+			</span>
+		</td>
+
+ 		<td ng-if="q11">
+			{{ value.last_block | number }}
+		</td>
+		
+  		<td ng-if="q12">
+			<span ng-if="value.last_time">
+				{{ value.last_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
+			</span>
+			<span ng-if="!value.last_time">
+				-
+			</span>
+		</td>
+
+ 		<td ng-if="q13">
+			{{ value.block_count | number }}
+		</td>
+
+		<td ng-if="q14">
+			<a class="a-link" ng-href="#!/bp/{{ value.owner }}">详情</a>
+		</td>
+
+  </script>
+
+
+	</div>
+  </div>
+</main>

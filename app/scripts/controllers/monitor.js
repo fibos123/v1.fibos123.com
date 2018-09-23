@@ -11,24 +11,21 @@ angular.module('appApp')
   .controller('MonitorCtrl', function ($scope) {
 
   	document.title = ' 节点监控 | FIBOS 导航';
+  	$(window).scrollTop(0)
 
-  	var bp_status_rows = {};
   	var st1;
 
-  	get_bp_status();
+  	main();
 
-	function get_bp_status() {
-	  	$.getJSON('https://api.fibos123.com/bp_status', function(data) {
-	  		$scope.bp_status = data;
-	  		if (!bp_status_rows || JSON.stringify(bp_status_rows) != JSON.stringify(data.rows2)) {
-	  			$scope.bp_status_rows = data.rows2;
-	  			bp_status_rows = data.rows2;
-	  		}
+	function main() {
+	  	util.ajax({url: url.api.bp_status}, function(data) {
+	  		$scope.data = data;
+	  		$scope.items = data.rows2;
 	  		$scope.$apply();
 			st1 = setTimeout(function (){
-				get_bp_status()
+				main()
 			}, 1000)
-	  	});
+	  	}, function(){});
 	}
 
 	$scope.$on("$destroy", function() {

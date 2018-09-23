@@ -22,27 +22,30 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+      })
+      .when('/bp', {
+        templateUrl: 'views/bp.html',
+        controller: 'BpCtrl',
+      })
+      .when('/bp/:bpname', {
+        templateUrl: 'views/bp_detail.html',
+        controller: 'BpdetailCtrl',
       })
       .when('/monitor', {
         templateUrl: 'views/monitor.html',
         controller: 'MonitorCtrl',
-        controllerAs: 'monitor'
       })
       .when('/monitor/pointer', {
         templateUrl: 'views/monitor_pointer.html',
         controller: 'MonitorPointerCtrl',
-        controllerAs: 'monitorpointer'
       })
       .when('/monitor/logs', {
         templateUrl: 'views/monitor_logs.html',
         controller: 'MonitorLogsCtrl',
-        controllerAs: 'monitorlogs'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
-        controllerAs: 'about'
       })
       .otherwise({
         redirectTo: '/'

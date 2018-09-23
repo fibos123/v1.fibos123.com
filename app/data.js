@@ -101,5 +101,19 @@ var websites = [
         ]
       }
     ]
-  }
+  },
+  {
+    "icon": "",
+    "name": "去中心化应用",
+    "sub": [
+      {
+        "name": "",
+        "icon": "",
+        "child": [
+          {"name": "头条", "desc": "头条", "url": "http://explorer.fibos.rocks/"},
+          {"name": "幸运大投注", "desc": "幸运大投注", "url": "http://www.biteye.pro/"},
+        ]
+      }
+    ]
+  },
 ]
