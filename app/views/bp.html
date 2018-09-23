@@ -27,15 +27,19 @@
 		    <label> <input type="checkbox" ng-init="q1 = true" ng-model="q1"> 编号 </label>
 		    <label> <input type="checkbox" ng-init="q2 = true" ng-model="q2"> 节点账户 </label>
 		    <label> <input type="checkbox" ng-init="q3 = true" ng-model="q3"> 状态 </label>
-		    <label> <input type="checkbox" ng-init="q4 = true" ng-model="q4"> 票数 </label>
+		    <label> <input type="checkbox" ng-init="q4 = true" ng-model="q4"> 得票数 </label>
+		    <label> <input type="checkbox" ng-init="q17 = false" ng-model="q17"> 得票权重 </label>
 		    <label> <input type="checkbox" ng-init="q5 = true" ng-model="q5"> 得票率 </label>
 		    <label> <input type="checkbox" ng-init="q6 = true" ng-model="q6"> 每日收益 </label>
 		    <label> <input type="checkbox" ng-init="q7 = false" ng-model="q7"> 未领取收益 </label>
+		    <label> <input type="checkbox" ng-init="q8 = false" ng-model="q8"> 未支付块 </label>
+		    <label> <input type="checkbox" ng-init="q16 = false" ng-model="q16"> 上次领取时间 </label>
 		    <label> <input type="checkbox" ng-init="q9 = false" ng-model="q9"> 首次出块区块 </label>
 		    <label> <input type="checkbox" ng-init="q10 = false" ng-model="q10"> 首次出块时间 </label>
 		    <label> <input type="checkbox" ng-init="q11 = false" ng-model="q11"> 最终出块区块 </label>
 		    <label> <input type="checkbox" ng-init="q12 = false" ng-model="q12"> 最终出块时间 </label>
 		    <label> <input type="checkbox" ng-init="q13 = false" ng-model="q13"> 累计出块</label>
+		    <!-- <label> <input type="checkbox" ng-init="q18 = false" ng-model="q18"> 公钥 </label> -->
 		    <label> <input type="checkbox" ng-init="q15 = false" ng-model="q15"> 网站 </label>
 		    <label> <input type="checkbox" ng-init="q14 = true" ng-model="q14"> 操作 </label>
 		</div>
@@ -80,16 +84,20 @@
 		<th width="50" class="text-center" ng-if="q1">编号</th>
 		<th width="" ng-if="q2">节点账户</th>
 		<th width="" ng-if="q3">状态</th>
-		<th width="" ng-if="q4">票数</th>
+		<th width="" ng-if="q4">得票数</th>
+		<th width="" ng-if="q17">得票权重</th>
 		<th width="" ng-if="q5">得票率</th>
 		<th width="" ng-if="q6">每日收益</th>
 		<th width="" ng-if="q7">未领取收益</th>
+		<th width="" ng-if="q8">未支付块</th>
+		<th width="" ng-if="q16">上次领取时间</th>
 		<th width="" ng-if="q9">首次出块区块</th>
 		<th width="" ng-if="q10">首次出块时间</th>
 		<th width="" ng-if="q11">最终出块区块</th>
 		<th width="" ng-if="q12">最终出块时间</th>
 		<th width="" ng-if="q13">累计出块</th>
-		<th width="50" ng-if="q15">网站</th>
+		<th width="" ng-if="q18">公钥</th>
+		<th width="200" ng-if="q15">网站</th>
 		<th width="" ng-if="q14">操作</th>
 	</tr>
   </script>
@@ -122,6 +130,11 @@
 		</td>
 
 		<td ng-if="q4">{{ getStaked(value.total_votes) | number }} FO</td>
+
+		<td ng-if="q17">
+			{{ value.total_votes | number }}
+		</td>
+
 		<td ng-if="q5">{{ weightPercent(value.total_votes, totalVotessum) }} %</td>
 		<td ng-if="q6">
 			{{ getClaimRewards(value, global, value.rank).total | number }} FO
@@ -129,6 +142,14 @@
 
 		<td ng-if="q7">
 			{{ getClaimRewards(value, global, value.rank).unreceived | number }} FO
+		</td>
+
+		<td ng-if="q8">
+			{{ value.unpaid_blocks | number }}
+		</td>
+
+		<td ng-if="q16">
+			{{ value.last_claim_time / 1000 | date : "yyyy-MM-dd HH:mm:ss Z" }}
 		</td>
 
   		<td ng-if="q9">
@@ -159,6 +180,10 @@
 
  		<td ng-if="q13">
 			{{ value.block_count | number }}
+		</td>
+
+ 		<td ng-if="q18">
+			{{ value.producer_key }}
 		</td>
 
 		<td ng-if="q15">

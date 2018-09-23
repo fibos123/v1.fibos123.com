@@ -44,9 +44,9 @@ var util = {
     getStaked: function (total_votes) {
         var t = 0;
         if (0 == total_votes) return t;
-        var e = Date.now() / 1e3 - 946684800, // 946684800 = 2000-01-01 UTC
-            s = Math.floor(e / 604800) / 52; // 604800 = 1 week
-        return (t = total_votes / Math.pow(2, s) / 1e4).toFixed(0)
+        var e = Date.now() / 1000 - 946684800, // 946684800 = 2000-01-01 UTC
+            s = Math.floor(e / 604800) / 52.046281; // 604800 = 1 week
+        return (t = total_votes / Math.pow(2, s) / 10000).toFixed(0)
     },
 
 
@@ -106,13 +106,14 @@ var util = {
         var total = 0;
         var unreceived = 0;
         var bpay = (global.perblock_bucket * producer.unpaid_blocks) / global.total_unpaid_blocks / 10000;
-        var bpay2 = 2546;
         var vpay = (global.pervote_bucket * producer.total_votes) / (1 * global.total_producer_vote_weight) / 10000;
         var next_claim_time = 1 * producer.last_claim_time / 1000 + 24 * 60 * 60 * 1000;
+        var bpay2 = 3210;
+        var vpay2 = 4879e5 / 365 * 0.2 * 0.771 * producer.total_votes / global.total_producer_vote_weight
         if (vpay < 1000) {
             vpay = 0;
         }
-        total = (rank < 21) ? bpay2 + vpay : vpay;
+        total = (rank < 21) ? bpay2 + vpay2 : vpay2;
         unreceived = (next_claim_time > Date.now()) ? 0 : bpay + vpay;
         return {
             total: total.toFixed(0),
