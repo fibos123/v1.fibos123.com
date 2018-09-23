@@ -12,8 +12,7 @@
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "font-awesome": "^5.3.1",
-    "jquery": "^3.3.1",
-    "aos": "^2.3.3"
+    "jquery": "^3.3.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
