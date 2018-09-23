@@ -15,13 +15,13 @@ angular.module('appApp')
 
 	$scope.data = websites;
 
-	AOS.init({
-	  startEvent: 'aosEvent',
-	  // disable: 'mobile',
-	  once: true,
-	  offset: 60
-	});
-	document.dispatchEvent(new Event('aosEvent'));
+	// AOS.init({
+	//   startEvent: 'aosEvent',
+	//   // disable: 'mobile',
+	//   once: true,
+	//   offset: 60
+	// });
+	// document.dispatchEvent(new Event('aosEvent'));
 
 	var eos2fo, fo2eos;
 	var i = 0;

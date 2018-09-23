@@ -70,6 +70,7 @@ body.full-bg .logo-white{display: initial}
 .part-monitor .icon-un:before{content:'\f059';}
 .part-monitor .icon-ing{color: gray}
 .part-monitor .icon-ing:before{content:'\f110';font-weight: 900;}
+.part-monitor table td {word-break: break-all;}
 .part-monitor table td .hide-link{display: none}
 .part-monitor table td:hover .hide-link{display: initial;}
 .part-about{color: white;}

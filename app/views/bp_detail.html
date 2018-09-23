@@ -24,7 +24,7 @@
 				<tbody>
 
 					<tr>
-						<th>创建时间</th>
+						<th width="20%">创建时间</th>
 						<td>
 							<span ng-if="info.created">
 								{{ info.created + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
@@ -85,7 +85,7 @@
 
 
 					<tr>
-						<th>首次出块区块</th>
+						<th width="20%">首次出块区块</th>
 						<td>{{ info.first_block | number }}</td>
 					</tr>
 
@@ -132,7 +132,7 @@
 				<tbody>
 					
 					<tr ng-repeat="(key, value) in info.json.org">
-						<th>{{ key }}</th>
+						<th width="20%">{{ key }}</th>
 						<td>
 							{{ value }}
 						</td>
@@ -146,7 +146,7 @@
 				<tbody>
 					
 					<tr ng-repeat="(key, value) in info.json.nodes">
-						<th>{{ value.node_type }}</th>
+						<th width="20%">{{ value.node_type }}</th>
 						<td>
 							<div>
 								<b>国家或地区：</b> {{ value.location.name }}, {{ value.location.country }}
