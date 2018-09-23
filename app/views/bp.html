@@ -97,7 +97,7 @@
 		<th width="" ng-if="q12">最终出块时间</th>
 		<th width="" ng-if="q13">累计出块</th>
 		<th width="" ng-if="q18">公钥</th>
-		<th width="200" ng-if="q15">网站</th>
+		<th width="" ng-if="q15">网站</th>
 		<th width="" ng-if="q14">操作</th>
 	</tr>
   </script>
@@ -187,7 +187,7 @@
 		</td>
 
 		<td ng-if="q15">
-			<a ng-if="value.url" target="_blank" href="{{ value.url }}">
+			<a ng-if="value.url" class="trim-link" target="_blank" href="{{ value.url }}">
 				{{ value.url }}
 			</a>
 		</td>

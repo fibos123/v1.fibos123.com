@@ -23,12 +23,10 @@ footer{background: white}
 .navbar-nav .nav-item .nav-link{}
 .navbar-nav .nav-item .nav-link:hover{}
 .a-link{color: #4184bf!important;cursor: pointer;}
-
 body .logo-white{display: none}
 body.full-bg {background: url(../images/bg.jpg) center no-repeat;background-size: cover;}
 body.full-bg .logo{display: none}
 body.full-bg .logo-white{display: initial}
-
 .part-websites {}
 .part-websites section{position:relative;background:white;margin-bottom:30px;padding:1px;border:0 solid #c5d2db;border-radius:8px;background:#fff;box-shadow:0 1px 2px rgba(31,35,37,.08)}
 .part-websites section .panel-heading{padding:12px 24px;font-size:1.2em;border-bottom:1px solid #e7eff4;cursor:default}
@@ -72,5 +70,6 @@ body.full-bg .logo-white{display: initial}
 .part-monitor .icon-ing:before{content:'\f110';font-weight: 900;}
 .part-monitor table td {word-break: break-all;}
 .part-monitor table td .hide-link{display: none}
+.part-monitor table td .trim-link{display: block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 .part-monitor table td:hover .hide-link{display: initial;}
 .part-about{color: white;}
