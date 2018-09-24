@@ -113,6 +113,9 @@ var util = {
         if (vpay < 1000) {
             vpay = 0;
         }
+        if (vpay2 < 1000) {
+            vpay2 = 0;
+        }
         total = (rank < 21) ? bpay2 + vpay2 : vpay2;
         unreceived = (next_claim_time > Date.now()) ? 0 : bpay + vpay;
         return {

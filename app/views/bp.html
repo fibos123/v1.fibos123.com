@@ -149,7 +149,12 @@
 		</td>
 
 		<td ng-if="q16">
-			{{ value.last_claim_time / 1000 | date : "yyyy-MM-dd HH:mm:ss Z" }}
+			<span ng-if="value.last_claim_time">
+				{{ value.last_claim_time / 1000 | date : "yyyy-MM-dd HH:mm:ss Z" }}
+			</span>
+			<span ng-if="!value.last_claim_time">
+				-
+			</span>
 		</td>
 
   		<td ng-if="q9">

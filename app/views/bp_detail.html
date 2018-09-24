@@ -67,7 +67,14 @@
 
 					<tr>
 						<th>上次领取时间</th>
-						<td>{{ info.last_claim_time / 1000 | date : "yyyy-MM-dd HH:mm:ss Z" }}</td>
+						<td>
+							<span ng-if="info.last_claim_time">
+								{{ info.last_claim_time / 1000 | date : "yyyy-MM-dd HH:mm:ss Z" }}
+							</span>
+							<span ng-if="!info.last_claim_time">
+								-
+							</span>
+						</td>
 					</tr>
 
 					<tr>
