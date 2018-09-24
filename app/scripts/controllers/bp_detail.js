@@ -106,7 +106,7 @@ angular.module('appApp')
             " 至 " + util.timetrans(e.max) + 
             "，出块数量：" + success.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 块" +
             "，丢块数量：" + fall.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 块" + 
-            " 出块率：" + percent.toFixed(3) + " %" +
+            "，出块率：" + percent.toFixed(3) + " %" +
             ""
         });
     }
