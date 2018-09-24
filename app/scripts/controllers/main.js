@@ -44,12 +44,11 @@ angular.module('appApp')
 	})
 
 	function getExchangeInfo() {
-	  var url = 'https://api.fibos123.com/json2jsonp?url=' + encodeURIComponent('https://fibos.io/getExchangeInfo?rand='+Math.random()) + '&callback=?';
-	  $.getJSON(url, function(data){
+	  util.ajax({url: url.api.json2jsonp, dataType: "jsonp", data:{url: 'https://fibos.io/getExchangeInfo'}}, function (data){
 	    eos2fo = data.price;
 	    fo2eos = 1 / data.price;
 	    setTimeout(getExchangeInfo, 5000);
-	  });
+	  }, function(){})
 	}
 
   });

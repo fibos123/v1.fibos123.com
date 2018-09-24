@@ -113,17 +113,17 @@
 			</span>
 			
 			<span ng-if="info.head_block_producer != value.owner && value.bp_info">
-				<span ng-if="value.rank < 21">
+				<span ng-if="value.rank <= 21">
 					<span ng-if="info.head_block_num - value.last_block <= 244" class="icon icon-ok">在线</span>
 					<span ng-if="info.head_block_num - value.last_block > 244" class="icon icon-ng">离线</span>
 				</span>
 			</span>
 
-			<span ng-if="!value.bp_info && value.rank < 21" class="gray">
+			<span ng-if="!value.bp_info && value.rank <= 21" class="gray">
 				获取中
 			</span>
 
-			<span ng-if="value.rank >= 21" class="gray">
+			<span ng-if="value.rank > 21" class="gray">
 				待机中
 			</span>
 

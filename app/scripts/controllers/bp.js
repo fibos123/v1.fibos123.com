@@ -44,7 +44,7 @@ angular.module('appApp')
 			$scope.totalVotessum = totalVotessum;
 	  		for (var i = 0; i < items.length; i++) {
 	  			var bp = items[i];
-	  			items[i]["rank"] = i;
+	  			items[i]["rank"] = i + 1;
 	  			bpname2i[bp["owner"]] = i;
 	  			get_bp_info(i, bp["owner"], function(i, bpname, info){
 	  				items[i] = Object.assign(items[i], info);

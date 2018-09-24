@@ -21,7 +21,6 @@
 		
 		<div ng-if="info">
 
-
 			<h6>基本信息</h6>
 			<table class="table table-bordered table-hover table-sm table-striped monospaced-font">
 				<tbody>
@@ -33,6 +32,18 @@
 								{{ info.created + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
 							</span>
 							<span ng-if="!info.created">
+								-
+							</span>
+						</td>
+					</tr>
+
+					<tr>
+						<th>排名</th>
+						<td>
+							<span ng-if="info.rank">
+								{{ info.rank }}
+							</span>
+							<span ng-if="!info.rank">
 								-
 							</span>
 						</td>
@@ -54,7 +65,20 @@
 					</tr>
 
 					<tr>
-						<th>每日收益</th>
+						<th>公钥</th>
+						<td>{{ info.producer_key }}</td>
+					</tr>
+
+
+				</tbody>
+			</table>
+
+			<h6>收益信息</h6>
+			<table class="table table-bordered table-hover table-sm table-striped monospaced-font">
+				<tbody>
+
+					<tr>
+						<th width="20%">每日收益</th>
 						<td>{{ getClaimRewards(info, global, info.rank).total | number }} FO</td>
 					</tr>
 
@@ -79,12 +103,6 @@
 							</span>
 						</td>
 					</tr>
-
-					<tr>
-						<th>公钥</th>
-						<td>{{ info.producer_key }}</td>
-					</tr>
-
 
 				</tbody>
 			</table>

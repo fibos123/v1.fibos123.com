@@ -13,8 +13,6 @@ angular.module('appApp')
   	document.title = '节点监控 | FIBOS 导航';
   	$(window).scrollTop(0)
 
-  	var api = 'https://api.fibos123.com';
-
 	var items = [];
 	var is_set = false;
 
