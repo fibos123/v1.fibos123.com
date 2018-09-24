@@ -7,6 +7,7 @@ url.api.bp_status = url.api.endpoint + "/bp_status";
 url.api.bp_status_change_logs = url.api.endpoint + "/bp_status_change_logs";
 url.api.check_p2p = url.api.endpoint + "/check_p2p";
 url.api.json2jsonp = url.api.endpoint + "/json2jsonp";
+url.api.bp_history = url.api.endpoint + "/bp_history";
 
 url.rpc = {};
 url.rpc.endpoint = "https://rpc-mainnet.fibos123.com";

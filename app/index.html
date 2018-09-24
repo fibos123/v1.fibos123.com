@@ -76,7 +76,7 @@
         </p>
       </div>
     </footer>
-
+    
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -91,6 +91,12 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/highcharts.js -->
+        <script src="scripts/components/highstock.js"></script>
+        <script src="scripts/components/exporting.js"></script>
+        <script src="scripts/components/highcharts-zh_CN.js"></script>
+        <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="data.js"></script>

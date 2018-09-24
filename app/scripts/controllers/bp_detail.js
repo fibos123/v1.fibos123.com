@@ -22,6 +22,69 @@ angular.module('appApp')
     $scope.weightPercent = util.weightPercent;
     $scope.getClaimRewards = util.getClaimRewards;
 
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    })
+
+    // Create the chart
+    var chart = Highcharts.stockChart('history', {
+        chart: {
+            zoomType: 'x',
+            backgroundColor: "transparent"
+        },
+        tooltip: {
+            split: false,
+            shared: true,
+        },
+        rangeSelector: {
+            buttons: [{
+                type: 'day',
+                count: 3,
+                text: '3天'
+            }, {
+                type: 'week',
+                count: 1,
+                text: '1周'
+            }, {
+                type: 'month',
+                count: 1,
+                text: '1个月'
+            }, {
+                type: 'month',
+                count: 6,
+                text: '6个月'
+            }, {
+                type: 'year',
+                count: 1,
+                text: '1年'
+            }, {
+                type: 'all',
+                text: '所有'
+            }],
+            selected: 3
+        },
+        title: {
+            text: bpname + ' 节点每轮出块数'
+        },
+        series: [{
+            pointStart: 1535414400000,
+            pointInterval: 126000,
+            name: "平均值",
+            tooltip: {
+                valueDecimals: 1,
+                valueSuffix: ''
+            }
+        }]
+    });
+    chart.showLoading('载入中...');
+
+    util.ajax({url: url.api.bp_history, data:{bpname: bpname}}, function (data){
+      chart.series[0].setData(data.rows);
+      chart.hideLoading();
+    })
+
   	document.title = bpname + ' 节点详情 | FIBOS 导航';
     $(window).scrollTop(0)
 
