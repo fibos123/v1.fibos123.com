@@ -104,9 +104,10 @@ angular.module('appApp')
         chart.setTitle(null, {text: 
             " 从 " + util.timetrans(e.min) + 
             " 至 " + util.timetrans(e.max) + 
-            " 出块率：" + percent.toFixed(3) + 
-            " %，出块数量：" + success.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 块" +
-            "，丢块数量：" + fall.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 块"
+            "，出块数量：" + success.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 块" +
+            "，丢块数量：" + fall.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 块" + 
+            " 出块率：" + percent.toFixed(3) + " %" +
+            ""
         });
     }
 
