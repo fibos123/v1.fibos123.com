@@ -21,7 +21,7 @@
 			<b>说明：</b>
 			数据缓存时间为 1 个小时。
 			平均标准值为 12.0。
-			每 126 秒为一轮，
+			每 126 秒为一轮。
 		</div>
 		
 		<div ng-if="info">
@@ -182,7 +182,11 @@
 						<th width="20%">{{ value.node_type }}</th>
 						<td>
 							<div>
-								<b>国家或地区：</b> {{ value.location.name }}, {{ value.location.country }}
+								<b>国家或地区：</b> 
+								<span ng-if="value.location.name">
+									{{ value.location.name }}, 
+								</span>
+								{{ value.location.country }}
 							</div>
 							<div ng-if="
 								value.p2p_endpoint ||
