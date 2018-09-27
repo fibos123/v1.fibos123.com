@@ -128,7 +128,7 @@ angular.module('appApp')
 
             util.ajax({url: url.api.bp_history, data:{bpname: bpname}}, function (data){
               history_data = data.rows.slice(0, data.rows.length-1);
-                console.log(history_data)
+                // console.log(history_data)
               if (!history_data.length) {
                 chart.showLoading('暂无数据，请刷新页面重试');
                 return

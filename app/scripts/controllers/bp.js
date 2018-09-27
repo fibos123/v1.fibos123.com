@@ -53,6 +53,7 @@ angular.module('appApp')
 	  			}, function(){})
 	  		}
 			is_set = true;
+			get_producerjson();
 	  	}, function(){})
   	}
 
@@ -155,6 +156,32 @@ angular.module('appApp')
 			function(data){success(i, bpname, data)}, 
 			function(textStatus) {error(textStatus)}
 		)
+  	}
+
+  	function get_producerjson(){
+
+	  	util.ajax({url: url.rpc.get_table_rows, data: 
+	  		JSON.stringify({
+	  			"json": "true",
+		  		"code": "producerjson",
+		  		"scope": "producerjson",
+		  		"table": "producerjson",
+		  		"limit": 1000
+		  	}), type: "POST"}
+	  	, function(data) {
+	  		for (var i = 0; i < data.rows.length; i++) {
+	  			var json = JSON.parse(data.rows[i].json);
+	  			var bpname = data.rows[i].owner;
+
+				if ("undefined" !== typeof bpname2i[bpname]) {
+					items[bpname2i[bpname]] = Object.assign(items[bpname2i[bpname]], {json: json});
+				}
+
+	  		}
+			is_set = true;
+
+	  	}, function(){});
+
   	}
 
   });
