@@ -26,9 +26,10 @@
 		    <h6>显示选项</h6>
 		    <label> <input type="checkbox" ng-init="q1 = true" ng-model="q1"> 编号 </label>
 		    <!-- <label> <input type="checkbox" ng-init="q19 = true" ng-model="q19"> LOGO </label> -->
-		    <label> <input type="checkbox" ng-init="q2 = true" ng-model="q2"> 节点账户 </label>
+		    <label> <input type="checkbox" ng-init="q20 = true" ng-model="q20"> 节点名称 </label>
+		    <label> <input type="checkbox" ng-init="q2 = false" ng-model="q2"> 节点账户 </label>
 		    <label> <input type="checkbox" ng-init="q3 = true" ng-model="q3"> 状态 </label>
-		    <label> <input type="checkbox" ng-init="q4 = true" ng-model="q4"> 得票数 </label>
+		    <label> <input type="checkbox" ng-init="q4 = true" ng-model="q4"> 有效票数 </label>
 		    <label> <input type="checkbox" ng-init="q17 = false" ng-model="q17"> 得票权重 </label>
 		    <label> <input type="checkbox" ng-init="q5 = true" ng-model="q5"> 得票率 </label>
 		    <label> <input type="checkbox" ng-init="q6 = true" ng-model="q6"> 每日收益 </label>
@@ -84,9 +85,10 @@
 	<tr>
 		<th width="50" class="text-center" ng-if="q1">编号</th>
 		<!-- <th width="" ng-if="q19">LOGO</th> -->
+		<th width="" ng-if="q20">节点名称</th>
 		<th width="" ng-if="q2">节点账户</th>
 		<th width="" ng-if="q3">状态</th>
-		<th width="" ng-if="q4">得票数</th>
+		<th width="" ng-if="q4">有效票数</th>
 		<th width="" ng-if="q17">得票权重</th>
 		<th width="" ng-if="q5">得票率</th>
 		<th width="" ng-if="q6">每日收益</th>
@@ -105,19 +107,22 @@
   </script>
   <script type="text/ng-template" id="tbody">
 		<td ng-if="q1" align="center">{{ $index + 1 }}</td>
-		<td ng-if="q2">
+
+		<td ng-if="q20">
 			<span ng-if="value.json.org.branding.logo_256">
-				<!-- <a href="{{ value.json.org.branding.logo_256 }}" target="_blank"> -->
-					<img src="{{ value.json.org.branding.logo_256 }}" alt="" width="21" height="21">
-				<!-- </a> -->
+				<img src="{{ value.json.org.branding.logo_256 }}" alt="" width="21" height="21">
 			</span>	
+			{{ value.json.org.candidate_name || value.owner }}
+		</td>
+
+		<td ng-if="q2">
 			{{ value.owner }}
 		</td>
 
 		<td ng-if="q3">
 			<span ng-if="info.head_block_producer == value.owner">
 				<div class="progress">
-				  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" aria-valuemax="100" style="width: {{ s/6*100 }}%">出块中</div>
+				  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" aria-valuemax="100" style="width:0%">出块中</div>
 				</div>
 			</span>
 			
@@ -138,19 +143,19 @@
 
 		</td>
 
-		<td ng-if="q4">{{ getStaked(value.total_votes) | number }} FO</td>
+		<td ng-if="q4">{{ value.staked | number }} FO</td>
 
 		<td ng-if="q17">
 			{{ value.total_votes | number }}
 		</td>
 
-		<td ng-if="q5">{{ weightPercent(value.total_votes, totalVotessum) }} %</td>
+		<td ng-if="q5">{{ value.weight_percent }} %</td>
 		<td ng-if="q6">
-			{{ getClaimRewards(value, global, value.rank).total | number }} FO
+			{{ value.claim_rewards_total | number }} FO
 		</td>
 
 		<td ng-if="q7">
-			{{ getClaimRewards(value, global, value.rank).unreceived | number }} FO
+			{{ value.claim_rewards_unreceived | number }} FO
 		</td>
 
 		<td ng-if="q8">

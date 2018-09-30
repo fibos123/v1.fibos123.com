@@ -51,7 +51,7 @@ body.full-bg .logo-white{display: initial}
 .part-websites section .line1 header, .part-websites section .line1 .website-list{height:100px}
 .part-websites section .website-list li .more a.color-fibos-rocks{color: #78d2f0;background: rgba(0, 0, 0, 0.85);}
 .part-monitor {}
-.part-monitor .progress-bar{transition: width 1s linear;}
+.part-monitor .progress-bar{transition: width 6s linear;}
 .part-monitor .green{color: green}
 .part-monitor .orange{color: orange}
 .part-monitor .red{color: red}

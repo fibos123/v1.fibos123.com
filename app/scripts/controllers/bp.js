@@ -20,14 +20,8 @@ angular.module('appApp')
 	var totalVotessum = 0;
   	var st1;
   	var bpname2i = {};
-  	var s = 0;
-  	var last_producer = '';
 
   	$scope.refresh = main;
-  	$scope.getStaked = util.getStaked;
-  	$scope.totalVotessum = util.totalVotessum;
-  	$scope.weightPercent = util.weightPercent;
-  	$scope.getClaimRewards = util.getClaimRewards;
 
   	main();
 	get_info();
@@ -36,42 +30,38 @@ angular.module('appApp')
   		bpname2i = {};
 	  	get_global(function(data){
 	  		global = data.rows[0];
-			$scope.global = global;
+		  	get_producers(function(data) {
+		  		items = data.rows;
+				totalVotessum = util.totalVotessum(data.rows);
+		  		for (var i = 0; i < items.length; i++) {
+		  			var bp = items[i];
+		  			items[i]["rank"] = i + 1;
+		  			items[i]["staked"] = util.getStaked(bp.total_votes) 
+		  			items[i]["weight_percent"] = util.weightPercent(bp.total_votes, totalVotessum)
+		  			var getClaimRewards = util.getClaimRewards(bp, global, items[i]["rank"]);
+		  			items[i]["claim_rewards_total"] = getClaimRewards.total;
+		  			items[i]["claim_rewards_unreceived"] = getClaimRewards.unreceived;
+
+		  			bpname2i[bp["owner"]] = i;
+		  			get_bp_info(i, bp["owner"], function(i, bpname, info){
+		  				items[i] = Object.assign(items[i], info);
+		  				items[i] = Object.assign(items[i], {bp_info: true});
+						is_set = true;
+		  			}, function(){})
+		  		}
+				is_set = true;
+				get_producerjson();
+		  	}, function(){})
 	  	})
-	  	get_producers(function(data) {
-	  		items = data.rows;
-			totalVotessum = util.totalVotessum(data.rows);
-			$scope.totalVotessum = totalVotessum;
-	  		for (var i = 0; i < items.length; i++) {
-	  			var bp = items[i];
-	  			items[i]["rank"] = i + 1;
-	  			bpname2i[bp["owner"]] = i;
-	  			get_bp_info(i, bp["owner"], function(i, bpname, info){
-	  				items[i] = Object.assign(items[i], info);
-	  				items[i] = Object.assign(items[i], {bp_info: true});
-					is_set = true;
-	  			}, function(){})
-	  		}
-			is_set = true;
-			get_producerjson();
-	  	}, function(){})
   	}
 
   	function get_info () {
   		util.ajax({url: url.rpc.get_info}, function(data){
 	  		info = data;
 			$scope.info = info;
-			s++;
-			if (last_producer != info["head_block_producer"]) {
-				last_producer = info["head_block_producer"];
-				s = 0;
-				setTimeout(function(){
-					s++;
-					$scope.s = s;
-					$scope.$apply();
-				}, 1);
-			}
-			$scope.s = s;
+			setTimeout(function(){
+				$(".progress-bar").width("100%");
+			}, 1);
 			if ("undefined" !== typeof bpname2i[info["head_block_producer"]]) {
 	  			get_bp_info(bpname2i[info["head_block_producer"]], info["head_block_producer"], function(i, bpname, info){
 	  				items[i] = Object.assign(items[i], info);
