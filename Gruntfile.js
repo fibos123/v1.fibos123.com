@@ -377,7 +377,7 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            // '*.json',
+            'data.js',
             '.gitignore',
             'CNAME',
             'public/*',
@@ -385,7 +385,7 @@ module.exports = function (grunt) {
             'styles/phone.css',
             'webfonts/*',
             '*.{ico,png,txt}',
-            '*.html',
+            'index.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
@@ -406,6 +406,15 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      blank: {
+        expand: true,
+        cwd: '<%= yeoman.dist %>',
+        dest: '<%= yeoman.dist %>/',
+        src: 'index.html',
+        rename: function(dest, src) {
+          return dest + src.replace('index.html','404.html');
+        }
       }
     },
 
@@ -478,7 +487,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'copy:blank',
   ]);
 
   grunt.registerTask('default', [
