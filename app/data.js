@@ -30,7 +30,7 @@ var websites = [
           {"name": "MORE Wallet", "desc": "支持傻瓜式一键投兑 FO 功能", "url": "https://more.top/"},
           {"name": "51Token", "desc": "支持 FO 闪兑的钱包", "url": "https://www.51token.im/"},
           {"name": "FO 钱包", "desc": "基于 FIBOS 生态系统的智能钱包", "url": "http://wallet.fo/"},
-          {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/guide/basic/about.md.html"},
+          {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/overview/developdoc/overview.md.html"},
           {"name": "imondo", "desc": "由 fibos4imondo 超级节点 建立的一个活跃的小众社区", "url": "http://imondo.io/"}
         ]
       }
@@ -78,7 +78,7 @@ var websites = [
         "name": "官方网站",
         "child": [
           {"name": "FIBOS.IO", "icon": "fas fa-home", "desc": "FIBOS 官方网站", "url": "https://fibos.io/"},
-          {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/guide/basic/about.md.html"},
+          {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/overview/developdoc/overview.md.html"},
           {"name": "Telegram", "desc": "FIBOS 官方电报群", "url": "https://t.me/FIBOSIO"},
           {"name": "社区", "desc": "FIBOS 官方社区", "url": "http://bbs.dev.fo/"},
           {"name": "GitHub", "desc": "FIBOS 源代码", "url": "https://github.com/FIBOSIO"}
