@@ -48,6 +48,7 @@ angular.module('appApp')
 		  				items[i] = Object.assign(items[i], {bp_info: true});
 						is_set = true;
 		  			}, function(){})
+		  			get_history(bp["owner"]);
 		  		}
 				is_set = true;
 				get_producerjson();
@@ -168,6 +169,21 @@ angular.module('appApp')
 				}
 
 	  		}
+			is_set = true;
+
+	  	}, function(){});
+
+  	}
+
+  	function get_history(bpname){
+
+	  	util.ajax({url: url.api.bp_history, data: {bpname: bpname}}
+	  	, function(data) {
+
+			if ("undefined" !== typeof bpname2i[bpname]) {
+				items[bpname2i[bpname]] = Object.assign(items[bpname2i[bpname]], {history: data});
+			}
+
 			is_set = true;
 
 	  	}, function(){});
