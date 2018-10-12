@@ -48,7 +48,7 @@ angular.module('appApp')
 		  				items[i] = Object.assign(items[i], {bp_info: true});
 						is_set = true;
 		  			}, function(){})
-		  			// get_history(bp["owner"]);
+		  			get_history(bp["owner"]);
 		  		}
 				is_set = true;
 				get_producerjson();
