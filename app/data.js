@@ -60,7 +60,7 @@ var websites = [
         "child": [
           {"name": "Ironman", "icon": "fas fa-wrench", "desc": "基于浏览器的 FIBOS 安全插件", "url": "http://foironman.com/", "more": {"icon": "", "name": "教程", "url": "http://imondo.io/article/1535848881409"}},
           {"name": "FOToolkit", "icon": "fas fa-toolbox", "desc": "FIBOS 工具套件。安全，可靠，透明和快速", "url": "https://fotoolkit.com/home"},
-          {"name": "FibosBP", "desc": "FIBOS 在线工具包", "url": "http://fibosbp.com/"},
+          // {"name": "FibosBP", "desc": "FIBOS 在线工具包", "url": "http://fibosbp.com/"},
           {"name": "Fibos Startup", "desc": "FIBOS 常用代码", "url": "https://github.com/dabdevelop/fibos-startup/"}
         ]
       },
@@ -113,7 +113,7 @@ var websites = [
         "icon": "",
         "child": [
           {"name": "头条", "desc": "头条", "url": "http://explorer.fibos.rocks/"},
-          {"name": "幸运大投注", "desc": "幸运大投注", "url": "http://www.biteye.pro/"},
+          // {"name": "幸运大投注", "desc": "幸运大投注", "url": "http://www.biteye.pro/"},
           {"name": "PIXEL MASTER", "desc": "PIXEL MASTER是世界首个在区块链上的协作艺术品", "url": "https://fopixels.com/"},
         ]
       }
