@@ -7,6 +7,7 @@
 		    	<h3>节点列表 </h3>
 		    	<div>生产者： {{info.head_block_producer}}</div>
 		    	<div>最新区块：{{ info.head_block_num | number }} </div>
+		    	<div>不可逆区块：{{ info.last_irreversible_block_num | number }} </div>
 		    	<div>出块时间： 
 		    		<span ng-if="info.head_block_time">
 		    			{{ info.head_block_time + "Z" | date : "yyyy-MM-dd HH:mm:ss Z" }}
