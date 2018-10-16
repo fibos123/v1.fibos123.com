@@ -119,13 +119,13 @@ angular.module('appApp')
 		score += (info.http.endpoint) ? 1 : 0;
 		score += (info.http.status === 'ok') ? 2 : 0;
 		score += (info.http.status === 'ok' && info.http.cors === true) ? 1 : 0;
-		// score += (info.http.history === true) ? 1 : 0;
+		score += (info.http.history === true) ? 0.5 : 0;
 		score += (info.http.version.indexOf("v1.2") !== 0) ? 1 : 0;
 
 		score += (info.https.endpoint) ? 1 : 0;
 		score += (info.https.status === 'ok') ? 2 : 0;
 		score += (info.https.status === 'ok' && info.https.cors === true) ? 1 : 0;
-		// score += (info.https.history === true) ? 1 : 0;
+		score += (info.https.history === true) ? 0.5 : 0;
 		score += (info.https.version.indexOf("v1.2") !== 0) ? 1 : 0;
 
 		score += (info.p2p.endpoint) ? 1 : 0;
@@ -161,11 +161,11 @@ angular.module('appApp')
 		util.ajax({url: url_get_info}, function(info) {
 			if (info && info.head_block_num) {
 				// history
-				// util.ajax({url: url_get_transaction, type: "POST", data: '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}'},function(info) {
-				// 	if (info && info.id) {
-				// 		return callback(bpname, {history: true});
-				// 	}
-				// }, function(){})
+				util.ajax({url: url_get_transaction, type: "POST", data: '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}'},function(info) {
+					if (info && info.id) {
+						return callback(bpname, {history: true});
+					}
+				}, function(){})
 				return callback(bpname, {status: "ok", msg: "",number: info.head_block_num,version: info.server_version_string});
 			} else {
 				return callback(bpname, {status: "ng",msg: "offline"});

@@ -40,11 +40,11 @@
 					<td align="center">{{ $index + 1 }}</td>
 					<td>
 						<span ng-class="{
-						green: value.score == 14,
+						green: value.score >= 14,
 						red: value.score <= 3,
 					}">
-						<span ng-if="value.score == 14" data-toggle="tooltip" title="优质接入点"><i class="fas fa-thumbs-up"></i> {{ value.bpname }}</span>
-						<span ng-if="value.score != 14">{{ value.bpname }}</span>
+						<span ng-if="value.score >= 14" data-toggle="tooltip" title="优质接入点"><i class="fas fa-thumbs-up"></i> {{ value.bpname }}</span>
+						<span ng-if="value.score < 14">{{ value.bpname }}</span>
 					</span>
 
 						<a class="hide-link float-right" ng-if="value.producerjson.org.website" target="_blank" href="{{ value.producerjson.org.website }}" data-toggle="tooltip" title="打开新窗口查看网站">
@@ -53,9 +53,6 @@
 					</td>
 
 					<td>
-						<span ng-if="value.http.history" class="green" data-toggle="tooltip" title="已开启 history 插件">
-							<i class="fas fa-history"></i>
-						</span>
 						<span class="icon" ng-class="{
 						'icon-ok': value.http.status == 'ok', 
 						'icon-ng': value.http.status == 'ng', 
@@ -63,12 +60,20 @@
 						'icon-un': value.http.status == 'un', 
 						'icon-warn': !value.http.cors || value.http.version.indexOf('v1.2') === 0
 						}
-						" data-toggle="tooltip" title="{{ value.http.endpoint }}">
-							<span>{{ value.http.msg }}</span>
-							<span ng-if="value.http.status == 'ok'">
-							{{ value.http.number | number }}
-							( {{ value.http.version }} )
+						">
+
+							<span ng-if="value.http.history" data-toggle="tooltip" title="已开启 history 插件">
+								<i class="fas fa-history"></i>
 							</span>
+
+							<span data-toggle="tooltip" title="{{ value.http.endpoint }}">
+								<span>{{ value.http.msg }}</span>
+								<span ng-if="value.http.status == 'ok'">
+								{{ value.http.number | number }}
+								( {{ value.http.version }} )
+								</span>
+							</span>
+
 						</span>
 						<span ng-if="!value.http.cors || value.http.version.indexOf('v1.2') === 0" data-toggle="tooltip" title="
 						{{ !value.http.cors ? '未开启 CORS' : '' }}
@@ -83,21 +88,26 @@
 					</td>
 
 					<td>
-						<span ng-if="value.https.history" class="green" data-toggle="tooltip" title="已开启 history 插件">
-							<i class="fas fa-history"></i>
-						</span>
 						<span class="icon" ng-class="{
 						'icon-ok': value.https.status == 'ok', 
 						'icon-ng': value.https.status == 'ng', 
 						'icon-ing': value.https.status == 'ing', 
 						'icon-un': value.https.status == 'un', 
 						'icon-warn': !value.https.cors || value.https.version.indexOf('v1.2') === 0
-						}" data-toggle="tooltip" title="{{ value.https.endpoint }}">
-							<span>{{ value.https.msg }}</span>
-							<span ng-if="value.https.status == 'ok'">
-							{{ value.https.number | number }}
-							( {{ value.https.version }} )
+						}">
+
+							<span ng-if="value.https.history" data-toggle="tooltip" title="已开启 history 插件">
+								<i class="fas fa-history"></i>
 							</span>
+							
+							<span data-toggle="tooltip" title="{{ value.https.endpoint }}">
+								<span>{{ value.https.msg }}</span>
+								<span ng-if="value.https.status == 'ok'">
+								{{ value.https.number | number }}
+								( {{ value.https.version }} )
+								</span>
+							</span>
+
 						</span>
 						<span ng-if="!value.https.cors || value.https.version.indexOf('v1.2') === 0" data-toggle="tooltip" title="
 						{{ !value.https.cors ? '未开启 CORS' : '' }}
