@@ -64,7 +64,10 @@
 						'icon-warn': !value.http.cors}
 						" data-toggle="tooltip" title="{{ value.http.endpoint }}">
 							<span>{{ value.http.msg }}</span>
-							<span ng-if="value.http.status == 'ok'">{{ value.http.number | number }}</span>
+							<span ng-if="value.http.status == 'ok'">
+							{{ value.http.number | number }}
+							( {{ value.http.version }} )
+							</span>
 						</span>
 						<span ng-if="!value.http.cors" data-toggle="tooltip" title="未开启 CORS">
 							<i class="fas fa-exclamation-circle"></i>
@@ -86,7 +89,10 @@
 						'icon-warn': !value.https.cors
 						}" data-toggle="tooltip" title="{{ value.https.endpoint }}">
 							<span>{{ value.https.msg }}</span>
-							<span ng-if="value.https.status == 'ok'">{{ value.https.number | number }}</span>
+							<span ng-if="value.https.status == 'ok'">
+							{{ value.https.number | number }}
+							( {{ value.https.version }} )
+							</span>
 						</span>
 						<span ng-if="!value.https.cors" data-toggle="tooltip" title="未开启 CORS">
 							<i class="fas fa-exclamation-circle"></i>

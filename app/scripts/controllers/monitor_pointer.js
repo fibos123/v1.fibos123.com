@@ -47,6 +47,7 @@ angular.module('appApp')
 	  					status: "un",
 	  					msg: "unset",
 	  					endpoint: "",
+	  					version: "",
 	  					number: 0,
 	  					history: false,
 	  					cors: true
@@ -55,6 +56,7 @@ angular.module('appApp')
 	  					status: "un",
 	  					msg: "unset",
 	  					endpoint: "",
+	  					version: "",
 	  					number: 0,
 	  					history: false,
 	  					cors: true
@@ -117,12 +119,14 @@ angular.module('appApp')
 		score += (info.http.endpoint) ? 1 : 0;
 		score += (info.http.status === 'ok') ? 2 : 0;
 		score += (info.http.status === 'ok' && info.http.cors === true) ? 1 : 0;
-		score += (info.http.history === true) ? 1 : 0;
+		// score += (info.http.history === true) ? 1 : 0;
+		score += (info.http.version === "v1.3.1.1") ? 1 : 0;
 
 		score += (info.https.endpoint) ? 1 : 0;
 		score += (info.https.status === 'ok') ? 2 : 0;
 		score += (info.https.status === 'ok' && info.https.cors === true) ? 1 : 0;
-		score += (info.https.history === true) ? 1 : 0;
+		// score += (info.https.history === true) ? 1 : 0;
+		score += (info.https.version === "v1.3.1.1") ? 1 : 0;
 
 		score += (info.p2p.endpoint) ? 1 : 0;
 		score += (info.p2p.status === 'ok') ? 3 : 0;
@@ -162,7 +166,7 @@ angular.module('appApp')
 						return callback(bpname, {history: true});
 					}
 				}, function(){})
-				return callback(bpname, {status: "ok", msg: "",number: info.head_block_num});
+				return callback(bpname, {status: "ok", msg: "",number: info.head_block_num,version: info.server_version_string});
 			} else {
 				return callback(bpname, {status: "ng",msg: "offline"});
 			}
@@ -173,7 +177,7 @@ angular.module('appApp')
 				// cors
 				util.ajax({url: url.api.json2jsonp, data: {url: url_get_info}, dataType: "jsonp"}, function(info) {
 					if (info && info.head_block_num) {
-						return callback(bpname, {status: "ok", msg: "",cors: false,number: info.head_block_num});
+						return callback(bpname, {status: "ok", msg: "",cors: false,number: info.head_block_num,version: info.server_version_string});
 					} else {
 						return callback(bpname, {status: "ng",msg: "offline"});
 					}
