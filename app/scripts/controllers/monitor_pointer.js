@@ -8,14 +8,16 @@
  * Controller of the appApp
  */
 angular.module('appApp')
-  .controller('MonitorPointerCtrl', function ($scope) {
+  .controller('MonitorPointerCtrl', function ($scope, layer) {
 
   	document.title = '节点监控 | FIBOS 导航';
   	$(window).scrollTop(0)
 
 	var items = [];
 	var is_set = false;
-
+	var httpArr = [];
+	var httpsArr = [];
+	var p2pArr = [];
 	if (window.location.protocol === "https:") {
 		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
 		return;
@@ -23,7 +25,15 @@ angular.module('appApp')
   	main();
   	$scope.refresh = main;
   	$scope.url_api_check_p2p = url.api.check_p2p;
-
+		$scope.openLayer = function () {
+			layer.open({
+				type: 1,
+				title: '可用接入点列表',
+				area: ['420px', '420px'],
+				content: '<div style="padding: 20px"><pre><code>{{ urls | json}}</code></pre></div>',
+				scope: $scope
+      });	
+		}
 	function main() {
 		
 	  	util.ajax({url: url.rpc.get_table_rows, data: 
@@ -91,13 +101,17 @@ angular.module('appApp')
 	  				});
 	  			}
 	  		}
-
 	  	}, function(){});
 
 	}
 
 	function set() {
-  		$scope.items = util.copy(items).sort(util.compare_reverse("score"));
+  	$scope.items = util.copy(items).sort(util.compare_reverse("score"));
+		$scope.urls = {
+			"p2p-peer-address": p2pArr,
+			"http-api-address": httpArr,
+			"https-api-address": httpsArr
+		}
 		$scope.$apply();
 		$(".tooltip").remove();
 	  	$('[data-toggle="tooltip"]').tooltip();
@@ -122,14 +136,36 @@ angular.module('appApp')
 		score += (info.http.history === true) ? 0.5 : 0;
 		score += (info.http.version.indexOf("v1.2") !== 0) ? 1 : 0;
 
+		if (info.http.endpoint
+			&& (info.http.status === 'ok')
+			&& (info.http.cors === true)
+			&& (info.http.version.indexOf("v1.2") !== 0)
+			&& (httpArr.indexOf(info.http.endpoint) === -1)) {
+			httpArr.push(info.http.endpoint)
+		}
+
 		score += (info.https.endpoint) ? 1 : 0;
 		score += (info.https.status === 'ok') ? 2 : 0;
 		score += (info.https.status === 'ok' && info.https.cors === true) ? 1 : 0;
 		score += (info.https.history === true) ? 0.5 : 0;
 		score += (info.https.version.indexOf("v1.2") !== 0) ? 1 : 0;
 
+		if (info.https.endpoint
+			&& (info.https.status === 'ok')
+			&& (info.https.cors === true)
+			&& (info.https.version.indexOf("v1.2") !== 0)
+			&& (httpsArr.indexOf(info.https.endpoint) === -1)) {
+			httpsArr.push(info.https.endpoint)
+		}
+
 		score += (info.p2p.endpoint) ? 1 : 0;
 		score += (info.p2p.status === 'ok') ? 3 : 0;
+
+		if (info.p2p.endpoint
+			&& (info.p2p.status === 'ok')
+			&& (p2pArr.indexOf(info.p2p.endpoint) === -1)) {
+			p2pArr.push(info.p2p.endpoint)
+		}
 		return score;
 	}
 
