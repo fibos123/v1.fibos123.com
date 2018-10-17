@@ -16,11 +16,13 @@
 
 		
 		<div class="d-flex justify-content-between">
-		    <div><h3>接入点状态监测 </h3></div>
+				<div><h3>接入点状态监测 </h3></div>
 		    <div class="mt-auto">
-				<div class="text-right"><a class="a-link" ng-click="refresh()"><i class="fas fa-sync-alt"></i> 刷新</a> </div>
+				<div class="text-right"></div>
     			<div class="input-group input-group-sm pb-1">
-				  <input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
+					<a class="a-link" ng-click="openLayer()" style="margin-right:20px"><i class="fas fa-server"></i> 可用接入点列表</a>
+					<a class="a-link" ng-click="refresh()" style="margin-right:20px"><i class="fas fa-sync-alt"></i> 刷新</a> 
+					<input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
 				</div>
 			</div>
 	    </div>
