@@ -60,7 +60,8 @@
 						'icon-ng': value.http.status == 'ng', 
 						'icon-ing': value.http.status == 'ing', 
 						'icon-un': value.http.status == 'un', 
-						'icon-warn': !value.http.cors || value.http.version.indexOf('v1.2') === 0
+						'icon-warn': !value.http.cors || 
+									 (value.http.number && value.http.number < info.last_irreversible_block_num)
 						}
 						">
 
@@ -77,10 +78,10 @@
 							</span>
 
 						</span>
-						<span ng-if="!value.http.cors || value.http.version.indexOf('v1.2') === 0" data-toggle="tooltip" title="
+						<span ng-if="!value.http.cors || (value.http.number && value.http.number < info.last_irreversible_block_num)" data-toggle="tooltip" title="
 						{{ !value.http.cors ? '未开启 CORS' : '' }}
-						{{ !value.http.cors && value.http.version.indexOf('v1.2') === 0 ? ',' : '' }}
-						{{ value.http.version.indexOf('v1.2') === 0 ? '不支持 JS 合约' : '' }}
+						{{ !value.http.cors && (value.http.number && value.http.number < info.last_irreversible_block_num) ? ',' : '' }}
+						{{ (value.http.number && value.http.number < info.last_irreversible_block_num) ? '不在最新区块' : '' }}
 						">
 							<i class="fas fa-exclamation-circle"></i>
 						</span>
@@ -95,7 +96,8 @@
 						'icon-ng': value.https.status == 'ng', 
 						'icon-ing': value.https.status == 'ing', 
 						'icon-un': value.https.status == 'un', 
-						'icon-warn': !value.https.cors || value.https.version.indexOf('v1.2') === 0
+						'icon-warn': !value.https.cors || 
+									 (value.https.number && value.https.number < info.last_irreversible_block_num)
 						}">
 
 							<span ng-if="value.https.history" data-toggle="tooltip" title="已开启 history 插件">
@@ -111,10 +113,10 @@
 							</span>
 
 						</span>
-						<span ng-if="!value.https.cors || value.https.version.indexOf('v1.2') === 0" data-toggle="tooltip" title="
+						<span ng-if="!value.https.cors || (value.https.number && value.https.number < info.last_irreversible_block_num)" data-toggle="tooltip" title="
 						{{ !value.https.cors ? '未开启 CORS' : '' }}
-						{{ !value.https.cors && value.https.version.indexOf('v1.2') === 0 ? ',' : '' }}
-						{{ value.https.version.indexOf('v1.2') === 0 ? '不支持 JS 合约' : '' }}
+						{{ !value.https.cors && (value.https.number && value.https.number < info.last_irreversible_block_num) ? ',' : '' }}
+						{{ (value.https.number && value.https.number < info.last_irreversible_block_num) ? '不在最新区块' : '' }}
 						">
 							<i class="fas fa-exclamation-circle"></i>
 						</span>

@@ -18,6 +18,7 @@ angular.module('appApp')
 	var httpArr = [];
 	var httpsArr = [];
 	var p2pArr = [];
+	var info = {};
 	if (window.location.protocol === "https:") {
 		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
 		return;
@@ -25,17 +26,25 @@ angular.module('appApp')
   	main();
   	$scope.refresh = main;
   	$scope.url_api_check_p2p = url.api.check_p2p;
-		$scope.openLayer = function () {
-			layer.open({
-				type: 1,
-				title: '可用接入点列表',
-				area: ['420px', '420px'],
-				content: '<div style="padding: 20px"><pre><code>{{ urls | json}}</code></pre></div>',
-				scope: $scope
-      });	
-		}
+	$scope.openLayer = function () {
+		layer.open({
+			type: 1,
+			title: '可用接入点列表',
+			area: ['', '420px'],
+			content: '<div style="padding: 20px"><pre><code>{{ urls | json}}</code></pre></div>',
+			scope: $scope
+        });	
+	}
 	function main() {
+		httpArr = [];
+		httpsArr = [];
+		p2pArr = [];
 		
+  		util.ajax({url: url.rpc.get_info}, function(data){
+	  		info = data;
+	  		$scope.info = info;
+  		}, function(){})
+
 	  	util.ajax({url: url.rpc.get_table_rows, data: 
 	  		JSON.stringify({
 	  			"json": "true",
@@ -106,11 +115,11 @@ angular.module('appApp')
 	}
 
 	function set() {
-  	$scope.items = util.copy(items).sort(util.compare_reverse("score"));
+  		$scope.items = util.copy(items).sort(util.compare_reverse("score"));
 		$scope.urls = {
-			"p2p-peer-address": p2pArr,
-			"http-api-address": httpArr,
-			"https-api-address": httpsArr
+			"p2p-peer-address": util.unique(p2pArr),
+			"http-api-address": util.unique(httpArr),
+			"https-api-address": util.unique(httpsArr)
 		}
 		$scope.$apply();
 		$(".tooltip").remove();
@@ -128,45 +137,41 @@ angular.module('appApp')
 		clearInterval(si1);
 	})
 
-	function count_score(info){
+	function count_score(bp){
 		var score = 0;
-		score += (info.http.endpoint) ? 1 : 0;
-		score += (info.http.status === 'ok') ? 2 : 0;
-		score += (info.http.status === 'ok' && info.http.cors === true) ? 1 : 0;
-		score += (info.http.history === true) ? 0.5 : 0;
-		score += (info.http.version.indexOf("v1.2") !== 0) ? 1 : 0;
 
-		if (info.http.endpoint
-			&& (info.http.status === 'ok')
-			&& (info.http.cors === true)
-			&& (info.http.version.indexOf("v1.2") !== 0)
-			&& (httpArr.indexOf(info.http.endpoint) === -1)) {
-			httpArr.push(info.http.endpoint)
+		var http_score = 0;
+		var https_score = 0;
+		var p2p_score = 0;
+
+		http_score += (bp.http.endpoint) ? 1 : 0;
+		http_score += (bp.http.status === 'ok') ? 2 : 0;
+		http_score += (bp.http.status === 'ok' && bp.http.cors === true) ? 1 : 0;
+		http_score += (bp.http.history === true) ? 0.5 : 0;
+		http_score += (bp.http.number > info.last_irreversible_block_num) ? 1 : 0;
+
+		if (http_score == 5.5) {
+			httpArr.push(bp.http.endpoint)
 		}
 
-		score += (info.https.endpoint) ? 1 : 0;
-		score += (info.https.status === 'ok') ? 2 : 0;
-		score += (info.https.status === 'ok' && info.https.cors === true) ? 1 : 0;
-		score += (info.https.history === true) ? 0.5 : 0;
-		score += (info.https.version.indexOf("v1.2") !== 0) ? 1 : 0;
+		https_score += (bp.https.endpoint) ? 1 : 0;
+		https_score += (bp.https.status === 'ok') ? 2 : 0;
+		https_score += (bp.https.status === 'ok' && bp.https.cors === true) ? 1 : 0;
+		https_score += (bp.https.history === true) ? 0.5 : 0;
+		https_score += (bp.https.number > info.last_irreversible_block_num) ? 1 : 0;
 
-		if (info.https.endpoint
-			&& (info.https.status === 'ok')
-			&& (info.https.cors === true)
-			&& (info.https.version.indexOf("v1.2") !== 0)
-			&& (httpsArr.indexOf(info.https.endpoint) === -1)) {
-			httpsArr.push(info.https.endpoint)
+		if (https_score == 5.5) {
+			httpsArr.push(bp.https.endpoint)
 		}
 
-		score += (info.p2p.endpoint) ? 1 : 0;
-		score += (info.p2p.status === 'ok') ? 3 : 0;
+		p2p_score += (bp.p2p.endpoint) ? 1 : 0;
+		p2p_score += (bp.p2p.status === 'ok') ? 3 : 0;
 
-		if (info.p2p.endpoint
-			&& (info.p2p.status === 'ok')
-			&& (p2pArr.indexOf(info.p2p.endpoint) === -1)) {
-			p2pArr.push(info.p2p.endpoint)
+		if (p2p_score == 4) {
+			p2pArr.push(bp.p2p.endpoint)
 		}
-		return score;
+
+		return http_score + https_score + p2p_score;
 	}
 
 	function check_http_or_https(bpname, bpinfo, type, callback) {
@@ -192,13 +197,13 @@ angular.module('appApp')
 		}
 		callback(bpname, {status: "ing",msg:"connecting",endpoint: endpoint});
 		var url_get_info = endpoint + '/v1/chain/get_info';
-		var url_get_transaction = endpoint + '/v1/history/get_transaction';
+		var url_get_transaction = endpoint + '/v1/history/get_key_accounts';
 		// get_info
 		util.ajax({url: url_get_info}, function(info) {
 			if (info && info.head_block_num) {
 				// history
-				util.ajax({url: url_get_transaction, type: "POST", data: '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}'},function(info) {
-					if (info && info.id) {
+				util.ajax({url: url_get_transaction, type: "POST", data: '{"public_key":"FO6MzV92DgYjwDa7K3rtc28dPhGt2Gy8oUoHjESUq4gBx63v8num"}'},function(info) {
+					if (info && info.account_names) {
 						return callback(bpname, {history: true});
 					}
 				}, function(){})
@@ -211,15 +216,16 @@ angular.module('appApp')
 				return callback(bpname, {status: "ng",msg:"timeout"});
 			} else {
 				// cors
-				util.ajax({url: url.api.json2jsonp, data: {url: url_get_info}, dataType: "jsonp"}, function(info) {
-					if (info && info.head_block_num) {
-						return callback(bpname, {status: "ok", msg: "",cors: false,number: info.head_block_num,version: info.server_version_string});
-					} else {
-						return callback(bpname, {status: "ng",msg: "offline"});
-					}
-				}, function (textStatus){
-					return callback(bpname, {status: "ng",msg: "error"});
-				})
+				// util.ajax({url: url.api.json2jsonp, data: {url: url_get_info}, dataType: "jsonp"}, function(info) {
+				// 	if (info && info.head_block_num) {
+				// 		return callback(bpname, {status: "ok", msg: "",cors: false,number: info.head_block_num,version: info.server_version_string});
+				// 	} else {
+				// 		return callback(bpname, {status: "ng",msg: "offline"});
+				// 	}
+				// }, function (textStatus){
+				// 	return callback(bpname, {status: "ng",msg: "error"});
+				// })
+				return callback(bpname, {status: "ng",msg: "error"});
 			}
 		});
 	}

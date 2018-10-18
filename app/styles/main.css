@@ -73,3 +73,4 @@ body.full-bg .logo-white{display: initial}
 .part-monitor table td .trim-link{display: block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 .part-monitor table td:hover .hide-link{display: initial;}
 .part-about{color: white;}
+.layui-layer-ico {background: url(../images/layer-icon.png) no-repeat;}

@@ -135,7 +135,20 @@ var util = {
         var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
         var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
         return Y+M+D+h+m+s;
+    },
+
+    // 数组去重
+    unique: function (array) {
+        var res = [];
+        for (var i = 0, len = array.length; i < len; i++) {
+            var current = array[i];
+            if (res.indexOf(current) === -1) {
+                res.push(current)
+            }
+        }
+        return res;
     }
+
 
 
 }
