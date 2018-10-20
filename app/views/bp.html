@@ -42,7 +42,7 @@
 		    <label> <input type="checkbox" ng-init="q11 = false" ng-model="q11"> 最终出块区块 </label>
 		    <label> <input type="checkbox" ng-init="q12 = false" ng-model="q12"> 最终出块时间 </label>
 		    <label> <input type="checkbox" ng-init="q13 = false" ng-model="q13"> 累计出块</label>
-		    <!-- <label> <input type="checkbox" ng-init="q18 = false" ng-model="q18"> 公钥 </label> -->
+		    <label> <input type="checkbox" ng-init="q18 = false" ng-model="q18"> 7天出块率 </label>
 		    <label> <input type="checkbox" ng-init="q15 = false" ng-model="q15"> 网站 </label>
 		    <label> <input type="checkbox" ng-init="q14 = true" ng-model="q14"> 操作 </label>
 		</div>
@@ -101,7 +101,7 @@
 		<th width="" ng-if="q11">最终出块区块</th>
 		<th width="" ng-if="q12">最终出块时间</th>
 		<th width="" ng-if="q13">累计出块</th>
-		<th width="" ng-if="q18">公钥</th>
+		<th width="" ng-if="q18">7天出块率</th>
 		<th width="" ng-if="q15">网站</th>
 		<th width="" ng-if="q14">操作</th>
 	</tr>
@@ -203,7 +203,12 @@
 		</td>
 
  		<td ng-if="q18">
-			{{ value.producer_key }}
+ 			<span ng-class="{
+						green: value.rank <= 21 && value.history.weekpercent >= 99.9,
+						orange: value.rank <= 21 && value.history.weekpercent < 99.9,
+					}">
+				{{ value.history.weekpercent }} %
+			</span>
 		</td>
 
 		<td ng-if="q15">

@@ -36,6 +36,8 @@ angular.module('appApp')
 		  		for (var i = 0; i < items.length; i++) {
 		  			var bp = items[i];
 		  			items[i]["rank"] = i + 1;
+		  			items[i]["history"] = {};
+		  			items[i]["history"]["weekpercent"] = 0;
 		  			items[i]["staked"] = util.getStaked(bp.total_votes) 
 		  			items[i]["weight_percent"] = util.weightPercent(bp.total_votes, totalVotessum)
 		  			var getClaimRewards = util.getClaimRewards(bp, global, items[i]["rank"]);
@@ -181,6 +183,23 @@ angular.module('appApp')
 	  	, function(data) {
 
 			if ("undefined" !== typeof bpname2i[bpname]) {
+			    var pointStart = 1535414400000;
+			    var pointInterval = 126000;
+
+		        var min = data.rows.length - 4800 - 1;
+		        var max = data.rows.length - 1;
+		        var fall = 0;
+		        var success = 0;
+		        for (var i = min; i < max; i++) {
+		            success += data.rows[i];
+		            if (data.rows[i] < 12) {
+		                fall += 12 - data.rows[i]
+		            }
+		        }
+		        var percent = (1 - (fall / ((max - min) * 12))) * 100
+
+				data.weekpercent = percent.toFixed(3);
+
 				items[bpname2i[bpname]] = Object.assign(items[bpname2i[bpname]], {history: data});
 			}
 
