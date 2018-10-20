@@ -10,8 +10,8 @@ url.api.json2jsonp = url.api.endpoint + "/json2jsonp";
 url.api.bp_history = url.api.endpoint + "/bp_history";
 
 url.rpc = {};
-// url.rpc.endpoint = "https://rpc-mainnet.fibos123.com";
-url.rpc.endpoint = "https://api.fibos.rocks";
+url.rpc.endpoint = "https://rpc-mainnet.fibos123.com";
+// url.rpc.endpoint = "https://api.fibos.rocks";
 url.rpc.get_table_rows = url.rpc.endpoint + "/v1/chain/get_table_rows";
 url.rpc.get_info = url.rpc.endpoint + "/v1/chain/get_info";
 url.rpc.get_account = url.rpc.endpoint + "/v1/chain/get_account";
