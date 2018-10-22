@@ -198,12 +198,14 @@ angular.module('appApp')
 		callback(bpname, {status: "ing",msg:"connecting",endpoint: endpoint});
 		var url_get_info = endpoint + '/v1/chain/get_info';
 		var url_get_transaction = endpoint + '/v1/history/get_key_accounts';
+		// var url_get_transaction = endpoint + '/v1/history/get_transaction';
 		// get_info
 		util.ajax({url: url_get_info}, function(info) {
 			if (info && info.head_block_num) {
 				// history
 				util.ajax({url: url_get_transaction, type: "POST", data: '{"public_key":"FO6MzV92DgYjwDa7K3rtc28dPhGt2Gy8oUoHjESUq4gBx63v8num"}'},function(info) {
-					if (info && info.account_names) {
+				// util.ajax({url: url_get_transaction, type: "POST", dataType : "json", contentType: "application/json; charset=utf-8", data: '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}'},function(info) {
+					if (info) {
 						return callback(bpname, {history: true});
 					}
 				}, function(){})
