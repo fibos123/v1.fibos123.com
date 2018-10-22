@@ -150,7 +150,7 @@ angular.module('appApp')
 		http_score += (bp.http.history === true) ? 0.5 : 0;
 		http_score += (bp.http.number > info.last_irreversible_block_num) ? 1 : 0;
 
-		if (http_score == 5.5) {
+		if (http_score >= 5) {
 			httpArr.push(bp.http.endpoint)
 		}
 
@@ -160,7 +160,7 @@ angular.module('appApp')
 		https_score += (bp.https.history === true) ? 0.5 : 0;
 		https_score += (bp.https.number > info.last_irreversible_block_num) ? 1 : 0;
 
-		if (https_score == 5.5) {
+		if (https_score >= 5) {
 			httpsArr.push(bp.https.endpoint)
 		}
 
@@ -253,7 +253,7 @@ angular.module('appApp')
 			var length = 1; // rows.length
 
 			for (var i = 0; i < length; i++) {
-				if (rows[i].indexOf("connect ") >= 0 || rows[i].indexOf("connection ") >= 0) {
+				if ((rows[i].indexOf("connect ") >= 0 || rows[i].indexOf("connection ") >= 0) && rows[i].indexOf("failed ") === -1) {
 					ok_num++;
 				}
 				var _msg = rows[i].split(port)[1].substr(1).replace(/\s+/g,"")

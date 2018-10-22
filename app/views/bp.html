@@ -204,8 +204,9 @@
 
  		<td ng-if="q18">
  			<span ng-class="{
-						green: value.rank <= 21 && value.history.weekpercent >= 99.9,
-						orange: value.rank <= 21 && value.history.weekpercent < 99.9,
+						green: value.rank <= 21 && value.history.weekpercent == 100,
+						orange: value.rank <= 21 && value.history.weekpercent >= 99 && value.history.weekpercent < 100,
+						red: value.rank <= 21 && value.history.weekpercent < 99,
 					}">
 				{{ value.history.weekpercent }} %
 			</span>
