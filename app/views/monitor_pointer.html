@@ -79,7 +79,7 @@
 
 						</span>
 						<span ng-if="!value.http.cors || (value.http.number && value.http.number < info.last_irreversible_block_num)" data-toggle="tooltip" title="
-						{{ !value.http.cors ? (value.http.status == 'ok' ? '未完整开启 CORS' : '未开启 CORS') : '' }}
+						{{ !value.http.cors ? (value.http.status == 'ok' ? '未完整开启 CORS，不支持自定义 Content-Type' : '未开启 CORS') : '' }}
 						{{ !value.http.cors && (value.http.number && value.http.number < info.last_irreversible_block_num) ? ',' : '' }}
 						{{ (value.http.number && value.http.number < info.last_irreversible_block_num) ? '不在最新区块' : '' }}
 						">
@@ -114,7 +114,7 @@
 
 						</span>
 						<span ng-if="!value.https.cors || (value.https.number && value.https.number < info.last_irreversible_block_num)" data-toggle="tooltip" title="
-						{{ !value.https.cors ? (value.https.status == 'ok' ? '未完整开启 CORS' : '未开启 CORS') : '' }}
+						{{ !value.https.cors ? (value.https.status == 'ok' ? '未完整开启 CORS，不支持自定义 Content-Type' : '未开启 CORS') : '' }}
 						{{ !value.https.cors && (value.https.number && value.https.number < info.last_irreversible_block_num) ? ',' : '' }}
 						{{ (value.https.number && value.https.number < info.last_irreversible_block_num) ? '不在最新区块' : '' }}
 						">
