@@ -33,19 +33,19 @@ angular.module('appApp')
 			area: ['', '420px'],
 			content: '<div style="padding: 20px"><pre><code>{{ urls | json}}</code></pre></div>',
 			scope: $scope
-        });	
+        });
 	}
 	function main() {
 		httpArr = [];
 		httpsArr = [];
 		p2pArr = [];
-		
+
   		util.ajax({url: url.rpc.get_info}, function(data){
 	  		info = data;
 	  		$scope.info = info;
   		}, function(){})
 
-	  	util.ajax({url: url.rpc.get_table_rows, data: 
+	  	util.ajax({url: url.rpc.get_table_rows, data:
 	  		JSON.stringify({
 	  			"json": "true",
 		  		"code": "producerjson",
@@ -209,6 +209,9 @@ angular.module('appApp')
 						return callback(bpname, {history: true});
 					}
 				}, function(){})
+			  util.ajax({url: url_get_info, headers: {'content-type': 'application/json'}}, function() {}, function() {
+                callback(bpname, {cors: false});
+			  });
 				return callback(bpname, {status: "ok", msg: "",number: info.head_block_num,version: info.server_version_string});
 			} else {
 				return callback(bpname, {status: "ng",msg: "offline"});
