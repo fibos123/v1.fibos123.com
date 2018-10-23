@@ -1,7 +1,7 @@
 <main role="main">
   <div class="py-4 bg-light">
     <div class="container part-monitor">
-    	
+
     	<ul class="nav nav-pills flex-column flex-sm-row">
 		  <li class="nav-item">
 		    <a class="nav-link" ng-href="#!/monitor">出块节点在线状态</a>
@@ -14,14 +14,14 @@
 		  </li>
 		</ul><br>
 
-		
+
 		<div class="d-flex justify-content-between">
 				<div><h3>接入点状态监测 </h3></div>
 		    <div class="mt-auto">
 				<div class="text-right"></div>
     			<div class="input-group input-group-sm pb-1">
 					<a class="a-link" ng-click="openLayer()" style="margin-right:20px"><i class="fas fa-server"></i> 可用接入点列表</a>
-					<a class="a-link" ng-click="refresh()" style="margin-right:20px"><i class="fas fa-sync-alt"></i> 刷新</a> 
+					<a class="a-link" ng-click="refresh()" style="margin-right:20px"><i class="fas fa-sync-alt"></i> 刷新</a>
 					<input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
 				</div>
 			</div>
@@ -56,11 +56,11 @@
 
 					<td>
 						<span class="icon" ng-class="{
-						'icon-ok': value.http.status == 'ok', 
-						'icon-ng': value.http.status == 'ng', 
-						'icon-ing': value.http.status == 'ing', 
-						'icon-un': value.http.status == 'un', 
-						'icon-warn': !value.http.cors || 
+						'icon-ok': value.http.status == 'ok',
+						'icon-ng': value.http.status == 'ng',
+						'icon-ing': value.http.status == 'ing',
+						'icon-un': value.http.status == 'un',
+						'icon-warn': !value.http.cors ||
 									 (value.http.number && value.http.number < info.last_irreversible_block_num)
 						}
 						">
@@ -79,7 +79,7 @@
 
 						</span>
 						<span ng-if="!value.http.cors || (value.http.number && value.http.number < info.last_irreversible_block_num)" data-toggle="tooltip" title="
-						{{ !value.http.cors ? '未开启 CORS' : '' }}
+						{{ !value.http.cors ? (value.http.status == 'ok' ? '未完整开启 CORS' : '未开启 CORS') : '' }}
 						{{ !value.http.cors && (value.http.number && value.http.number < info.last_irreversible_block_num) ? ',' : '' }}
 						{{ (value.http.number && value.http.number < info.last_irreversible_block_num) ? '不在最新区块' : '' }}
 						">
@@ -92,18 +92,18 @@
 
 					<td>
 						<span class="icon" ng-class="{
-						'icon-ok': value.https.status == 'ok', 
-						'icon-ng': value.https.status == 'ng', 
-						'icon-ing': value.https.status == 'ing', 
-						'icon-un': value.https.status == 'un', 
-						'icon-warn': !value.https.cors || 
+						'icon-ok': value.https.status == 'ok',
+						'icon-ng': value.https.status == 'ng',
+						'icon-ing': value.https.status == 'ing',
+						'icon-un': value.https.status == 'un',
+						'icon-warn': !value.https.cors ||
 									 (value.https.number && value.https.number < info.last_irreversible_block_num)
 						}">
 
 							<span ng-if="value.https.history" data-toggle="tooltip" title="已开启 history 插件">
 								<i class="fas fa-history"></i>
 							</span>
-							
+
 							<span data-toggle="tooltip" title="{{ value.https.endpoint }}">
 								<span>{{ value.https.msg }}</span>
 								<span ng-if="value.https.status == 'ok'">
@@ -114,7 +114,7 @@
 
 						</span>
 						<span ng-if="!value.https.cors || (value.https.number && value.https.number < info.last_irreversible_block_num)" data-toggle="tooltip" title="
-						{{ !value.https.cors ? '未开启 CORS' : '' }}
+						{{ !value.https.cors ? (value.https.status == 'ok' ? '未完整开启 CORS' : '未开启 CORS') : '' }}
 						{{ !value.https.cors && (value.https.number && value.https.number < info.last_irreversible_block_num) ? ',' : '' }}
 						{{ (value.https.number && value.https.number < info.last_irreversible_block_num) ? '不在最新区块' : '' }}
 						">
@@ -126,12 +126,12 @@
 					</td>
 
 					<td >
-						<span data-toggle="tooltip" title="{{ value.p2p.endpoint }}" class="icon" 
+						<span data-toggle="tooltip" title="{{ value.p2p.endpoint }}" class="icon"
 						ng-class="{
-						'icon-ok': value.p2p.status == 'ok', 
-						'icon-ng': value.p2p.status == 'ng', 
-						'icon-ing': value.p2p.status == 'ing', 
-						'icon-un': value.p2p.status == 'un', 
+						'icon-ok': value.p2p.status == 'ok',
+						'icon-ng': value.p2p.status == 'ng',
+						'icon-ing': value.p2p.status == 'ing',
+						'icon-un': value.p2p.status == 'un',
 						'icon-warn': value.p2p.warning}"
 						>
 							{{ value.p2p.msg | lowercase }}
