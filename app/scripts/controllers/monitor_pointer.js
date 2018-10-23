@@ -203,8 +203,8 @@ angular.module('appApp')
 		util.ajax({url: url_get_info}, function(info) {
 			if (info && info.head_block_num) {
 				// history
-				util.ajax({url: url_get_transaction, type: "POST", data: '{"public_key":"FO6MzV92DgYjwDa7K3rtc28dPhGt2Gy8oUoHjESUq4gBx63v8num"}'},function(info) {
-				// util.ajax({url: url_get_transaction, type: "POST", dataType : "json", contentType: "application/json; charset=utf-8", data: '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}'},function(info) {
+				util.ajax({url: url_get_transaction, type: "POST", headers: {'content-type': 'application/json'}, data: '{"public_key":"FO6MzV92DgYjwDa7K3rtc28dPhGt2Gy8oUoHjESUq4gBx63v8num"}'},function(info) {
+				// util.ajax({url: url_get_transaction, type: "POST", dataType : "json", headers: {'content-type': 'application/json'}, data: '{"id":"ba59b1eb11f49d9d7ef881e3055c0ec7956e9b7921605a3cc6d5172e3de54154"}'},function(info) {
 					if (info) {
 						return callback(bpname, {history: true});
 					}
