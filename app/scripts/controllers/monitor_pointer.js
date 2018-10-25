@@ -19,6 +19,7 @@ angular.module('appApp')
 	var httpsArr = [];
 	var p2pArr = [];
 	var info = {};
+	var  maxVersion = 'v1.3.1.2';
 	if (window.location.protocol === "https:") {
 		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
 		return;

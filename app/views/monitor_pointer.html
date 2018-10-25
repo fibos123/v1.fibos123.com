@@ -60,7 +60,7 @@
 						'icon-ng': value.http.status == 'ng',
 						'icon-ing': value.http.status == 'ing',
 						'icon-un': value.http.status == 'un',
-						'icon-warn': !value.http.cors ||
+						'icon-warn': (!value.http.cors && value.http.status != 'ok') ||
 									 (value.http.number && value.http.number < info.last_irreversible_block_num)
 						}
 						">

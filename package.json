@@ -35,5 +35,8 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js"
+  },
+  "dependencies": {
+    "compare-versions": "^3.4.0"
   }
 }
