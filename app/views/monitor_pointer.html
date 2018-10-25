@@ -96,7 +96,7 @@
 						'icon-ng': value.https.status == 'ng',
 						'icon-ing': value.https.status == 'ing',
 						'icon-un': value.https.status == 'un',
-						'icon-warn': !value.https.cors ||
+						'icon-warn': (!value.https.cors && value.https.status != 'ok') ||
 									 (value.https.number && value.https.number < info.last_irreversible_block_num)
 						}">
 
