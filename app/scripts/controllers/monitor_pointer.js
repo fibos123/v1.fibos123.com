@@ -19,7 +19,7 @@ angular.module('appApp')
 	var httpsArr = [];
 	var p2pArr = [];
 	var info = {};
-	var  maxVersion = 'v1.3.1.2';
+	var maxVersion = 'v1.3.1.2';
 	if (window.location.protocol === "https:") {
 		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
 		return;
@@ -244,7 +244,7 @@ angular.module('appApp')
 		endpoint = endpoint.replace("http://", "");
 		var addr = endpoint.split(":");
 		var host = addr[0];
-		var port = addr[1];
+		var port = addr[1] || "";
 
 		callback(bpname, {status: "ing",msg:"connecting",endpoint: endpoint});
 		util.ajax({url: url.api.check_p2p, data: {host: host, port:port}}, function(data) {
