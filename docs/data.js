@@ -88,7 +88,7 @@ var websites = [
       {
         "name": "交易所",
         "child": [
-          {"name": "CREX", "desc": "数字资产价值兑换交易平台", "url": "http://www.crexfit.com/"},
+          // {"name": "CREX", "desc": "数字资产价值兑换交易平台", "url": "http://www.crexfit.com/"},
           {"name": "Augur", "desc": "做多 / 做空 FIBOS", "url": "https://www.augur.net/", "more": {"icon": "", "name": "教程", "url": "http://imondo.io/article/1536026943861"}},
           {"name": "币岁", "desc": "了得资本投资的数字资产交易平台", "url": "https://www.bisale.com/"},
           {"name": "BIEX", "desc": "全球区块链资产交易平台，位于塞舌尔共和国", "url": "https://www.biex.io/"},
@@ -112,9 +112,11 @@ var websites = [
         "name": "",
         "icon": "",
         "child": [
-          {"name": "头条", "desc": "头条", "url": "http://explorer.fibos.rocks/"},
+          {"name": "头条", "desc": "浏览器头条", "url": "http://explorer.fibos.rocks/"},
           // {"name": "幸运大投注", "desc": "幸运大投注", "url": "http://www.biteye.pro/"},
-          {"name": "PIXEL MASTER", "desc": "PIXEL MASTER是世界首个在区块链上的协作艺术品", "url": "https://fopixels.com/"},
+          {"name": "PIXEL MASTER", "desc": "像素大师", "url": "https://fopixels.com/"},
+          {"name": "FOBet Dice", "desc": "扔骰子", "url": "https://dice.fobet.one/"},
+          {"name": "FORPS", "desc": "猜拳头", "url": "http://rps.qingah.com/"},
         ]
       }
     ]
