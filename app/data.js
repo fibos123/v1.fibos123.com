@@ -44,7 +44,7 @@ var websites = [
         "name": "浏览器",
         "child": [
           {"name": "FIBOS ROCKS", "icon": "", "desc": "一款出色的 FIBOS 区块链浏览器", "url": "http://explorer.fibos.rocks/", "more": {"name": "投票", "color": "color-fibos-rocks", "url": "http://explorer.fibos.rocks/voting#fibos123comm:fibosrockskr"}},
-          {"name": "fometa", "icon": "", "desc": "FIBOS 区块浏览器", "url": "http://fometa.io/"}
+          {"name": "FIBSCAN", "icon": "", "desc": "FIBOS 上的类 EOSFLARE 浏览器", "url": "https://fibscan.io/"}
         ]
       },
       {
