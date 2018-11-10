@@ -259,12 +259,19 @@ angular.module('appApp')
 			var length = 1; // rows.length
 
 			for (var i = 0; i < length; i++) {
-				if ((rows[i].indexOf("connect ") >= 0 || rows[i].indexOf("connection ") >= 0) && rows[i].indexOf("failed ") === -1) {
+				if (
+					(rows[i].indexOf("connect ") >= 0 || rows[i].indexOf("connection ") >= 0 || rows[i].indexOf("self connect") >= 0) 
+					&& rows[i].indexOf("failed ") === -1
+					&& port
+					) {
 					ok_num++;
 				}
 				var _msg = rows[i].split(port)[1].substr(1).replace(/\s+/g,"")
 				if (_msg) {
 					msg = rows[i].split(port)[1].substr(1);
+				}
+				if (!port) {
+					msg = "Invalid peer address"
 				}
 			}
 

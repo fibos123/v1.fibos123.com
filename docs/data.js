@@ -90,7 +90,6 @@ var websites = [
         "child": [
           // {"name": "CREX", "desc": "数字资产价值兑换交易平台", "url": "http://www.crexfit.com/"},
           {"name": "Augur", "desc": "做多 / 做空 FIBOS", "url": "https://www.augur.net/", "more": {"icon": "", "name": "教程", "url": "http://imondo.io/article/1536026943861"}},
-          {"name": "币岁", "desc": "了得资本投资的数字资产交易平台", "url": "https://www.bisale.com/"},
           {"name": "BIEX", "desc": "全球区块链资产交易平台，位于塞舌尔共和国", "url": "https://www.biex.io/"},
           {"name": "币图", "desc": "全球领先的数字资产交易平台", "url": "https://www.tok.com/"},
           {"name": "BiSale", "desc": "存币收益，币圈余额宝", "url": "https://www.bisale.com/#/bisale"}
