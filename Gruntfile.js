@@ -378,6 +378,7 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             'data.js',
+            'bp_honor.js',
             '.gitignore',
             'CNAME',
             'public/*',

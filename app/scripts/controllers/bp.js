@@ -21,6 +21,7 @@ angular.module('appApp')
   	var st1;
   	var bpname2i = {};
 
+  	$scope.bp_honor = bp_honor;
   	$scope.refresh = main;
 
   	main();
@@ -84,7 +85,7 @@ angular.module('appApp')
 	function set() {
   		$scope.items = items;
 		$scope.$apply();
-		$(".tooltip").remove();
+		// $(".tooltip").remove();
 	  	$('[data-toggle="tooltip"]').tooltip();
 	}
 

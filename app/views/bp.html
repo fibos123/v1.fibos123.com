@@ -114,6 +114,10 @@
 				<img src="{{ value.json.org.branding.logo_256 }}" alt="" width="21" height="21">
 			</span>	
 			{{ value.json.org.candidate_name || value.owner }}
+			<span ng-repeat="(key, value) in bp_honor[value.owner]" data-toggle="tooltip" title="{{ value }}">
+				<span class="fas fa-award green"></span>
+			</span>
+
 		</td>
 
 		<td ng-if="q2">
