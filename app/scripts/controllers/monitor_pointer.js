@@ -19,12 +19,22 @@ angular.module('appApp')
 	var httpsArr = [];
 	var p2pArr = [];
 	var info = {};
-	var maxVersion = 'v1.3.1.2';
+
 	if (window.location.protocol === "https:") {
 		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
 		return;
 	}
   	main();
+
+	$scope.simple = false;
+	$scope.changeSimple = function (){
+		$scope.simple = !$scope.simple;
+		setTimeout(function (){
+			$(".tooltip").remove();
+		  	$('[data-toggle="tooltip"]').tooltip();
+		  }, 500)
+	}
+	
   	$scope.refresh = main;
   	$scope.url_api_check_p2p = url.api.check_p2p;
 	$scope.openLayer = function () {
@@ -146,7 +156,8 @@ angular.module('appApp')
 		var p2p_score = 0;
 
 		http_score += (bp.http.endpoint) ? 1 : 0;
-		http_score += (bp.http.status === 'ok') ? 2 : 0;
+		http_score += (bp.http.status === 'ok') ? 1 : 0;
+		http_score += (bp.http.version >= info.server_version_string) ? 1 : 0;
 		http_score += (bp.http.status === 'ok' && bp.http.cors === true) ? 1 : 0;
 		http_score += (bp.http.history === true) ? 0.5 : 0;
 		http_score += (bp.http.number > info.last_irreversible_block_num) ? 1 : 0;
@@ -156,7 +167,8 @@ angular.module('appApp')
 		}
 
 		https_score += (bp.https.endpoint) ? 1 : 0;
-		https_score += (bp.https.status === 'ok') ? 2 : 0;
+		https_score += (bp.https.status === 'ok') ? 1 : 0;
+		https_score += (bp.https.version >= info.server_version_string) ? 1 : 0;
 		https_score += (bp.https.status === 'ok' && bp.https.cors === true) ? 1 : 0;
 		https_score += (bp.https.history === true) ? 0.5 : 0;
 		https_score += (bp.https.number > info.last_irreversible_block_num) ? 1 : 0;

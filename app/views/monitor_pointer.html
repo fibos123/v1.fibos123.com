@@ -16,18 +16,22 @@
 
 
 		<div class="d-flex justify-content-between">
-				<div><h3>接入点状态监测 </h3></div>
+			<div><h3>接入点状态监测 </h3></div>
 		    <div class="mt-auto">
 				<div class="text-right"></div>
     			<div class="input-group input-group-sm pb-1">
-					<a class="a-link" ng-click="openLayer()" style="margin-right:20px"><i class="fas fa-server"></i> 可用接入点列表</a>
-					<a class="a-link" ng-click="refresh()" style="margin-right:20px"><i class="fas fa-sync-alt"></i> 刷新</a>
+					<label style="margin-right:10px"> <input type="checkbox" ng-model="simple" ng-click="changeSimple()"> 简版 </label>
+					<br>
+					<a class="a-link" ng-click="openLayer()" style="margin-right:10px"><i class="fas fa-server"></i> 可用接入点列表</a>
+					<br>
+					<a class="a-link" ng-click="refresh()" style="margin-right:10px"><i class="fas fa-sync-alt"></i> 刷新</a>
+					<br>
 					<input type="text" autocomplete="off" placeholder="搜索" class="form-control" ng-model="q">
 				</div>
 			</div>
 	    </div>
 
-		<table ng-if="items" class="table table-bordered table-hover table-sm table-striped monospaced-font">
+		<table ng-if="items && !simple" class="table table-bordered table-hover table-sm table-striped monospaced-font">
 			<thead>
 				<tr>
 					<th width="50" class="text-center">编号</th>
@@ -150,6 +154,212 @@
 				</tr>
 			</tbody>
 		</table>
+
+
+		<table ng-if="items && simple" class="table table-bordered table-hover table-sm table-striped monospaced-font">
+			<thead class="text-center">
+				<tr>
+					<th width="50" rowspan="2">编号</th>
+					<th rowspan="2">节点账户</th>
+					<th colspan="6">HTTP 状态</th>
+					<th colspan="6">HTTPS 状态</th>
+					<th rowspan="2" width="10%">P2P 状态</th>
+				</tr>
+				<tr>
+					<th width="6%">设置接入点</th>
+					<th width="6%">在线</th>
+					<th width="6%">最新区块</th>
+					<th width="6%">最新版本</th>
+					<th width="6%">开启 CORS</th>
+					<th width="6%">开启 history</th>
+
+					<th width="6%">设置接入点</th>
+					<th width="6%">在线</th>
+					<th width="6%">最新区块</th>
+					<th width="6%">最新版本</th>
+					<th width="6%">开启 CORS</th>
+					<th width="6%">开启 history</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, value) in items | filter:q">
+					<td align="center">{{ $index + 1 }}</td>
+
+					<td>
+						<span ng-class="{
+						green: value.score >= 14,
+						red: value.score <= 3,
+					}">
+						<span ng-if="value.score >= 14" data-toggle="tooltip" title="优质接入点"><i class="fas fa-thumbs-up"></i> {{ value.bpname }}</span>
+						<span ng-if="value.score < 14">{{ value.bpname }}</span>
+					</span>
+
+						<a class="hide-link float-right" ng-if="value.producerjson.org.website" target="_blank" href="{{ value.producerjson.org.website }}" data-toggle="tooltip" title="打开新窗口查看网站">
+							<i class="fas fa-link"></i>
+						</a>
+					</td>
+					
+					<!-- http -->
+
+					<td class="text-center">
+						<span ng-if="value.http.status != 'un'" data-toggle="tooltip" title="已设置接入点">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.http.status == 'un'" data-toggle="tooltip" title="未设置接入点">
+							<span class="icon icon-ng"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.http.status == 'ok'" data-toggle="tooltip" title="在线">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.http.status == 'ng' || value.http.status == 'ing'" data-toggle="tooltip" title="离线">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.http.status == 'un'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.http.status == 'ok' && value.http.number && value.http.number >= info.last_irreversible_block_num" data-toggle="tooltip" title="当前区块：{{ value.http.number | number }}">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.http.status == 'ok' && value.http.number && value.http.number < info.last_irreversible_block_num" data-toggle="tooltip" title="当前区块：{{ value.http.number | number }}">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.http.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.http.status == 'ok' && value.http.version >= info.server_version_string" data-toggle="tooltip" title="版本号：{{ value.http.version }}">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.http.status == 'ok' && value.http.version < info.server_version_string" data-toggle="tooltip" title="版本号：{{ value.http.version }}">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.http.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.http.status == 'ok' && value.http.cors" data-toggle="tooltip" title="已开启 CORS">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.http.status == 'ok' && !value.http.cors" data-toggle="tooltip" title="未开启 CORS">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.http.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.http.status == 'ok' && value.http.history" data-toggle="tooltip" title="已开启 history 插件">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.http.status == 'ok' && !value.http.history" data-toggle="tooltip" title="未开启 history 插件">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.http.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<!-- https -->
+
+					<td class="text-center">
+						<span ng-if="value.https.status != 'un'" data-toggle="tooltip" title="已设置接入点">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.https.status == 'un'" data-toggle="tooltip" title="未设置接入点">
+							<span class="icon icon-ng"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.https.status == 'ok'" data-toggle="tooltip" title="在线">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.https.status == 'ng' || value.https.status == 'ing'" data-toggle="tooltip" title="离线">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.https.status == 'un'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.https.status == 'ok' && value.https.number && value.https.number >= info.last_irreversible_block_num" data-toggle="tooltip" title="当前区块：{{ value.https.number | number }}">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.https.status == 'ok' && value.https.number && value.https.number < info.last_irreversible_block_num" data-toggle="tooltip" title="当前区块：{{ value.https.number | number }}">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.https.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.https.status == 'ok' && value.https.version >= info.server_version_string" data-toggle="tooltip" title="版本号：{{ value.https.version }}">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.https.status == 'ok' && value.https.version < info.server_version_string" data-toggle="tooltip" title="版本号：{{ value.https.version }}">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.https.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.https.status == 'ok' && value.https.cors" data-toggle="tooltip" title="已开启 CORS">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.https.status == 'ok' && !value.https.cors" data-toggle="tooltip" title="未开启 CORS">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.https.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<td class="text-center">
+						<span ng-if="value.https.status == 'ok' && value.https.history" data-toggle="tooltip" title="已开启 history 插件">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.https.status == 'ok' && !value.https.history" data-toggle="tooltip" title="未开启 history 插件">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.https.status != 'ok'" data-toggle="tooltip" title="未知">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+
+					<!-- p2p -->
+					<td class="text-center">
+						<span ng-if="value.p2p.status == 'ok' || value.p2p.status == 'ing'" data-toggle="tooltip" title="接入点可用">
+							<span class="icon icon-ok"></span>
+						</span>
+						<span ng-if="value.p2p.status == 'ng'" data-toggle="tooltip" title="{{ value.p2p.msg | lowercase }}">
+							<span class="icon icon-ng"></span>
+						</span>
+						<span ng-if="value.p2p.status == 'un' && value.p2p.detecting" data-toggle="tooltip" title="未设置接入点">
+							<span class="icon icon-un"></span>
+						</span>
+						<span ng-if="value.p2p.status == 'un' && !value.p2p.detecting" data-toggle="tooltip" title="这是新接入点，服务器未对其进行监测，请把该接入点地址({{ value.p2p.endpoint }})发送给 &#98;&#112;&#64;&#102;&#105;&#98;&#111;&#115;&#49;&#50;&#51;&#46;&#99;&#111;&#109; ">
+							<span class="icon icon-un"></span>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
 		<div ng-if="!items">获取中...</div>
 
 	</div>
