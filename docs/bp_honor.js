@@ -12,7 +12,7 @@ var bp_honor = {
 
 	"liuqiangdong": ["FIBOS 数据备份", "60% 分红"],
 	"lijialintest": ["60% 分红"],
-	"zhangsenyuan": ["60% 分红"],
+	"zhangsenyuan": ["Dapp 开发者", "60% 分红"],
 	"superbpusphl": ["60% 分红"],
 	"shaoshaoshao": ["60% 分红"],
 	"williamfouvy": ["60% 分红"],

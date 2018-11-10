@@ -138,7 +138,7 @@
 				</span>
 			</span>
 
-			<span ng-if="!value.bp_info && value.rank <= 21" class="gray">
+			<span ng-if="info.head_block_producer != value.owner && !value.bp_info && value.rank <= 21" class="gray">
 				获取中
 			</span>
 
