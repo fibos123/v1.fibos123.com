@@ -2,7 +2,7 @@ var bp_honor = {
 	"fibosrockskr": ["Fibos Rocks 浏览器", "51Token 钱包", "Dapp 开发者", "节点英雄"],
 	"fibos123comm": ["FIBOS 导航", "节点英雄"],
 	"ansenironman": ["IronMan 作者"],
-	"lovefibosb": ["Fotoolkit 作者"],
+	"ilovefibosbp": ["FOToolkit 作者"],
 	"fibosisfunoo": ["Dapp 开发者"],
 
 	"slowmistioio": ["节点英雄"],
@@ -19,4 +19,5 @@ var bp_honor = {
 	"singaporebps": ["60% 分红"],
 	"ukfiboooooos": ["60% 分红"],
 	"fotothemooon": ["60% 分红"],
+	"aprilfibosbp": ["60% 分红"],
 };
