@@ -20,4 +20,5 @@ var bp_honor = {
 	"ukfiboooooos": ["遵守 BP 分红公约"],
 	"fotothemooon": ["遵守 BP 分红公约"],
 	"aprilfibosbp": ["遵守 BP 分红公约"],
+	"bitzebitze11": ["遵守 BP 分红公约"],
 };
