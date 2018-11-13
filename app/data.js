@@ -6,7 +6,7 @@ var websites = [
       {
         "name": "",
         "child": [
-          {"name": "FIBOS 是什么？", "desc": "了解 FIBOS 的基本知识以及为什么创造 FIBOS", "url": "https://fibos.io/docs/document/start/about.md.html"},
+          {"name": "FIBOS 是什么？", "desc": "了解 FIBOS 的基本知识以及为什么创造 FIBOS", "url": "https://dev.fo/guide/introduction/introduction.html"},
           {"name": "我需要兑换 FO 吗？", "desc": "打开微博看看创始人响马先生的提醒", "url": "http://file.gongxiangcj.com/nonooghj.png"},
           {"name": "投 FIBOS 代码太难？", "desc": "MORE wallet 推出傻瓜式一键投兑 FO 功能", "url": "https://www.jianshu.com/p/4b1f2f2825f7"},
           {"name": "能查看区块链状态吗？", "desc": "FIBOS ROCKS 是一款出色的 FIBOS 区块链浏览器", "url": "http://explorer.fibos.rocks/"},
@@ -30,8 +30,8 @@ var websites = [
           {"name": "MORE Wallet", "desc": "支持傻瓜式一键投兑 FO 功能", "url": "https://more.top/"},
           {"name": "51Token", "desc": "支持 FO 闪兑的钱包", "url": "https://www.51token.im/"},
           {"name": "FO 钱包", "desc": "基于 FIBOS 生态系统的智能钱包", "url": "http://wallet.fo/"},
-          {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/overview/developdoc/overview.md.html"},
-          {"name": "imondo", "desc": "由 fibos4imondo 超级节点 建立的一个活跃的小众社区", "url": "http://imondo.io/"}
+          {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://dev.fo/"},
+          {"name": "imondo", "desc": "一个活跃的小众社区", "url": "http://imondo.io/"}
         ]
       }
     ]
@@ -79,16 +79,15 @@ var websites = [
         "name": "官方网站",
         "child": [
           {"name": "FIBOS.IO", "icon": "fas fa-home", "desc": "FIBOS 官方网站", "url": "https://fibos.io/"},
-          {"name": "开发文档", "desc": "FIBOS 开发文档", "url": "https://fibos.io/docs/overview/developdoc/overview.md.html"},
+          {"name": "DEV.FO", "desc": "FIBOS 开发者社区", "url": "https://dev.fo/"},
           {"name": "Telegram", "desc": "FIBOS 官方电报群", "url": "https://t.me/FIBOSIO"},
-          {"name": "社区", "desc": "FIBOS 官方社区", "url": "http://bbs.dev.fo/"},
+          {"name": "社区", "desc": "FIBOS 官方社区", "url": "http://forum.fo/"},
           {"name": "GitHub", "desc": "FIBOS 源代码", "url": "https://github.com/FIBOSIO"}
         ]
       },
       {
         "name": "交易所",
         "child": [
-          // {"name": "CREX", "desc": "数字资产价值兑换交易平台", "url": "http://www.crexfit.com/"},
           {"name": "Augur", "desc": "做多 / 做空 FIBOS", "url": "https://www.augur.net/", "more": {"icon": "", "name": "教程", "url": "http://imondo.io/article/1536026943861"}},
           {"name": "BIEX", "desc": "全球区块链资产交易平台，位于塞舌尔共和国", "url": "https://www.biex.io/"},
           {"name": "币图", "desc": "全球领先的数字资产交易平台", "url": "https://www.tok.com/"},
@@ -98,7 +97,7 @@ var websites = [
       {
         "name": "社区",
         "child": [
-          {"name": "imondo", "desc": "由 fibos4imondo 节点建立的一个活跃的小众社区", "url": "http://imondo.io/"}
+          {"name": "imondo", "desc": "一个活跃的小众社区", "url": "http://imondo.io/"}
         ]
       }
     ]
