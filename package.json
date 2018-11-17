@@ -3,6 +3,7 @@
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
+    "gh-pages": "^2.0.1",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-concurrent": "^1.0.0",
@@ -34,7 +35,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "karma start test/karma.conf.js"
+    "test": "karma start test/karma.conf.js",
+    "predeploy": "grunt build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "compare-versions": "^3.4.0"

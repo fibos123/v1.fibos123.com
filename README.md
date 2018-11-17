@@ -14,3 +14,8 @@ bower install
 ## Build & development
 
 Run `grunt build` for building and `grunt serve` for preview.
+
+
+## Deploy
+
+Run `npm run deploy` for deploy.
