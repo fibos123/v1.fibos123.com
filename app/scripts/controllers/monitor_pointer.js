@@ -272,7 +272,11 @@ angular.module('appApp')
 
 			for (var i = 0; i < length; i++) {
 				if (
-					(rows[i].indexOf("connect ") >= 0 || rows[i].indexOf("connection ") >= 0 || rows[i].indexOf("self connect") >= 0) 
+					(rows[i].indexOf("connect ") >= 0 || 
+					rows[i].indexOf("connection ") >= 0 || 
+					rows[i].indexOf("self connect") >= 0 || 
+					rows[1].indexOf("self connect") >= 0
+					) 
 					&& rows[i].indexOf("failed ") === -1
 					&& port
 					) {
