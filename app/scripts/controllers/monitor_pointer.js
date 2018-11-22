@@ -149,7 +149,6 @@ angular.module('appApp')
 	})
 
 	function count_score(bp){
-		var score = 0;
 
 		var http_score = 0;
 		var https_score = 0;
@@ -162,10 +161,6 @@ angular.module('appApp')
 		http_score += (bp.http.history === true) ? 0.5 : 0;
 		http_score += (bp.http.number > info.last_irreversible_block_num) ? 1 : 0;
 
-		if (http_score >= 5) {
-			httpArr.push(bp.http.endpoint)
-		}
-
 		https_score += (bp.https.endpoint) ? 1 : 0;
 		https_score += (bp.https.status === 'ok') ? 1 : 0;
 		https_score += (bp.https.version >= info.server_version_string) ? 1 : 0;
@@ -173,15 +168,19 @@ angular.module('appApp')
 		https_score += (bp.https.history === true) ? 0.5 : 0;
 		https_score += (bp.https.number > info.last_irreversible_block_num) ? 1 : 0;
 
-		if (https_score >= 5) {
-			httpsArr.push(bp.https.endpoint)
-		}
-
 		p2p_score += (bp.p2p.endpoint) ? 1 : 0;
 		p2p_score += (bp.p2p.status === 'ok') ? 3 : 0;
 
-		if (p2p_score == 4) {
-			p2pArr.push(bp.p2p.endpoint)
+		if (bp.http.version >= info.server_version_string) {
+			if (http_score >= 5) {
+				httpArr.push(bp.http.endpoint)
+			}
+			if (https_score >= 5) {
+				httpsArr.push(bp.https.endpoint)
+			}
+			if (p2p_score == 4 ) {
+				p2pArr.push(bp.p2p.endpoint)
+			}
 		}
 
 		return http_score + https_score + p2p_score;
