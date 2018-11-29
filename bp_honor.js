@@ -21,4 +21,5 @@ var bp_honor = {
 	"fotothemooon": ["遵守分红共识"],
 	"aprilfibosbp": ["遵守分红共识"],
 	"bitzebitze11": ["遵守分红共识"],
+	"beedappchina": ["dApp 活动赞助商"],
 };
