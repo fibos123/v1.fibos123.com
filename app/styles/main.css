@@ -6,7 +6,7 @@ img{max-width:100%}
 footer{padding-top:3rem;padding-bottom:3rem}
 footer p{margin-bottom:.25rem}
 footer a{color:#2d74b2}
-footer{background: white}
+/* footer{background: white} */
 .jumbotron{padding-top:calc(var(--jumbotron-padding-y) * 2);padding-bottom:calc(var(--jumbotron-padding-y) * 2);margin-bottom:0;position:relative}
 .jumbotron{background:url(../images/bg.jpg);background-size:cover;background-position:center;background-repeat:no-repeat;color:white;border-radius:0}
 .jumbotron p:last-child{margin-bottom:0}
@@ -27,6 +27,8 @@ body .logo-white{display: none}
 body.full-bg {background: url(../images/bg.jpg) center no-repeat;background-size: cover;}
 body.full-bg .logo{display: none}
 body.full-bg .logo-white{display: initial}
+body.full-bg footer.text-muted {color: white!important}
+body.full-bg footer a{color: inherit}
 .part-websites {}
 .part-websites section{position:relative;background:white;margin-bottom:30px;padding:1px;border:0 solid #c5d2db;border-radius:8px;background:#fff;box-shadow:0 1px 2px rgba(31,35,37,.08)}
 .part-websites section .panel-heading{padding:12px 24px;font-size:1.2em;border-bottom:1px solid #e7eff4;cursor:default}
