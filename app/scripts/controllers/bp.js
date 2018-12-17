@@ -46,14 +46,14 @@ angular.module('appApp')
 		  			items[i]["claim_rewards_unreceived"] = getClaimRewards.unreceived;
 
 					bpname2i[bp["owner"]] = i;
-					if (items[i]["rank"] <= 21) {
-						get_history(bp["owner"]);
-						get_bp_info(i, bp["owner"], function(i, bpname, info){
-							items[i] = Object.assign(items[i], info);
-							items[i] = Object.assign(items[i], {bp_info: true});
-							is_set = true;
-						}, function(){})
-					}
+					// if (items[i]["rank"] <= 21) {
+					// 	get_history(bp["owner"]);
+					// 	get_bp_info(i, bp["owner"], function(i, bpname, info){
+					// 		items[i] = Object.assign(items[i], info);
+					// 		items[i] = Object.assign(items[i], {bp_info: true});
+					// 		is_set = true;
+					// 	}, function(){})
+					// }
 		  		}
 				is_set = true;
 				get_producerjson();

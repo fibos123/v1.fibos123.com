@@ -42,7 +42,7 @@
 		    <label> <input type="checkbox" ng-init="q11 = false" ng-model="q11"> 最终出块区块 </label>
 		    <label> <input type="checkbox" ng-init="q12 = false" ng-model="q12"> 最终出块时间 </label>
 		    <label> <input type="checkbox" ng-init="q13 = false" ng-model="q13"> 累计出块</label>
-		    <label> <input type="checkbox" ng-init="q18 = false" ng-model="q18"> 7天出块率 </label>
+		    <!-- <label> <input type="checkbox" ng-init="q18 = false" ng-model="q18"> 7天出块率 </label> -->
 		    <label> <input type="checkbox" ng-init="q15 = false" ng-model="q15"> 网站 </label>
 		    <label> <input type="checkbox" ng-init="q14 = true" ng-model="q14"> 操作 </label>
 		</div>
@@ -138,8 +138,8 @@
 				</span>
 			</span>
 
-			<span ng-if="info.head_block_producer != value.owner && !value.bp_info && value.rank <= 21" class="gray">
-				获取中
+			<span ng-if="info.head_block_producer != value.owner && !value.bp_info && value.rank <= 21" class="green">
+				当选节点
 			</span>
 
 			<span ng-if="value.rank > 21" class="gray">
