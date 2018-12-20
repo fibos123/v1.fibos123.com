@@ -47,7 +47,7 @@ angular.module('appApp')
 	var si1 = setInterval(function () {
 		if (eos2fo) {
 		    if (i % 2 === 0) {
-				document.title = eos2fo + ' FO / EOS | FIBOS 导航';
+				document.title = eos2fo.toFixed(4) + ' FO / EOS | FIBOS 导航';
 		    } else {
 				document.title = fo2eos.toFixed(6) + ' EOS / FO | FIBOS 导航';
 		    }
@@ -60,9 +60,9 @@ angular.module('appApp')
 	})
 
 	function getExchangeInfo() {
-	  util.ajax({url: url.api.json2jsonp, dataType: "jsonp", data:{url: 'https://fibos.io/getExchangeInfo'}}, function (data){
-	    eos2fo = data.price;
-	    fo2eos = 1 / data.price;
+	  util.ajax({url: "https://explorer.fibos.rocks/api/resource", dataType: "json"}, function (data){
+	    eos2fo = data.eos_fo_price;
+	    fo2eos = 1 / data.eos_fo_price;
 	    setTimeout(getExchangeInfo, 5000);
 	  }, function(){})
 	}
