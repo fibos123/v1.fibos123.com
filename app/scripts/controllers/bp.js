@@ -21,7 +21,7 @@ angular.module('appApp')
   	var st1;
   	var bpname2i = {};
 
-  	$scope.bp_honor = bp_honor;
+  	$scope.bp_honor = util.copy(bp_honor);
   	$scope.refresh = main;
 
   	main();
@@ -29,6 +29,7 @@ angular.module('appApp')
 
   	function main(){
   		bpname2i = {};
+		$scope.bp_honor = util.copy(bp_honor);
 	  	get_global(function(data){
 	  		global = data.rows[0];
 		  	get_producers(function(data) {
@@ -43,17 +44,35 @@ angular.module('appApp')
 		  			items[i]["weight_percent"] = util.weightPercent(bp.total_votes, totalVotessum)
 		  			var getClaimRewards = util.getClaimRewards(bp, global, items[i]["rank"]);
 		  			items[i]["claim_rewards_total"] = getClaimRewards.total;
-		  			items[i]["claim_rewards_unreceived"] = getClaimRewards.unreceived;
+					items[i]["claim_rewards_unreceived"] = getClaimRewards.unreceived;
+					items[i]["http"] = {
+						status: "un",
+						msg: "unset",
+						endpoint: "",
+						version: "",
+						number: 0,
+						history: false,
+						cors: true
+					};
+					
+					items[i]["https"] = {
+						status: "un",
+						msg: "unset",
+						endpoint: "",
+						version: "",
+						number: 0,
+						history: false,
+						cors: true
+					};
+					items[i]["p2p"] = {
+						status: "un",
+						msg: "unset",
+						endpoint: "",
+						detecting: true
+					};
+
 
 					bpname2i[bp["owner"]] = i;
-					// if (items[i]["rank"] <= 21) {
-					// 	get_history(bp["owner"]);
-					// 	get_bp_info(i, bp["owner"], function(i, bpname, info){
-					// 		items[i] = Object.assign(items[i], info);
-					// 		items[i] = Object.assign(items[i], {bp_info: true});
-					// 		is_set = true;
-					// 	}, function(){})
-					// }
 		  		}
 				is_set = true;
 				get_producerjson();
@@ -68,13 +87,6 @@ angular.module('appApp')
 			setTimeout(function(){
 				$(".progress-bar").width("100%");
 			}, 1);
-			if ("undefined" !== typeof bpname2i[info["head_block_producer"]]) {
-	  			get_bp_info(bpname2i[info["head_block_producer"]], info["head_block_producer"], function(i, bpname, info){
-	  				items[i] = Object.assign(items[i], info);
-					is_set = true;
-	  			}, function(){})
-  			}
-
 			$scope.$apply();
 			clearTimeout(st1);
 			st1 = setTimeout(function (){
@@ -155,7 +167,6 @@ angular.module('appApp')
   	}
 
   	function get_producerjson(){
-
 	  	util.ajax({url: url.rpc.get_table_rows, data: 
 	  		JSON.stringify({
 	  			"json": "true",
@@ -167,49 +178,44 @@ angular.module('appApp')
 	  	, function(data) {
 	  		for (var i = 0; i < data.rows.length; i++) {
 	  			var json = JSON.parse(data.rows[i].json);
-	  			var bpname = data.rows[i].owner;
+				var bpname = data.rows[i].owner;
+				  
+				if ("undefined" === typeof $scope.bp_honor[bpname]) {
+					$scope.bp_honor[bpname] = [];
+				}
+				$scope.bp_honor[bpname].push("已设置 JSON");
 
 				if ("undefined" !== typeof bpname2i[bpname]) {
 					items[bpname2i[bpname]] = Object.assign(items[bpname2i[bpname]], {json: json});
+					for (var j = 0; j < json.nodes.length; j++) {
+						util.check_http_or_https(bpname, json.nodes[j], "http", function (bpname, info) {
+							if (info.status == "ok") {
+								$scope.bp_honor[bpname].push("HTTP 接入点可用");
+								is_set = true;
+							}
+							items[bpname2i[bpname]]["http"] = Object.assign(items[bpname2i[bpname]]["http"], info)
+						});
+						util.check_http_or_https(bpname, json.nodes[j], "https", function (bpname, info) {
+							if (info.status == "ok") {
+								$scope.bp_honor[bpname].push("HTTPS 接入点可用");
+								is_set = true;
+							}
+							items[bpname2i[bpname]]["https"] = Object.assign(items[bpname2i[bpname]]["https"], info)
+						});
+						util.check_p2p(bpname, json.nodes[j], function (bpname, info) {
+							if (info.status == "ok") {
+								$scope.bp_honor[bpname].push("P2P 接入点可用");
+								is_set = true;
+							}
+							items[bpname2i[bpname]]["p2p"] = Object.assign(items[bpname2i[bpname]]["p2p"], info)
+						});
+					}
 				}
-
 	  		}
 			is_set = true;
-
 	  	}, function(){});
 
   	}
 
-  	function get_history(bpname){
-
-	  	util.ajax({url: url.api.bp_history, data: {bpname: bpname}}
-	  	, function(data) {
-
-			if ("undefined" !== typeof bpname2i[bpname]) {
-			    var pointStart = 1535414400000;
-			    var pointInterval = 126000;
-
-		        var min = data.rows.length - 4800 - 1;
-		        var max = data.rows.length - 1;
-		        var fall = 0;
-		        var success = 0;
-		        for (var i = min; i < max; i++) {
-		            success += data.rows[i];
-		            if (data.rows[i] < 12) {
-		                fall += 12 - data.rows[i]
-		            }
-		        }
-		        var percent = (1 - (fall / ((max - min) * 12))) * 100
-
-				data.weekpercent = percent.toFixed(3);
-
-				items[bpname2i[bpname]] = Object.assign(items[bpname2i[bpname]], {history: data});
-			}
-
-			is_set = true;
-
-	  	}, function(){});
-
-  	}
 
   });
