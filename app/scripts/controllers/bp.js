@@ -13,11 +13,16 @@ angular.module('appApp')
   	document.title = '节点列表 | FIBOS 导航';
   	$(window).scrollTop(0)
 
+		if (window.location.protocol === "https:") {
+			window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
+			return;
+		}
+		
   	var items = [];
-	var is_set = false;
-	var global = {}; // 计算收益
-	var info = {}; // 最新区块
-	var totalVotessum = 0;
+		var is_set = false;
+		var global = {}; // 计算收益
+		var info = {}; // 最新区块
+		var totalVotessum = 0;
   	var st1;
   	var bpname2i = {};
 

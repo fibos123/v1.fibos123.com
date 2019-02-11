@@ -13,6 +13,10 @@ angular.module('appApp')
   	document.title = '节点监控 | FIBOS 导航';
   	$(window).scrollTop(0)
 
+	if (window.location.protocol === "https:") {
+		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
+		return;
+	}
 	var items = [];
 	var is_set = false;
 	var httpArr = [];
@@ -20,12 +24,8 @@ angular.module('appApp')
 	var p2pArr = [];
 	var info = {};
 
-	if (window.location.protocol === "https:") {
-		window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
-		return;
-	}
-  	main();
-
+	main();
+	  
 	$scope.simple = false;
 	$scope.changeSimple = function (){
 		$scope.simple = !$scope.simple;
