@@ -99,27 +99,28 @@ angular.module('appApp')
 	  				}
 	  			});
 	  			bpname = index-1;
-
-	  			for (var j = 0; j < json.nodes.length; j++) {
-	  				// http
-	  				util.check_http_or_https(bpname, json.nodes[j], "http", function (bpname, info) {
-  						items[bpname]["http"] = Object.assign(items[bpname]["http"], info)
-  						items[bpname]["score"] = count_score(items[bpname]);
-  						is_set = true;
-	  				});
-	  				// https
-	  				util.check_http_or_https(bpname, json.nodes[j], "https", function (bpname, info) {
-  						items[bpname]["https"] = Object.assign(items[bpname]["https"], info)
-  						items[bpname]["score"] = count_score(items[bpname]);
-  						is_set = true;
-	  				});
-	  				// p2p
-	  				util.check_p2p(bpname, json.nodes[j], function (bpname, info) {
-  						items[bpname]["p2p"] = Object.assign(items[bpname]["p2p"], info)
-  						items[bpname]["score"] = count_score(items[bpname]);
-  						is_set = true;
-	  				});
-	  			}
+				if (json.nodes) {
+					for (var j = 0; j < json.nodes.length; j++) {
+						// http
+						util.check_http_or_https(bpname, json.nodes[j], "http", function (bpname, info) {
+							items[bpname]["http"] = Object.assign(items[bpname]["http"], info)
+							items[bpname]["score"] = count_score(items[bpname]);
+							is_set = true;
+						});
+						// https
+						util.check_http_or_https(bpname, json.nodes[j], "https", function (bpname, info) {
+							items[bpname]["https"] = Object.assign(items[bpname]["https"], info)
+							items[bpname]["score"] = count_score(items[bpname]);
+							is_set = true;
+						});
+						// p2p
+						util.check_p2p(bpname, json.nodes[j], function (bpname, info) {
+							items[bpname]["p2p"] = Object.assign(items[bpname]["p2p"], info)
+							items[bpname]["score"] = count_score(items[bpname]);
+							is_set = true;
+						});
+					}
+				}
 	  		}
 	  	}, function(){});
 
