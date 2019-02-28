@@ -239,8 +239,11 @@ var util = {
                 _msg = _msg.substr(1).replace(/\s+/g, "");
                 if (_msg) {
                     msg = rows[i].split(port);
-                    msg = msg[1] || msg[0];
-                    msg = msg.substr(1);
+                    if (msg[1]) {
+                        msg = msg[1].substr(1);
+                    } else {
+                        msg = msg[0];
+                    }
                 }
                 if (!port) {
                     msg = "Invalid peer address"
