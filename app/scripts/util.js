@@ -212,7 +212,7 @@ var util = {
         var host = addr[0];
         var port = addr[1] || "";
 
-        window.p2p.push(`${host}:${port}`);
+        window.p2p.push(host + ":" + port);
 
         callback(bpname, { status: "ing", msg: "connecting", endpoint: endpoint });
         util.ajax({ url: url.api.check_p2p, data: { host: host, port: port } }, function (data) {
