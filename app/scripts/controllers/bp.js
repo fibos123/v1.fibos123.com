@@ -190,7 +190,7 @@ angular.module('appApp')
 						if ("undefined" === typeof $scope.bp_honor[bpname]) {
 							$scope.bp_honor[bpname] = [];
 						}
-						$scope.bp_honor[bpname].push("已设置 JSON");
+						// $scope.bp_honor[bpname].push("已设置 JSON");
 
 						if ("undefined" !== typeof bpname2i[bpname]) {
 							items[bpname2i[bpname]] = Object.assign(items[bpname2i[bpname]], { json: json });

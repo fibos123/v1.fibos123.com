@@ -24,7 +24,7 @@ var util = {
     // ajax 加入自动重试
     ajax: function (options, success, error) {
         options = Object.assign({
-            timeout: 5000,
+            timeout: 2000,
             tryCount: 0,
             retryLimit: 3,
             success: function (data, textStatus) {
@@ -231,7 +231,7 @@ var util = {
                     (rows[i].indexOf("connect ") >= 0 ||
                         rows[i].indexOf("connection ") >= 0 ||
                         rows[i].indexOf("self connect") >= 0 ||
-                        (rows[1] && rows[1].indexOf("self connect") >= 0)
+                        (rows[1] && rows[1].indexOf("self connect") >= 0) 
                     )
                     && rows[i].indexOf("failed ") === -1
                     && port
@@ -251,6 +251,11 @@ var util = {
                 }
                 if (!port) {
                     msg = "Invalid peer address"
+                    ok_num = 0;
+                }
+                if (rows[1] && rows[1].indexOf("Connection timed out") >= 0) {
+                    msg = "Connection timed out"
+                    ok_num = 0;
                 }
             }
 
