@@ -17,6 +17,8 @@ url.rpc.get_info = url.rpc.endpoint + "/v1/chain/get_info";
 url.rpc.get_account = url.rpc.endpoint + "/v1/chain/get_account";
 url.rpc.get_transaction = url.rpc.endpoint + "/v1/history/get_transaction";
 
+window.p2p = [];
+
 var util = {
 
     // ajax 加入自动重试
@@ -209,6 +211,8 @@ var util = {
         var addr = endpoint.split(":");
         var host = addr[0];
         var port = addr[1] || "";
+
+        window.p2p.push(`${host}:${port}`);
 
         callback(bpname, { status: "ing", msg: "connecting", endpoint: endpoint });
         util.ajax({ url: url.api.check_p2p, data: { host: host, port: port } }, function (data) {
