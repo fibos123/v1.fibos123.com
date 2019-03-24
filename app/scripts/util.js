@@ -112,15 +112,15 @@ var util = {
     var bpay = (global.perblock_bucket * producer.unpaid_blocks) / global.total_unpaid_blocks / 10000;
     var vpay = (global.pervote_bucket * producer.total_votes) / (1 * global.total_producer_vote_weight) / 10000;
     var next_claim_time = 1 * producer.last_claim_time / 1000 + 24 * 60 * 60 * 1000;
-    var bpay2 = 3200;
+    var bpay2 = 320;
     var vpay2 = 4879e5 / 365 * 0.2 * 0.9 * producer.total_votes / global.total_producer_vote_weight
-    if (vpay < 1000) {
+    if (vpay < 100) {
       vpay = 0;
     }
-    if (vpay2 < 1000) {
+    if (vpay2 < 100) {
       vpay2 = 0;
     }
-    total = (rank <= 21) ? bpay2 + vpay2 : vpay2;
+    total = (rank <= 21) ? bpay + vpay : vpay;
     unreceived = (next_claim_time > Date.now()) ? 0 : bpay + vpay;
     return {
       total: total.toFixed(0),
@@ -277,9 +277,9 @@ var util = {
 
 function printP2p() {
   window.p2p = util.unique(window.p2p)
-  let list = '';
+  var list = '';
   list += '['
-  window.p2p.map(item => list += ` '${item}',`)
+  // window.p2p.map(item => list += ` '${item}',`)
   list += ']'
   console.log(list)
 }
