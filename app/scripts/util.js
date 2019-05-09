@@ -10,8 +10,8 @@ url.api.json2jsonp = url.api.endpoint + "/json2jsonp";
 url.api.bp_history = url.api.endpoint + "/bp_history";
 
 url.rpc = {};
-url.rpc.endpoint = "https://rpc-mainnet.fibos123.com";
-// url.rpc.endpoint = "https://api.fibos.rocks";
+// url.rpc.endpoint = "https://rpc-mainnet.fibos123.com";
+url.rpc.endpoint = "https://api.fibos.rocks";
 url.rpc.get_table_rows = url.rpc.endpoint + "/v1/chain/get_table_rows";
 url.rpc.get_info = url.rpc.endpoint + "/v1/chain/get_info";
 url.rpc.get_account = url.rpc.endpoint + "/v1/chain/get_account";
@@ -275,11 +275,16 @@ var util = {
 
 }
 
-function printP2p() {
+function printP2P() {
   window.p2p = util.unique(window.p2p)
   var list = '';
   list += '['
-  // window.p2p.map(item => list += ` '${item}',`)
+  for (var i = 0; i < window.p2p.length; i++) {
+    list += ' "' + window.p2p[i] + '"'
+    if (i + 1 != window.p2p.length) {
+      list += ','
+    }
+  }
   list += ']'
   console.log(list)
 }

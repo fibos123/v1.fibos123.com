@@ -124,6 +124,12 @@
             "icon": "",
             "desc": "FIBOS 上的类 EOSFLARE 浏览器",
             "url": "https://fibscan.io/"
+          },
+          {
+            "name": "Chain Moe",
+            "icon": "",
+            "desc": "开源的区块链浏览器",
+            "url": "http://explorer.chain.moe/fo"
           }
         ]
       },
@@ -252,9 +258,9 @@
             }
           },
           {
-            "name": "币图",
-            "desc": "全球领先的数字资产交易平台",
-            "url": "https://www.tok.com/"
+            "name": "比特兔",
+            "desc": "比特币以太坊莱特币交易平台",
+            "url": "https://bitrabbit.com/markets/fo_eth"
           }
         ]
       },
