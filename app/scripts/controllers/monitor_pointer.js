@@ -174,19 +174,20 @@ angular.module('appApp')
 			p2p_score += (bp.p2p.endpoint) ? 1 : 0;
 			p2p_score += (bp.p2p.status === 'ok') ? 3 : 0;
 
+      var score = http_score + https_score + p2p_score
 			if (bp.http.version >= info.server_version_string) {
 				if (http_score >= 5) {
 					httpArr.push(bp.http.endpoint)
 				}
 				if (https_score >= 5) {
 					httpsArr.push(bp.https.endpoint)
-				}
-				if (p2p_score == 4) {
+        }
+				if (score >= 10 && p2p_score) {
 					p2pArr.push(bp.p2p.endpoint)
 				}
 			}
 
-			return http_score + https_score + p2p_score;
+			return score;
 		}
 
 

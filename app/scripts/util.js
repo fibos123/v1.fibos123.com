@@ -106,26 +106,32 @@ var util = {
 
   // 奖励
   getClaimRewards: function (producer, global, rank) {
-    if (!producer) return;
-    var total = 0;
-    var unreceived = 0;
-    var bpay = (global.perblock_bucket * producer.unpaid_blocks) / global.total_unpaid_blocks / 10000;
-    var vpay = (global.pervote_bucket * producer.total_votes) / (1 * global.total_producer_vote_weight) / 10000;
-    var next_claim_time = 1 * producer.last_claim_time / 1000 + 24 * 60 * 60 * 1000;
-    var bpay2 = 320;
-    var vpay2 = 4879e5 / 365 * 0.2 * 0.9 * producer.total_votes / global.total_producer_vote_weight
-    if (vpay < 100) {
-      vpay = 0;
+    
+    if (!global.perblock_bucket) {
+      return {
+        total: 0,
+      };
     }
-    if (vpay2 < 100) {
-      vpay2 = 0;
-    }
-    total = (rank <= 21) ? bpay + vpay : vpay;
-    unreceived = (next_claim_time > Date.now()) ? 0 : bpay + vpay;
+    const block_pay =
+      (global.perblock_bucket * producer.unpaid_blocks) /
+      global.total_unpaid_blocks /
+      10000;
+    const vote_pay =
+      (global.pervote_bucket * producer.total_votes) /
+      global.total_producer_vote_weight /
+      10000;
+    const multiple = 1;
+    const block_pay_fix = rank <= 21 ? 320 * multiple : block_pay;
+    const total =
+      block_pay_fix + vote_pay >= 100 * multiple ? block_pay_fix + vote_pay : 0;
+    const next_claim_time = 1 * producer.last_claim_time / 1000 + 24 * 60 * 60 * 1000;
+    const unreceived = (next_claim_time > Date.now()) ? 0 : total;
     return {
       total: total.toFixed(0),
       unreceived: unreceived.toFixed(0)
-    }
+    };
+
+
   },
 
   // 时间格式化函数
@@ -181,14 +187,14 @@ var util = {
     util.ajax({ url: url_get_info }, function (info) {
       if (info && info.head_block_num) {
         // history
-        util.ajax({ url: url_get_transaction, type: "POST", headers: { 'content-type': 'application/json' }, data: '{"public_key":"FO6MzV92DgYjwDa7K3rtc28dPhGt2Gy8oUoHjESUq4gBx63v8num"}' }, function (info) {
+        util.ajax({ url: url_get_transaction, type: "POST",  data: '{"public_key":"FO6MzV92DgYjwDa7K3rtc28dPhGt2Gy8oUoHjESUq4gBx63v8num"}' }, function (info) {
           if (info) {
             return callback(bpname, { history: true });
           }
         }, function () { })
-        util.ajax({ url: url_get_info, headers: { 'content-type': 'application/json' } }, function () { }, function () {
-          callback(bpname, { cors: false });
-        });
+        // util.ajax({ url: url_get_info, headers: { 'content-type': 'application/json' } }, function () { }, function () {
+        //   callback(bpname, { cors: false });
+        // });
         return callback(bpname, { status: "ok", msg: "", number: info.head_block_num, version: info.server_version_string });
       } else {
         return callback(bpname, { status: "ng", msg: "offline" });
@@ -215,6 +221,7 @@ var util = {
     window.p2p.push(host + ":" + port);
 
     callback(bpname, { status: "ing", msg: "connecting", endpoint: endpoint });
+    /*
     util.ajax({ url: url.api.check_p2p, data: { host: host, port: port } }, function (data) {
       var status = data && data.rows && data.rows.length;
       if (!status) {
@@ -271,6 +278,7 @@ var util = {
         callback(bpname, { status: "un", msg: "unknown" });
       }
     })
+    */
   }
 
 }

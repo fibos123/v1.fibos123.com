@@ -36,9 +36,9 @@
 				<tr>
 					<th width="50" class="text-center">编号</th>
 					<th>节点账户</th>
-					<th width="25%">HTTP 状态</th>
-					<th width="25%">HTTPS 状态</th>
-					<th width="25%">P2P 状态</th>
+					<th width="37%">HTTP 状态</th>
+					<th width="37%">HTTPS 状态</th>
+					<!-- <th width="25%">P2P 状态</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -46,11 +46,12 @@
 					<td align="center">{{ $index + 1 }}</td>
 					<td>
 						<span ng-class="{
-						green: value.score >= 14,
+						green: value.score > 11,
 						red: value.score <= 3,
 					}">
-						<span ng-if="value.score >= 14" data-toggle="tooltip" title="优质接入点"><i class="fas fa-thumbs-up"></i> {{ value.bpname }}</span>
-						<span ng-if="value.score < 14">{{ value.bpname }}</span>
+						<span ng-if="value.score > 11" data-toggle="tooltip" title="优质接入点"><i class="fas fa-thumbs-up"></i> {{ value.bpname }}</span>
+						<span ng-if="value.score > 3 && value.score <= 11">{{ value.bpname }}</span>
+						<span ng-if="value.score <= 3" data-toggle="tooltip" title="无效接入点"><i class="fas fa-bug"></i> {{ value.bpname }}</span>
 					</span>
 
 						<a class="hide-link float-right" ng-if="value.producerjson.org.website" target="_blank" href="{{ value.producerjson.org.website }}" data-toggle="tooltip" title="打开新窗口查看网站">
@@ -129,7 +130,7 @@
 						</a>
 					</td>
 
-					<td >
+					<!-- <td >
 						<span data-toggle="tooltip" title="{{ value.p2p.endpoint }}" class="icon"
 						ng-class="{
 						'icon-ok': value.p2p.status == 'ok',
@@ -150,7 +151,7 @@
 								<i class="fas fa-link"></i>
 							</a>
 						</span>
-					</td>
+					</td> -->
 				</tr>
 			</tbody>
 		</table>
@@ -163,21 +164,21 @@
 					<th rowspan="2">节点账户</th>
 					<th colspan="6">HTTP 状态</th>
 					<th colspan="6">HTTPS 状态</th>
-					<th rowspan="2" width="10%">P2P 状态</th>
+					<!-- <th rowspan="2" width="10%">P2P 状态</th> -->
 				</tr>
 				<tr>
 					<th width="6%">设置接入点</th>
 					<th width="6%">在线</th>
 					<th width="6%">最新区块</th>
 					<th width="6%">最新版本</th>
-					<th width="6%">开启 CORS</th>
+					<!-- <th width="6%">开启 CORS</th> -->
 					<th width="6%">开启 history</th>
 
 					<th width="6%">设置接入点</th>
 					<th width="6%">在线</th>
 					<th width="6%">最新区块</th>
 					<th width="6%">最新版本</th>
-					<th width="6%">开启 CORS</th>
+					<!-- <th width="6%">开启 CORS</th> -->
 					<th width="6%">开启 history</th>
 				</tr>
 			</thead>
@@ -246,7 +247,7 @@
 						</span>
 					</td>
 
-					<td class="text-center">
+					<!-- <td class="text-center">
 						<span ng-if="value.http.status == 'ok' && value.http.cors" data-toggle="tooltip" title="已开启 CORS">
 							<span class="icon icon-ok"></span>
 						</span>
@@ -256,7 +257,7 @@
 						<span ng-if="value.http.status != 'ok'" data-toggle="tooltip" title="未知">
 							<span class="icon icon-un"></span>
 						</span>
-					</td>
+					</td> -->
 
 					<td class="text-center">
 						<span ng-if="value.http.status == 'ok' && value.http.history" data-toggle="tooltip" title="已开启 history 插件">
@@ -317,7 +318,7 @@
 						</span>
 					</td>
 
-					<td class="text-center">
+					<!-- <td class="text-center">
 						<span ng-if="value.https.status == 'ok' && value.https.cors" data-toggle="tooltip" title="已开启 CORS">
 							<span class="icon icon-ok"></span>
 						</span>
@@ -327,7 +328,7 @@
 						<span ng-if="value.https.status != 'ok'" data-toggle="tooltip" title="未知">
 							<span class="icon icon-un"></span>
 						</span>
-					</td>
+					</td> -->
 
 					<td class="text-center">
 						<span ng-if="value.https.status == 'ok' && value.https.history" data-toggle="tooltip" title="已开启 history 插件">
@@ -342,7 +343,7 @@
 					</td>
 
 					<!-- p2p -->
-					<td class="text-center">
+					<!-- <td class="text-center">
 						<span ng-if="value.p2p.status == 'ok' || value.p2p.status == 'ing'" data-toggle="tooltip" title="接入点可用">
 							<span class="icon icon-ok"></span>
 						</span>
@@ -355,7 +356,7 @@
 						<span ng-if="value.p2p.status == 'un' && !value.p2p.detecting" data-toggle="tooltip" title="这是新接入点，服务器未对其进行监测，请把该接入点地址({{ value.p2p.endpoint }})发送给 &#98;&#112;&#64;&#102;&#105;&#98;&#111;&#115;&#49;&#50;&#51;&#46;&#99;&#111;&#109; ">
 							<span class="icon icon-un"></span>
 						</span>
-					</td>
+					</td> -->
 				</tr>
 			</tbody>
 		</table>
