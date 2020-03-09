@@ -4,11 +4,12 @@ This project is generated with [yo angular generator](https://github.com/yeoman/
 version 0.16.0.
 
 ## Install
-`
-npm install -g grunt-cli bower yo generator-karma generator-angular && 
-npm install && 
+```
+npm install -g grunt-cli bower yo generator-karma generator-angular
+git clone https://github.com/fibos123/fibos123.com.git
+npm install
 bower install
-`
+```
 
 
 ## Build & development
