@@ -1,7 +1,7 @@
-# app
+# FIBOS 123
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.16.0.
+A Website of fibos website and resources.
+http://www.fibos123.com/
 
 ## Install
 ```
@@ -20,3 +20,7 @@ Run `grunt build` for building and `grunt serve` for preview.
 ## Deploy
 
 Run `npm run deploy` for deploy.
+
+## License
+This project is licensed under the MIT license, Copyright (c) 2020 Fibos 123 Team.
+
