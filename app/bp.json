@@ -5,14 +5,14 @@
     "website": "https://www.fibos123.com",
     "email": "mingfun.wong.chn@gmail.com",
     "branding": {
-        "logo_256": "https://www.fibos123.com/public/images/logo_256.png",
+      "logo_256": "https://www.fibos123.com/public/images/logo_256.png"
     },
     "location": {
       "name": "Tokyo",
       "country": "JP",
       "latitude": 35.7015201,
       "longitude": 139.6741876
-    },
+    }
   },
   "nodes": [
     {
