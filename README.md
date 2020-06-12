@@ -11,10 +11,13 @@ bower install
 ```
 
 
-## Build & development
+## Development
 
-Run `grunt build` for building and `grunt serve` for preview.
+`grunt serve`
 
+## Build
+
+`grunt build`
 
 ## Deploy
 

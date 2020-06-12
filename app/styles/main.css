@@ -24,7 +24,7 @@ footer a{color:#2d74b2}
 .navbar-nav .nav-item .nav-link:hover{}
 .a-link{color: #4184bf!important;cursor: pointer;}
 body .logo-white{display: none}
-body.full-bg {background: url(../images/bg.jpg) center no-repeat;background-size: cover;}
+body.full-bg {background: url(../images/bg.jpg) center no-repeat;}
 body.full-bg .logo{display: none}
 body.full-bg .logo-white{display: initial}
 body.full-bg footer.text-muted {color: white!important}
