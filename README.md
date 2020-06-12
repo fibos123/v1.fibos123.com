@@ -1,7 +1,6 @@
-# app
+# FIBOS 123
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.16.0.
+FIBSO 123 includes the URL and resources of FIBOS, including the basic questions commonly found in the "Beginner's Guide"; it contains commonly used navigation URLs, covering browsers, monitors, wallets, tools, official websites, exchanges, communities and other ecosystems; In addition to this, some decentralized applications are included, which are very powerful. It is a window we know about FIBOS.  http://www.fibos123.com/
 
 ## Install
 ```
@@ -20,3 +19,7 @@ Run `grunt build` for building and `grunt serve` for preview.
 ## Deploy
 
 Run `npm run deploy` for deploy.
+
+## License
+This project is licensed under the MIT license, Copyright (c) 2020 Fibos 123 Team.
+
