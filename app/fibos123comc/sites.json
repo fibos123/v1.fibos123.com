@@ -132,50 +132,27 @@
         ]
       },
       {
-        "name": "监控",
-        "icon": "",
+        "name": "矿池",
         "child": [
           {
-            "name": "FIBOS BP",
-            "desc": "FIBOS 主网节点监控",
-            "url": "http://bp.fo/"
+            "name": "力场矿池",
+            "desc": "基于内容社区平台的公链矿池",
+            "url": "https://pool.lichang.io/",
+            "more": {
+              "icon": "",
+              "name": "公告",
+              "url": "https://twitter.com/fibos_io/status/1252425915038003200"
+            }
           },
           {
-            "name": "FO 财富排行榜",
-            "desc": "每天统计全部 FO 账户，并从中筛选出一百个 FO 富豪",
-            "url": "http://ihavefo.com/"
-          },
-          {
-            "name": "FIBOS 安全节点",
-            "icon": "fas fa-bong",
-            "desc": "慢雾区推出的聚焦 FIBOS 生态安全网站",
-            "url": "https://fibos.slowmist.io/"
-          }
-        ]
-      },
-      {
-        "name": "工具",
-        "child": [
-          {
-            "name": "FOToolkit",
-            "icon": "fas fa-toolbox",
-            "desc": "FIBOS 工具套件。安全，可靠，透明和快速",
-            "url": "https://fotoolkit.com/"
-          },
-          {
-            "name": "Ghost",
-            "desc": "FIBOS 主网全节点区块数据备份",
-            "url": "http://ghost.bp.fo/"
-          },
-          {
-            "name": "FiBOSS",
-            "desc": "FIBOS 应用导航和数据服务",
-            "url": "http://fiboss.org/"
-          },
-          {
-            "name": "GitFob",
-            "desc": "FIBOS 合约追踪 & 开源社区",
-            "url": "http://gitfob.com/"
+            "name": "LBank",
+            "desc": "区块链资产银行",
+            "url": "https://www.lbank.info/",
+            "more": {
+              "icon": "",
+              "name": "公告",
+              "url": "https://www.bishijie.com/kuaixun/683616.html"
+            }
           }
         ]
       },
@@ -245,14 +222,14 @@
             }
           },
           {
-            "name": "CoinTiger",
-            "desc": "专业的币币、法币数字资产交易平台",
-            "url": "https://www.cointiger.com"
-          },
-          {
             "name": "LBank",
             "desc": "区块链资产银行",
             "url": "https://www.lbank.info/"
+          },
+          {
+            "name": "CoinTiger",
+            "desc": "专业的币币、法币数字资产交易平台",
+            "url": "https://www.cointiger.com"
           },
           {
             "name": "ZG.COM",
@@ -287,17 +264,50 @@
         ]
       },
       {
-        "name": "矿池",
+        "name": "监控",
+        "icon": "",
         "child": [
           {
-            "name": "力场矿池",
-            "desc": "基于内容社区平台的公链矿池",
-            "url": "https://pool.lichang.io/",
-            "more": {
-              "icon": "",
-              "name": "公告",
-              "url": "https://twitter.com/fibos_io/status/1252425915038003200"
-            }
+            "name": "FIBOS BP",
+            "desc": "FIBOS 主网节点监控",
+            "url": "http://bp.fo/"
+          },
+          {
+            "name": "FO 财富排行榜",
+            "desc": "每天统计全部 FO 账户，并从中筛选出一百个 FO 富豪",
+            "url": "http://ihavefo.com/"
+          },
+          {
+            "name": "FIBOS 安全节点",
+            "icon": "fas fa-bong",
+            "desc": "慢雾区推出的聚焦 FIBOS 生态安全网站",
+            "url": "https://fibos.slowmist.io/"
+          }
+        ]
+      },
+      {
+        "name": "工具",
+        "child": [
+          {
+            "name": "FOToolkit",
+            "icon": "fas fa-toolbox",
+            "desc": "FIBOS 工具套件。安全，可靠，透明和快速",
+            "url": "https://fotoolkit.com/"
+          },
+          {
+            "name": "Ghost",
+            "desc": "FIBOS 主网全节点区块数据备份",
+            "url": "http://ghost.bp.fo/"
+          },
+          {
+            "name": "FiBOSS",
+            "desc": "FIBOS 应用导航和数据服务",
+            "url": "http://fiboss.org/"
+          },
+          {
+            "name": "GitFob",
+            "desc": "FIBOS 合约追踪 & 开源社区",
+            "url": "http://gitfob.com/"
           }
         ]
       }
